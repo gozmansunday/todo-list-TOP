@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/stGozman/todo-list-TOP/issues"
   },
-  "homepage": "https://github.com/stGozman/todo-list-TOP#readme"
+  "homepage": "https://github.com/stGozman/todo-list-TOP#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
+  }
 }
