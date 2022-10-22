@@ -15,10 +15,15 @@ module.exports = {
     },
     extend: {
       colors: {
-        'colorName': '#color',
+        brand: "#15D155",
+        dark: "#000000",
+        mid: "#646464",
+        light: "#FFFFFF"
       },
       fontFamily: {
-        fontName: ['Font Official Name', 'font-type'],
+        spartan: ['League Spartan', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        grotesk: ['Space Grotesk', 'sans-serif'],
       },
       boxShadow: {
         'shadow': '0px 0px 0px 0px rgba(0, 0, 0, 0.0)',
