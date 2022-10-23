@@ -4,26 +4,81 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/328486b131.js" crossorigin="anonymous"></script>
     <title>ToDoit</title>
 
   </head>
   <body class="grid grid-rows-[2fr_15fr] h-screen">
-    <header class="bg-brand text-dark font-grotesk">
+    <header class="bg-dark text-brand font-grotesk">
       <div class="container mx-auto flex items-center gap-2 h-full">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-[4.5rem]"><path d="M3,5H9V11H3V5M5,7V9H7V7H5M11,7H21V9H11V7M11,15H21V17H11V15M5,20L1.5,16.5L2.91,15.09L5,17.17L9.59,12.59L11,14L5,20Z"/></svg>
-        <h1 class="text-6xl font-semibold">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-16 fill-brand"><path d="M3,5H9V11H3V5M5,7V9H7V7H5M11,7H21V9H11V7M11,15H21V17H11V15M5,20L1.5,16.5L2.91,15.09L5,17.17L9.59,12.59L11,14L5,20Z"/></svg>
+        <h1 class="text-[3.6rem] font-bold">
           ToDoit
         </h1>
       </div>
     </header>
-    <div class="grid grid-cols-[3fr_12fr]">
-      <div class="bg-mid text-white">
-        
+    <main class="grid grid-cols-[3fr_10fr] font-spartan text-dark">
+      <div class="bg-mid flex flex-col gap-7 pl-10 pr-8 py-7">
+        <div class="space-y-2">
+          <h2 class="text-3xl font-semibold">
+            Home
+          </h2>
+          <div class="space-y-1">
+            <div class="flex items-center gap-3 text-xl py-1 px-3 border-[3px] bg-brand border-brand rounded-md cursor-pointer lg:hover:border-brand">
+              <i class="fa-solid fa-list"></i>
+              <h4 class="pt-1">
+                All Tasks
+              </h4>
+            </div>
+            <div class="flex items-center gap-3 text-xl py-1 px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+              <i class="fa-solid fa-calendar-day"></i>
+              <h4 class="pt-1">
+                Today
+              </h4>
+            </div>
+            <div class="flex items-center gap-3 text-xl py-1 px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+              <i class="fa-solid fa-calendar-week"></i>
+              <h4 class="pt-1">
+                Week
+              </h4>
+            </div>
+            <div class="flex items-center gap-3 text-xl py-1 px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+              <i class="fa-solid fa-circle-check"></i>
+              <h4 class="pt-1">
+                Completed
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex justify-between items-center text-3xl font-semibold pr-2">
+            <h2>
+              Projects
+            </h2>
+            <i class="fa-solid fa-circle-plus text-2xl"></i>
+          </div>
+          <div class="space-y-1 overflow-auto">
+            <div class="flex items-center gap-3 text-xl py-1 px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+              <i class="fa-solid fa-angle-right"></i>
+              <h4 class="pt-1">
+                School
+              </h4>
+            </div>
+            <div class="flex items-center gap-3 text-xl py-1 px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+              <i class="fa-solid fa-angle-right"></i>
+              <h4 class="pt-1">
+                Chores
+              </h4>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="">
 
       </div>
-    </div>
+    </main>
 
     <script src="main.js"></script>
   </body>
