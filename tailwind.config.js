@@ -17,8 +17,8 @@ module.exports = {
       colors: {
         brand: "#15D155",
         dark: "#000000",
-        mid: "#646464",
-        light: "#FFFFFF"
+        mid: "#E4E4E7",
+        light: "#F8FAFC"
       },
       fontFamily: {
         spartan: ['League Spartan', 'sans-serif'],
