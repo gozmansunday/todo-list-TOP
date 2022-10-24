@@ -17,8 +17,8 @@ module.exports = {
       colors: {
         brand: "#15D155",
         dark: "#222222",
-        mid: "#DFDFDF",
-        light: "#F8FAFC"
+        mid: "#DADADA",
+        light: "#EEEEEE"
       },
       fontFamily: {
         spartan: ['League Spartan', 'sans-serif'],
@@ -30,5 +30,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/forms")
+  ],
 }
