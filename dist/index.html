@@ -8,42 +8,43 @@
     <title>ToDoit</title>
 
   </head>
-  <body class="grid grid-rows-[2fr_15fr] h-screen">
+  <body class="grid grid-rows-[1fr_10fr] h-screen md:grid-rows-[2fr_15fr]">
     <header class="bg-dark text-brand font-grotesk">
-      <div class="container mx-auto flex items-center gap-2 h-full">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-16 fill-brand"><path d="M3,5H9V11H3V5M5,7V9H7V7H5M11,7H21V9H11V7M11,15H21V17H11V15M5,20L1.5,16.5L2.91,15.09L5,17.17L9.59,12.59L11,14L5,20Z"/></svg>
-        <h1 class="text-[3.6rem] font-bold">
+      <div class="container mx-auto px-3 flex items-center gap-2 h-full md:px-0">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-brand w-16"><path d="M3,5H9V11H3V5M5,7V9H7V7H5M11,7H21V9H11V7M11,15H21V17H11V15M5,20L1.5,16.5L2.91,15.09L5,17.17L9.59,12.59L11,14L5,20Z"/></svg>
+        <h1 class="text-5xl font-bold md:text-[3.6rem]">
           ToDoit
         </h1>
       </div>
     </header>
 
-    <main class="grid grid-cols-[3fr_10fr] font-spartan text-dark">
-      <div class="bg-mid flex flex-col gap-7 pl-10 pr-8 py-7">
+    <main class="lg:grid grid-cols-[3fr_10fr] font-spartan text-dark">
+      <!-- Side Bar -->
+      <div class="hidden bg-mid lg:flex flex-col gap-7 pl-10 pr-8 py-7">
         <div class="space-y-2">
           <h2 class="text-3xl font-semibold">
             Home
           </h2>
           <div class="space-y-1">
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] bg-brand border-brand rounded-md cursor-pointer lg:hover:border-brand">
+            <div class="flex items-center gap-3 text-xl px-3 border-4 bg-brand border-brand rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-list"></i>
               <h4 class="pt-1">
                 All Tasks
               </h4>
             </div>
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+            <div class="flex items-center gap-3 text-xl px-3 border-4 border-mid rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-calendar-day"></i>
               <h4 class="pt-1">
                 Today
               </h4>
             </div>
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+            <div class="flex items-center gap-3 text-xl px-3 border-4 border-mid rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-calendar-week"></i>
               <h4 class="pt-1">
                 Week
               </h4>
             </div>
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+            <div class="flex items-center gap-3 text-xl px-3 border-4 border-mid rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-circle-check"></i>
               <h4 class="pt-1">
                 Completed
@@ -60,13 +61,13 @@
             <i class="fa-solid fa-circle-plus text-2xl"></i>
           </div>
           <div class="space-y-1 overflow-auto">
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+            <div class="flex items-center gap-3 text-xl px-3 border-4 border-mid rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-angle-right"></i>
               <h4 class="pt-1">
                 School
               </h4>
             </div>
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-md cursor-pointer lg:hover:border-brand">
+            <div class="flex items-center gap-3 text-xl px-3 border-4 border-mid rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-angle-right"></i>
               <h4 class="pt-1">
                 Chores
@@ -77,63 +78,63 @@
       </div>
 
       <!-- Main Bar -->
-      <div class="bg-light py-10 px-36">
+      <div class="bg-light h-full p-4 md:py-10 md:px-36">
         <!-- Tasks Section -->
         <div class="space-y-5">
           <!-- Tasks Section Heading -->
           <div class="flex items-center justify-between ">
-            <h2 class="text-[2.6rem] pt-2 leading-tight font-semibold">
+            <h2 class="text-[2.4rem] pt-2 leading-tight font-semibold md:text-[2.6rem]">
               All Tasks
             </h2>
-            <i class="fa-solid fa-circle-plus text-4xl"></i>
+            <i class="fa-solid fa-circle-plus text-3xl md:text-4xl"></i>
           </div>
           <!-- Tasks -->
           <div class="space-y-4">
             <!-- Task 1 -->
-            <div class="text-lg flex justify-between items-center border-[3px] border-red-400 bg-red-200 rounded-lg px-3 py-1 transition duration-150 lg:hover:bg-red-400 lg:hover:scale-[1.02]">
+            <div class="text-md flex justify-between items-center border-[3px] border-red-400 bg-red-200 rounded-lg px-3 py-1 transition duration-150 hover:bg-red-400 hover:scale-[1.02] md:text-lg">
               <div class="flex gap-2">
-                <div class=" pt-[0.12rem]">
-                  <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-6 h-6 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
+                <div class="pt-[0.2rem] md:pt-[0.12rem]">
+                  <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0 md:w-6 md:h-6">
                 </div>
-                <h4 class="text-xl font-semibold pt-1 ml-1">Pay Bills Right Now</h4>
-                <i class="fa-solid fa-chevron-up  pt-[0.55rem]"></i>
+                <h4 class="text-lg font-semibold pt-1 ml-1 md:text-xl">Pay bills</h4>
+                <i class="fa-solid fa-chevron-up pt-[0.64rem] md:pt-[0.55rem]"></i>
               </div>
               <div class="flex gap-2">
-                <p class=" pt-[0.35rem] mr-6">25/10/2022</p>
+                <p class=" pt-[0.35rem] mr-4 md:mr-6">25/10/2022</p>
                 <i class="fa-solid fa-pen-to-square  pt-[0.48rem]"></i>
-                <i class="fa-solid fa-trash  pt-[0.48rem]"></i>
+                <i class="fa-solid fa-trash pt-[0.55rem] md:pt-[0.48rem]"></i>
               </div>
             </div>
             
             <!-- Task 2 -->
-            <div class="text-lg flex justify-between items-center border-[3px] border-yellow-400 bg-yellow-200 rounded-lg px-3 py-1 transition duration-150 lg:hover:bg-yellow-400 lg:hover:scale-[1.02]">
+            <div class="text-md flex justify-between items-center border-[3px] border-yellow-400 bg-yellow-200 rounded-lg px-3 py-1 transition duration-150 hover:bg-yellow-400 hover:scale-[1.02] md:text-lg">
               <div class="flex gap-2">
-                <div class=" pt-[0.12rem]">
-                  <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-6 h-6 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
+                <div class="pt-[0.2rem] md:pt-[0.12rem]">
+                  <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0 md:w-6 md:h-6">
                 </div>
-                <h4 class="text-xl font-semibold pt-1 ml-1">Pay Bills Right Now</h4>
-                <i class="fa-solid fa-chevron-up  pt-[0.55rem]"></i>
+                <h4 class="text-lg font-semibold pt-1 ml-1 md:text-xl">Do chores</h4>
+                <i class="fa-solid fa-chevron-up pt-[0.64rem] md:pt-[0.55rem]"></i>
               </div>
               <div class="flex gap-2">
-                <p class=" pt-[0.35rem] mr-6">25/10/2022</p>
+                <p class=" pt-[0.35rem] mr-4 md:mr-6">25/10/2022</p>
                 <i class="fa-solid fa-pen-to-square  pt-[0.48rem]"></i>
-                <i class="fa-solid fa-trash  pt-[0.48rem]"></i>
+                <i class="fa-solid fa-trash pt-[0.55rem] md:pt-[0.48rem]"></i>
               </div>
             </div>
 
             <!-- Task 3 -->
-            <div class="text-lg flex justify-between items-center border-[3px] border-blue-400 bg-blue-200 rounded-lg px-3 py-1 transition duration-150 lg:hover:bg-blue-400 lg:hover:scale-[1.02]">
+            <div class="text-md flex justify-between items-center border-[3px] border-blue-400 bg-blue-200 rounded-lg px-3 py-1 transition duration-150 hover:bg-blue-400 hover:scale-[1.02] md:text-lg">
               <div class="flex gap-2">
-                <div class=" pt-[0.12rem]">
-                  <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-6 h-6 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
+                <div class="pt-[0.2rem] md:pt-[0.12rem]">
+                  <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0 md:w-6 md:h-6">
                 </div>
-                <h4 class="text-xl font-semibold pt-1 ml-1">Pay Bills Right Now</h4>
-                <i class="fa-solid fa-chevron-up  pt-[0.55rem]"></i>
+                <h4 class="text-lg font-semibold pt-1 ml-1 md:text-xl">Cook some food</h4>
+                <i class="fa-solid fa-chevron-up pt-[0.64rem] md:pt-[0.55rem]"></i>
               </div>
               <div class="flex gap-2">
-                <p class=" pt-[0.35rem] mr-6">25/10/2022</p>
+                <p class=" pt-[0.35rem] mr-4 md:mr-6">25/10/2022</p>
                 <i class="fa-solid fa-pen-to-square  pt-[0.48rem]"></i>
-                <i class="fa-solid fa-trash  pt-[0.48rem]"></i>
+                <i class="fa-solid fa-trash pt-[0.55rem] md:pt-[0.48rem]"></i>
               </div>
             </div>
           </div>
