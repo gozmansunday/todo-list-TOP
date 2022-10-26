@@ -18,7 +18,7 @@ module.exports = {
         brand: "#15D155",
         dark: "#222222",
         mid: "#DADADA",
-        light: "#EEEEEE"
+        light: "#EEEEEE",
       },
       fontFamily: {
         spartan: ['League Spartan', 'sans-serif'],
@@ -26,7 +26,8 @@ module.exports = {
         grotesk: ['Space Grotesk', 'sans-serif'],
       },
       boxShadow: {
-        'shadow': '0px 0px 0px 0px rgba(0, 0, 0, 0.0)',
+        // 'card': '0 12px 12px -3px rgba(0, 0, 0, 0.3)',
+        'card': '0px 5px 15px rgba(0, 0, 0, 0.35)',
       },
     },
   },
