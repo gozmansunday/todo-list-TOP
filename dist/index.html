@@ -28,26 +28,26 @@
           <div class="space-y-1">
             <div class="flex items-center gap-3 text-xl px-3 border-4 bg-brand border-brand rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-list"></i>
-              <h4 class="pt-1">
+              <h4 class="pt-1.5">
                 All Tasks
               </h4>
             </div>
             <div class="flex items-center gap-3 text-xl px-3 border-4 border-mid rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-calendar-day"></i>
-              <h4 class="pt-1">
+              <h4 class="pt-1.5">
                 Today
               </h4>
             </div>
             <div class="flex items-center gap-3 text-xl px-3 border-4 border-mid rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-calendar-week"></i>
-              <h4 class="pt-1">
+              <h4 class="pt-1.5">
                 Week
               </h4>
             </div>
             <div class="flex items-center gap-3 text-xl px-3 border-4 border-mid rounded-md cursor-pointer lg:hover:border-brand">
-              <i class="fa-solid fa-circle-check"></i>
-              <h4 class="pt-1">
-                Completed
+              <i class="fa-solid fa-note-sticky"></i>
+              <h4 class="pt-1.5">
+                Notes
               </h4>
             </div>
           </div>
@@ -60,7 +60,7 @@
             </h2>
             <i class="fa-solid fa-circle-plus text-2xl"></i>
           </div>
-          <div class="space-y-1 overflow-auto">
+          <!-- <div class="space-y-1 overflow-auto">
             <div class="flex items-center gap-3 text-xl px-3 border-4 border-mid rounded-md cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-angle-right"></i>
               <h4 class="pt-1">
@@ -73,7 +73,7 @@
                 Chores
               </h4>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -86,11 +86,11 @@
             <h2 class="text-[2.4rem] pt-2 leading-tight font-semibold md:text-[2.6rem]">
               All Tasks
             </h2>
-            <i class="fa-solid fa-circle-plus text-3xl md:text-4xl"></i>
+            <i id="new-task-btn" class="fa-solid fa-circle-plus text-3xl transition duration-150 md:text-4xl lg:hover:scale-110"></i>
           </div>
+          
           <!-- Tasks -->
-          <div class="space-y-3 md:space-y-4">
-            <!-- Task 1 -->
+          <!-- <div class="space-y-3 md:space-y-4">
             <div class="text-md flex justify-between items-center border-[3px] border-red-400 bg-red-200 rounded-lg px-3 py-1 transition duration-150 hover:bg-red-400 hover:scale-[1.02] md:text-lg">
               <div class="flex gap-2">
                 <div class="pt-[0.2rem] md:pt-[0.12rem]">
@@ -100,13 +100,12 @@
                 <i class="fa-solid fa-chevron-up pt-[0.64rem] md:pt-[0.55rem]"></i>
               </div>
               <div class="flex gap-2">
-                <p class="pt-[0.32rem] md:pt-[0.35rem] mr-4 md:mr-6">25/10/2022</p>
+                <p class="pt-[0.32rem] md:pt-[0.35rem] mr-1 md:mr-3 lg:mr-5">25/10/2022</p>
                 <i class="fa-solid fa-pen-to-square  pt-[0.48rem]"></i>
                 <i class="fa-solid fa-trash pt-[0.48rem]"></i>
               </div>
             </div>
             
-            <!-- Task 2 -->
             <div class="text-md flex justify-between items-center border-[3px] border-yellow-400 bg-yellow-200 rounded-lg px-3 py-1 transition duration-150 hover:bg-yellow-400 hover:scale-[1.02] md:text-lg">
               <div class="flex gap-2">
                 <div class="pt-[0.2rem] md:pt-[0.12rem]">
@@ -116,13 +115,12 @@
                 <i class="fa-solid fa-chevron-up pt-[0.64rem] md:pt-[0.55rem]"></i>
               </div>
               <div class="flex gap-2">
-                <p class="pt-[0.32rem] md:pt-[0.35rem] mr-4 md:mr-6">25/10/2022</p>
+                <p class="pt-[0.32rem] md:pt-[0.35rem] mr-1 md:mr-3 lg:mr-5">25/10/2022</p>
                 <i class="fa-solid fa-pen-to-square  pt-[0.48rem]"></i>
                 <i class="fa-solid fa-trash pt-[0.48rem]"></i>
               </div>
             </div>
 
-            <!-- Task 3 -->
             <div class="text-md flex justify-between items-center border-[3px] border-blue-400 bg-blue-200 rounded-lg px-3 py-1 transition duration-150 hover:bg-blue-400 hover:scale-[1.02] md:text-lg">
               <div class="flex gap-2">
                 <div class="pt-[0.2rem] md:pt-[0.12rem]">
@@ -132,14 +130,60 @@
                 <i class="fa-solid fa-chevron-up pt-[0.64rem] md:pt-[0.55rem]"></i>
               </div>
               <div class="flex gap-2">
-                <p class="pt-[0.32rem] md:pt-[0.35rem] mr-4 md:mr-6">25/10/2022</p>
+                <p class="pt-[0.32rem] md:pt-[0.35rem] mr-1 md:mr-3 lg:mr-5">25/10/2022</p>
                 <i class="fa-solid fa-pen-to-square  pt-[0.48rem]"></i>
                 <i class="fa-solid fa-trash pt-[0.48rem]"></i>
               </div>
             </div>
+          </div> -->
+        </div>
+      </div>
+
+      <!-- New Task Form -->
+      <!-- Form Overlay -->
+<!-- 
+      <div id="form-overlay" class="bg-black/60 fixed top-0 right-0 bottom-0 left-0 flex justify-center items-center">
+        <div class="bg-mid space-y-4 rounded-md px-6 pt-5 pb-8 w-[26rem] shadow-card">
+          <h3 class="text-3xl font-semibold">Add New Task</h3>
+          <div class="space-y-4">
+            <div>
+              <label for="title" class="block text-2xl leading-none">Title</label>
+              <input type="text" name="title" id="title" class="w-full border-[3px] border-dark/50 bg-mid px-2.5 pb-1.5 pt-2 text-lg leading-none rounded transition duration-200 focus:ring-0 focus:border-dark">
+            </div>
+            <div>
+              <label for="details" class="block text-2xl leading-none">Details</label>
+              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2.5 pb-1.5 pt-2 h-20 -mb-2 text-lg leading-none rounded transition duration-200 focus:ring-0 focus:border-dark"></textarea>
+            </div>
+            <div>
+              <label for="date" class="block text-2xl leading-none">Due Date</label>
+              <input type="date" name="date" id="date" class="w-full border-[3px] border-dark/50 bg-mid px-2.5 pb-1.5 pt-2 text-lg leading-none rounded transition duration-200 focus:ring-0 focus:border-dark">
+            </div>
+            <div>
+              <label for="priority" class="block text-2xl leading-none">Priority</label>
+              <select name="priority" id="priority" class="w-full border-[3px] border-dark/50 bg-mid px-2.5 pb-1.5 pt-2 text-lg leading-none rounded transition duration-200 focus:ring-0 focus:border-dark">
+                <option value="low" selected>
+                  Low
+                </option>
+                <option value="medium">
+                  Medium
+                </option>
+                <option value="high">
+                  High
+                </option>
+              </select>
+            </div>
+            <div>
+              <label for="project" class="block text-2xl leading-none">Project</label>
+              <select name="project" id="project" class="w-full border-[3px] border-dark/50 bg-mid px-2.5 pb-1.5 pt-2 text-lg leading-none rounded transition duration-200 focus:ring-0 focus:border-dark">
+                <option value="all tasks">
+                  All Tasks
+                </option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
+       -->
     </main>
 
     <script src="main.js"></script>
