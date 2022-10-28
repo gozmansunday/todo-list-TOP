@@ -99,23 +99,43 @@
           </div>
           
           <!-- Tasks -->
-          <div class="space-y-3.5">
-            <!-- <div class="text-sm flex justify-between items-center border-[3px] border-red-400 bg-red-200 rounded-lg px-3 py-0.5 transition duration-150 md:text-base">
-              <div class="flex gap-2 items-center">
-                <div class="">
-                  <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
+          <div id="task-container" class="space-y-3.5">
+
+            <div class="task-display text-sm border-[3px] border-red-400 bg-red-200 rounded-lg px-3 py-0.5 md:text-base">
+              <div class="flex justify-between items-center">
+                <div class="flex gap-2 items-center">
+                  <div class="">
+                    <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
+                  </div>
+                  <h4 class="text-lg font-semibold pt-0.5 ml-1">Pay bills</h4>
+                  <i class="fa-solid fa-chevron-up text-sm pt-1.5"></i>
                 </div>
-                <h4 class="text-lg font-semibold pt-0.5 ml-1">Pay bills</h4>
-                <i class="fa-solid fa-chevron-up text-sm pt-1.5"></i>
+                <div class="flex gap-2 items-center">
+                  <p class="mr-4">25/10/2022</p>
+                  <i class="fa-solid fa-pen-to-square text-sm"></i>
+                  <i class="fa-solid fa-trash text-sm"></i>
+                </div>
               </div>
-              <div class="flex gap-2 items-center">
-                <p class="mr-4">25/10/2022</p>
-                <i class="fa-solid fa-pen-to-square text-sm"></i>
-                <i class="fa-solid fa-trash text-sm"></i>
+              <!-- Extended -->
+              <div class="extended-part px-8 hidden">
+                <p>
+                  <span class="font-semibold">Details:</span>
+                  I need to pay my fucking bills ASAP!
+                </p>
+                <div>
+                  <p>
+                    <span class="font-semibold">Project:</span>
+                    All Tasks
+                  </p>
+                  <p>
+                    <span class="font-semibold">Priority:</span>
+                    High
+                  </p>
+                </div>
               </div>
             </div>
-            
-            <div class="text-sm flex justify-between items-center border-[3px] border-yellow-400 bg-yellow-200 rounded-lg px-3 py-0.5 transition duration-150 md:text-base">
+<!--             
+            <div class="text-sm flex justify-between items-center border-[3px] border-yellow-400 bg-yellow-200 rounded-lg px-3 py-0.5 md:text-base">
               <div class="flex gap-2 items-center">
                 <div class="">
                   <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
@@ -130,7 +150,7 @@
               </div>
             </div>
             
-            <div class="text-sm flex justify-between items-center border-[3px] border-blue-400 bg-blue-200 rounded-lg px-3 py-0.5 transition duration-150 md:text-base">
+            <div class="text-sm flex justify-between items-center border-[3px] border-blue-400 bg-blue-200 rounded-lg px-3 py-0.5 md:text-base">
               <div class="flex gap-2 items-center">
                 <div class="">
                   <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
@@ -145,7 +165,7 @@
               </div>
             </div>
             
-            <div class="text-sm flex justify-between items-center border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-lg px-3 py-0.5 transition duration-150 md:text-base">
+            <div class="text-sm flex justify-between items-center border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-lg px-3 py-0.5 md:text-base">
               <div class="flex gap-2 items-center">
                 <div class="">
                   <input type="checkbox" checked class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-gray-400 focus:ring-0 focus:ring-offset-0">
@@ -159,8 +179,8 @@
                 <i class="fa-solid fa-trash text-dark text-sm"></i>
               </div>
             </div>
-          </div> -->
-      
+             -->
+          </div>
         </div>
       </div>
 
@@ -168,7 +188,7 @@
       <div id="modal" class="hidden justify-center items-center bg-black/60 fixed top-0 right-0 bottom-0 left-0">
 
         <!-- New Task Form -->
-        <div id="new-task-form" class="hidden bg-mid border-4 border-dark space-y-4 rounded-2xl px-6 pt-3 pb-7 w-[22rem] shadow-card md:w-[26rem]">
+        <div id="new-task-form" class="hidden bg-mid border-4 border-dark space-y-4 rounded-2xl px-6 pt-3 pb-7 w-[24rem] shadow-card md:w-[26rem]">
           <div class="flex items-center justify-between">            
             <h3 class="text-3xl font-semibold">Add New Task</h3>
             <i id="new-task-form-close-btn" class="fa-solid fa-xmark text-3xl"></i>
@@ -177,40 +197,40 @@
           <form class="space-y-4">
             <div>
               <label for="title" class="block text-xl">Title</label>
-              <input type="text" name="title" id="title" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 text-sm rounded-lg transition duration-200 focus:ring-0 focus:border-dark">
+              <input type="text" name="title" id="title" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
               <label for="details" class="block text-xl">Details</label>
-              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-16 -mb-2 text-sm rounded-lg transition duration-200 focus:ring-0 focus:border-dark"></textarea>
+              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-16 -mb-2 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark"></textarea>
             </div>
             <div>
               <label for="date" class="block text-xl">Due Date</label>
-              <input type="date" name="date" id="date" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 text-sm rounded-lg transition duration-200 focus:ring-0 focus:border-dark">
+              <input type="date" name="date" id="date" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
               <label for="priority" class="block text-xl">Priority</label>
-              <select name="priority" id="priority" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 text-sm rounded-lg transition duration-200 focus:ring-0 focus:border-dark">
-                <option value="low" selected>
+              <select name="priority" id="priority" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+                <option value="Low" selected>
                   Low
                 </option>
-                <option value="medium">
+                <option value="Medium">
                   Medium
                 </option>
-                <option value="high">
+                <option value="High">
                   High
                 </option>
               </select>
             </div>
             <div>
               <label for="project" class="block text-xl">Project</label>
-              <select name="project" id="project" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 text-sm rounded-lg transition duration-200 focus:ring-0 focus:border-dark">
-                <option value="all tasks">
+              <select name="project" id="project" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+                <option value="All Tasks">
                   All Tasks
                 </option>
               </select>
             </div>
             <div>
-              <button class="w-full bg-dark text-light px-2.5 pb-2 pt-2.5 mt-4 text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
+              <button id="new-task-form-submit-btn" class="w-full bg-dark text-light px-2.5 pb-2 pt-2.5 mt-4 text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
                 Add Task
               </button>
             </div>
