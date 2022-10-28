@@ -22,7 +22,7 @@ module.exports = {
       },
       fontFamily: {
         spartan: ['League Spartan', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
+        dm: ['DM Sans', 'sans-serif'],
         grotesk: ['Space Grotesk', 'sans-serif'],
       },
       boxShadow: {
