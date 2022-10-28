@@ -1,4 +1,4 @@
 import './style.css';
-import { dom } from './modules/dom.js';
+import { forms } from './modules/forms';
 
-dom.formControl();
+forms.newTaskFormControl();
