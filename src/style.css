@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan&family=Poppins&family=Space+Grotesk&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=League+Spartan&family=Poppins&family=Space+Grotesk&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-#form-overlay > div {
+.new-task-form-animation {
   animation: scale-up-center 0.4s ease 0s 1 normal none;
 }
 
