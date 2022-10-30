@@ -5,13 +5,8 @@ import { forms } from './forms.js';
 let tasksArray = [];
 
 // Task Obj Factory
-function TaskObjCreator(title, details, date, priority, project) {
-  return {title, details, date, priority, project};
-}
-
-// Task Completed State
-function TaskCompleteState(completed) {
-  return {completed};
+function TaskObjCreator(title, details, date, priority, project, completed) {
+  return {title, details, date, priority, project, completed};
 }
 
 function addTask(e) {
@@ -27,7 +22,7 @@ function addTask(e) {
 
     if (taskTitle === '' || taskDetails === '' || taskDate === '' ) return;
 
-    const taskObj = TaskObjCreator(taskTitle, taskDetails, taskDate, taskPriority, taskProject);
+    const taskObj = TaskObjCreator(taskTitle, taskDetails, taskDate, taskPriority, taskProject, false);
 
     tasksArray.push(taskObj);
 
@@ -39,10 +34,8 @@ function addTask(e) {
 function displayTask() {
   dom.clearTaskContainer();
 
-  let baseColor;
-
   tasksArray.forEach(task => {
-    let taskState = TaskCompleteState(false);
+    let baseColor;
 
     if (task.priority === 'Low') {
       baseColor = 'blue';
@@ -52,55 +45,20 @@ function displayTask() {
       baseColor = 'red';
     }
 
-    const taskDisp = document.createElement('div');
-    taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-lg px-3 py-0.5 transition duration-150 md:text-base`;
-
-    const taskHTML = 
-      `
-      <div class="flex justify-between items-center">
-        <div class="flex gap-2 items-center">
-          <div class="">
-            <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
-          </div>
-          <h4 class="text-lg font-semibold pt-0.5 ml-1">${task.title}</h4>
-          <i class="fa-solid fa-chevron-up text-sm pt-1.5"></i>
-        </div>
-        <div class="flex gap-2 items-center">
-          <p class="mr-4">${task.date}</p>
-          <i class="fa-solid fa-pen-to-square text-sm"></i>
-          <i class="fa-solid fa-trash text-sm"></i>
-        </div>
-      </div>
-      <div class="extended-part px-8 hidden">
-        <p>
-          <span class="font-semibold">Details:</span>
-          ${task.details}
-        </p>
-        <div>
-          <p>
-            <span class="font-semibold">Project:</span>
-            ${task.project}
-          </p>
-          <p>
-            <span class="font-semibold">Priority:</span>
-            ${task.priority}
-          </p>
-        </div>
-      </div>
-      `;
-
-    taskDisp.innerHTML = taskHTML;
-
-    dom.selector.taskContainer.appendChild(taskDisp);
+    dom.createTaskDisplayDom(baseColor, task);
   });
 
-  // const chevrons = document.querySelectorAll('.fa-chevron-up');
+  expandTask();
+}
 
-  // [...chevrons].forEach(chevron => {
-  //   chevron.addEventListener('click', () => {
-  //     console.log('that is a chevron!');
-  //   });
-  // });
+function expandTask() {
+  const chevrons = document.querySelectorAll('.chevron');
+
+  [...chevrons].forEach(chevron => {
+    chevron.addEventListener('click', () => {
+      dom.taskDisplayControlDom(chevron);
+    });
+  });
 }
 
 export const tasks = {
