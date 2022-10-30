@@ -49,6 +49,7 @@ function displayTask() {
   });
 
   expandTask();
+  checkTask();
 }
 
 function expandTask() {
@@ -59,6 +60,16 @@ function expandTask() {
       dom.taskDisplayControlDom(chevron);
     });
   });
+}
+
+function checkTask() {
+  const checkboxes = document.querySelectorAll('.checkbox');
+
+  [...checkboxes].forEach(checkbox => {
+    checkbox.addEventListener('click', () => {
+      dom.completeTaskDom(checkbox, tasksArray);
+    });
+  }); 
 }
 
 export const tasks = {

@@ -43,14 +43,14 @@ function clearTaskContainer() {
 
 function createTaskDisplayDom(baseColor, task) {
   const taskDisp = document.createElement('div');
-  taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-lg px-3 py-0.5 transition duration-150 md:text-base`;
+  taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-lg px-3 py-0.5 md:text-base`;
 
   const taskHTML =
     `
     <div class="flex justify-between items-center">
       <div class="flex gap-2 items-center">
         <div class="">
-          <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
+          <input type="checkbox" class="checkbox border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
         </div>
         <h4 class="text-lg font-semibold pt-0.5 ml-1">${task.title}</h4>
         <i class="chevron rotate-0 fa-solid fa-chevron-up text-sm pt-1 md:pt-1.5"></i>
@@ -87,9 +87,8 @@ function createTaskDisplayDom(baseColor, task) {
 }
 
 function taskDisplayControlDom(chevron) {
-  const task = chevron.parentElement.parentElement.parentElement;
-  const extendedPart = task.children[1];
-  
+  const extendedPart = chevron.parentElement.parentElement.parentElement.children[1];
+
   if (extendedPart.style.maxHeight) {
     extendedPart.style.maxHeight = null;
   } else {
@@ -106,10 +105,52 @@ function taskDisplayControlDom(chevron) {
   chevron.classList.toggle('rotate-180');
 }
 
+function completeTaskDom(checkbox, tasksArray) {
+  const taskDisp = checkbox.parentElement.parentElement.parentElement.parentElement;
+  const taskIndex = [...dom.selector.taskContainer.children].indexOf(taskDisp);
+  const taskTitle = taskDisp.children[0].children[0].children[1];
+  const taskDate = taskDisp.children[0].children[1].children[0];
+  const chevron = taskDisp.children[0].children[0].children[2];
+  const taskEdit = taskDisp.children[0].children[1].children[1];
+  const extendedPart = taskDisp.children[1];
+  let baseColor;
+
+  if (tasksArray[taskIndex].priority === 'Low') {
+    baseColor = 'blue';
+  } else if (tasksArray[taskIndex].priority === 'Medium') {
+    baseColor = 'yellow';
+  } else {
+    baseColor = 'red';
+  }
+
+  if (checkbox.checked) {
+    taskDisp.className = `task-display text-sm border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-lg px-3 py-0.5 md:text-base`;
+    checkbox.classList.replace('checked:text-dark', 'checked:text-gray-400');
+    taskTitle.classList.add('line-through');
+    taskDate.classList.add('hidden');
+    chevron.classList.add('hidden');
+    taskEdit.classList.add('hidden');
+    extendedPart.style.maxHeight = null;
+    chevron.classList.remove('chevron-anim-down');
+    chevron.classList.remove('chevron-anim-up');
+    chevron.classList.remove('rotate-0');
+    chevron.classList.remove('rotate-180');
+    chevron.classList.add('rotate-0');
+  } else {
+    taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-lg px-3 py-0.5 md:text-base`;
+    checkbox.classList.replace('checked:text-gray-400', 'checked:text-dark');
+    taskTitle.classList.remove('line-through');
+    taskDate.classList.remove('hidden');
+    chevron.classList.remove('hidden');
+    taskEdit.classList.remove('hidden');
+  }
+}
+
 export const dom = {
   selector,
   newTaskFormDom,
   clearTaskContainer,
   createTaskDisplayDom,
   taskDisplayControlDom,
+  completeTaskDom,
 };
