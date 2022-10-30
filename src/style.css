@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .new-task-form-animation {
-  animation: scale-up-center 0.4s ease 0s 1 normal none;
+  animation: scale-up-center 0.3s ease 0s 1 normal none;
 }
 
 @keyframes scale-up-center {
@@ -14,5 +14,37 @@
   }
   100% {
     transform:scale(1);
+  }
+}
+
+.extended-part {
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  max-height: 0;
+}
+
+.chevron-anim-down {
+  animation: rotate-down 0.2s ease-out 0s 1 normal none;
+}
+
+@keyframes rotate-down {
+  0% {
+    transform:rotate(0deg);
+  }
+  100% {
+    transform:rotate(180deg);
+  }
+}
+
+.chevron-anim-up {
+  animation: rotate-up 0.2s ease-out 0s 1 normal none;
+}
+
+@keyframes rotate-up {
+  0% {
+    transform:rotate(180deg);
+  }
+  100% {
+    transform:rotate(0deg);
   }
 }
