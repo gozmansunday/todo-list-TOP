@@ -100,7 +100,7 @@
           
           <!-- Tasks -->
           <div id="task-container" class="space-y-3.5">
-
+            
             <div class="task-display text-sm border-[3px] border-red-400 bg-red-200 rounded-lg px-3 py-0.5 md:text-base">
               <div class="flex justify-between items-center">
                 <div class="flex gap-2 items-center">
@@ -108,7 +108,7 @@
                     <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
                   </div>
                   <h4 class="text-lg font-semibold pt-0.5 ml-1">Pay bills</h4>
-                  <i class="fa-solid fa-chevron-up text-sm pt-1 md:pt-1.5"></i>
+                  <i class="chevron fa-solid fa-chevron-up text-sm pt-1 md:pt-1.5"></i>
                 </div>
                 <div class="flex gap-2 items-center">
                   <p class="mr-4 pt-0.5 md:pt-0">25/10/2022</p>
@@ -116,55 +116,28 @@
                   <i class="fa-solid fa-trash text-sm"></i>
                 </div>
               </div>
-              <!-- Extended -->
-              <div class="extended-part px-8">
+              
+              <div class="extended-part px-8 pb-0.5">
+                <p>
+                  <span class="font-semibold">Title:</span>
+                  Pay bills
+                </p>
                 <p>
                   <span class="font-semibold">Details:</span>
                   I need to pay my fucking bills ASAP!
                 </p>
-                <div>
-                  <p>
-                    <span class="font-semibold">Project:</span>
-                    All Tasks
-                  </p>
-                  <p>
-                    <span class="font-semibold">Priority:</span>
-                    High
-                  </p>
-                </div>
-              </div>
-            </div>
-<!--             
-            <div class="text-sm flex justify-between items-center border-[3px] border-yellow-400 bg-yellow-200 rounded-lg px-3 py-0.5 md:text-base">
-              <div class="flex gap-2 items-center">
-                <div class="">
-                  <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
-                </div>
-                <h4 class="text-lg font-semibold pt-0.5 ml-1">Tweet #100days</h4>
-                <i class="fa-solid fa-chevron-up text-sm pt-1.5"></i>
-              </div>
-              <div class="flex gap-2 items-center">
-                <p class="mr-4">25/10/2022</p>
-                <i class="fa-solid fa-pen-to-square text-sm"></i>
-                <i class="fa-solid fa-trash text-sm"></i>
+                <p>
+                  <span class="font-semibold">Project:</span>
+                  All Tasks
+                </p>
+                <p>
+                  <span class="font-semibold">Priority:</span>
+                  High
+                </p>
               </div>
             </div>
             
-            <div class="text-sm flex justify-between items-center border-[3px] border-blue-400 bg-blue-200 rounded-lg px-3 py-0.5 md:text-base">
-              <div class="flex gap-2 items-center">
-                <div class="">
-                  <input type="checkbox" class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
-                </div>
-                <h4 class="text-lg font-semibold pt-0.5 ml-1">Chat her up</h4>
-                <i class="fa-solid fa-chevron-up text-sm pt-1.5"></i>
-              </div>
-              <div class="flex gap-2 items-center">
-                <p class="mr-4">25/10/2022</p>
-                <i class="fa-solid fa-pen-to-square text-sm"></i>
-                <i class="fa-solid fa-trash text-sm"></i>
-              </div>
-            </div>
-            
+            <!--             
             <div class="text-sm flex justify-between items-center border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-lg px-3 py-0.5 md:text-base">
               <div class="flex gap-2 items-center">
                 <div class="">
@@ -197,15 +170,15 @@
           <form class="space-y-4">
             <div>
               <label for="title" class="block text-xl">Title</label>
-              <input type="text" name="title" id="title" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+              <input type="text" name="title" id="title" value="Pay bills" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
               <label for="details" class="block text-xl">Details</label>
-              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-16 -mb-2 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark"></textarea>
+              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-16 -mb-2 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">Pay a lot of annoying bills!</textarea>
             </div>
             <div>
               <label for="date" class="block text-xl">Due Date</label>
-              <input type="date" name="date" id="date" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+              <input type="date" name="date" id="date" value="2023-01-01" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
               <label for="priority" class="block text-xl">Priority</label>
