@@ -1,5 +1,4 @@
 import { dom } from './dom.js';
-import { forms } from './forms.js';
 
 // Tasks Array
 let tasksArray = [];
@@ -50,6 +49,7 @@ function displayTask() {
 
   expandTask();
   checkTask();
+  deleteTask();  
 }
 
 function expandTask() {
@@ -70,6 +70,16 @@ function checkTask() {
       dom.completeTaskDom(checkbox, tasksArray);
     });
   }); 
+}
+
+function deleteTask() {
+  const trashs = document.querySelectorAll('.trash');
+
+  [...trashs].forEach(trash => {
+    trash.addEventListener('click', () => {
+      dom.deleteTaskDom(trash, tasksArray);
+    });
+  });
 }
 
 export const tasks = {

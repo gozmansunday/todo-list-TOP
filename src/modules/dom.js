@@ -43,7 +43,7 @@ function clearTaskContainer() {
 
 function createTaskDisplayDom(baseColor, task) {
   const taskDisp = document.createElement('div');
-  taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-lg px-3 py-0.5 md:text-base`;
+  taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
 
   const taskHTML =
     `
@@ -58,10 +58,10 @@ function createTaskDisplayDom(baseColor, task) {
       <div class="flex gap-2 items-center">
         <p class="mr-4  pt-0.5 md:pt-0">${task.date}</p>
         <i class="fa-solid fa-pen-to-square text-sm"></i>
-        <i class="fa-solid fa-trash text-sm"></i>
+        <i class="trash fa-solid fa-trash text-sm"></i>
       </div>
     </div>
-    <div class="extended-part px-8 pb-0.5">
+    <div class="extended-part px-8">
       <p>
         <span class="font-semibold">Title:</span>
         ${task.title}
@@ -78,6 +78,19 @@ function createTaskDisplayDom(baseColor, task) {
         <span class="font-semibold">Priority:</span>
         ${task.priority}
       </p>
+    </div>
+    <div class="confirm-delete px-8 space-y-1">
+      <h4 class="font-semibold">
+        Are you sure you want to delete this task?
+      </h4>
+      <div class="flex items-center gap-2 md:gap-3 pb-1">
+        <button class="cancel-del-btn bg-dark text-light rounded-md px-4 py-1 text-sm md:text-base transition duration-200 lg:hover:shadow-card">
+          Cancel
+        </button>
+        <button class="confirm-del-btn bg-dark text-light rounded-md px-4 py-1 text-sm md:text-base transition duration-200 lg:hover:shadow-card">
+          Delete
+        </button>
+      </div>
     </div>
     `;
 
@@ -113,6 +126,7 @@ function completeTaskDom(checkbox, tasksArray) {
   const chevron = taskDisp.children[0].children[0].children[2];
   const taskEdit = taskDisp.children[0].children[1].children[1];
   const extendedPart = taskDisp.children[1];
+  const confirmDelete = taskDisp.children[2];
   let baseColor;
 
   if (tasksArray[taskIndex].priority === 'Low') {
@@ -131,11 +145,13 @@ function completeTaskDom(checkbox, tasksArray) {
     chevron.classList.add('hidden');
     taskEdit.classList.add('hidden');
     extendedPart.style.maxHeight = null;
+    confirmDelete.style.maxHeight = null;
     chevron.classList.remove('chevron-anim-down');
     chevron.classList.remove('chevron-anim-up');
     chevron.classList.remove('rotate-0');
     chevron.classList.remove('rotate-180');
     chevron.classList.add('rotate-0');
+    tasksArray[taskIndex].completed = true;
   } else {
     taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-lg px-3 py-0.5 md:text-base`;
     checkbox.classList.replace('checked:text-gray-400', 'checked:text-dark');
@@ -143,6 +159,37 @@ function completeTaskDom(checkbox, tasksArray) {
     taskDate.classList.remove('hidden');
     chevron.classList.remove('hidden');
     taskEdit.classList.remove('hidden');
+    tasksArray[taskIndex].completed = false;
+  }
+}
+
+function deleteTaskDom(trash, tasksArray) {
+  console.log('trash!');
+
+  const taskDisp = trash.parentElement.parentElement.parentElement;
+  const taskIndex = [...dom.selector.taskContainer.children].indexOf(taskDisp);
+  const confirmDelete = taskDisp.children[2];
+  const cancelBtn = confirmDelete.children[1].children[0];
+  const deleteBtn = confirmDelete.children[1].children[1];
+
+  if (tasksArray[taskIndex].completed) {
+    taskDisp.remove();
+    tasksArray.splice(taskIndex, 1);
+  } else {
+    if (confirmDelete.style.maxHeight) {
+      confirmDelete.style.maxHeight = null;
+    } else {
+      confirmDelete.style.maxHeight = confirmDelete.scrollHeight + "px";
+    }
+
+    cancelBtn.addEventListener('click', () => {
+      confirmDelete.style.maxHeight = null;
+    });
+
+    deleteBtn.addEventListener('click', () => {
+      taskDisp.remove();
+      tasksArray.splice(taskIndex, 1);
+    });
   }
 }
 
@@ -153,4 +200,5 @@ export const dom = {
   createTaskDisplayDom,
   taskDisplayControlDom,
   completeTaskDom,
+  deleteTaskDom,
 };
