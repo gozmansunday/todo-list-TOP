@@ -30,9 +30,9 @@
           </h2>
           <div class="space-y-2">
             <div class="flex items-center gap-3 text-xl px-3 border-[3px] bg-brand border-brand rounded-xl cursor-pointer lg:hover:border-brand">
-              <i class="fa-solid fa-list"></i>
-              <h4 class="pt-1">
-                All Tasks
+              <i class="fa-solid fa-inbox"></i>
+              <h4 class="pt-0.5">
+                Inbox
               </h4>
             </div>
 
@@ -93,14 +93,14 @@
           <!-- Tasks Section Heading -->
           <div class="flex items-center justify-between">
             <h2 class="text-4xl font-semibold">
-              All Tasks
+              Inbox
             </h2>
             <i id="new-task-form-btn" class="fa-solid fa-circle-plus text-3xl transition duration-150 md:text-4xl lg:hover:scale-110"></i>
           </div>
           
           <!-- Tasks -->
           <div id="task-container" class="space-y-3.5">
-            <!--    
+               
             <div class="task-display text-sm border-[3px] border-red-400 bg-red-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base">
               <div class="flex justify-between items-center">
                 <div class="flex gap-2 items-center">
@@ -150,79 +150,8 @@
                 </div>
               </div>
             </div>
-         
-            <div class="task-display text-sm border-[3px] border-yellow-400 bg-yellow-200 rounded-xl px-3 py-0.5 md:text-base">
-              <div class="flex justify-between items-center">
-                <div class="flex gap-2 items-center">
-                  <div class="">
-                    <input type="checkbox" class="checkbox border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
-                  </div>
-                  <h4 class="text-lg font-semibold pt-0.5 ml-1">Pay bills</h4>
-                  <i class="chevron fa-solid fa-chevron-up text-sm pt-1 md:pt-1.5"></i>
-                </div>
-                <div class="flex gap-2 items-center">
-                  <p class="mr-4 pt-0.5 md:pt-0">25/10/2022</p>
-                  <i class="fa-solid fa-pen-to-square text-sm"></i>
-                  <i class="fa-solid fa-trash text-sm"></i>
-                </div>
-              </div>
-              
-              <div class="extended-part px-8 pb-0.5">
-                <p>
-                  <span class="font-semibold">Title:</span>
-                  Pay bills
-                </p>
-                <p>
-                  <span class="font-semibold">Details:</span>
-                  I need to pay my fucking bills ASAP!
-                </p>
-                <p>
-                  <span class="font-semibold">Project:</span>
-                  All Tasks
-                </p>
-                <p>
-                  <span class="font-semibold">Priority:</span>
-                  High
-                </p>
-              </div>
-            </div>
             
-            <div class="task-display text-sm border-[3px] border-blue-400 bg-blue-200 rounded-xl px-3 py-0.5 md:text-base">
-              <div class="flex justify-between items-center">
-                <div class="flex gap-2 items-center">
-                  <div class="">
-                    <input type="checkbox" class="checkbox border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
-                  </div>
-                  <h4 class="text-lg font-semibold pt-0.5 ml-1">Pay bills</h4>
-                  <i class="chevron fa-solid fa-chevron-up text-sm pt-1 md:pt-1.5"></i>
-                </div>
-                <div class="flex gap-2 items-center">
-                  <p class="mr-4 pt-0.5 md:pt-0">25/10/2022</p>
-                  <i class="fa-solid fa-pen-to-square text-sm"></i>
-                  <i class="fa-solid fa-trash text-sm"></i>
-                </div>
-              </div>
-              
-              <div class="extended-part px-8 pb-0.5">
-                <p>
-                  <span class="font-semibold">Title:</span>
-                  Pay bills
-                </p>
-                <p>
-                  <span class="font-semibold">Details:</span>
-                  I need to pay my fucking bills ASAP!
-                </p>
-                <p>
-                  <span class="font-semibold">Project:</span>
-                  All Tasks
-                </p>
-                <p>
-                  <span class="font-semibold">Priority:</span>
-                  High
-                </p>
-              </div>
-            </div>
-             -->
+
             <!--             
             <div class="text-sm flex justify-between items-center border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-3 py-0.5 md:text-base">
               <div class="flex gap-2 items-center">
@@ -283,14 +212,64 @@
             <div>
               <label for="project" class="block text-xl">Project</label>
               <select name="project" id="project" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
-                <option value="All Tasks">
-                  All Tasks
+                <option value="Inbox">
+                  Inbox
                 </option>
               </select>
             </div>
             <div>
               <button id="new-task-form-submit-btn" class="w-full bg-dark text-light px-2.5 pb-2 pt-2.5 mt-4 text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
                 Add Task
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Edit Task Form -->
+        <div id="edit-task-form" class="hidden bg-mid border-4 border-dark space-y-4 rounded-3xl px-6 pt-3 pb-7 w-[24rem] shadow-card md:w-[26rem]">
+          <div class="flex items-center justify-between">            
+            <h3 class="text-3xl font-semibold">Edit Task</h3>
+            <i id="edit-task-form-close-btn" class="fa-solid fa-xmark text-3xl"></i>
+          </div>
+          <!-- Form Controls -->
+          <form class="space-y-4">
+            <div>
+              <label for="title" class="block text-xl">Title</label>
+              <input type="text" name="title" id="title" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+            </div>
+            <div>
+              <label for="details" class="block text-xl">Details</label>
+              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-16 -mb-2 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark"></textarea>
+            </div>
+            <div>
+              <label for="date" class="block text-xl">Due Date</label>
+              <input type="date" name="date" id="date" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+            </div>
+            <div>
+              <label for="priority" class="block text-xl">Priority</label>
+              <select name="priority" id="priority" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+                <option value="Low">
+                  Low
+                </option>
+                <option value="Medium">
+                  Medium
+                </option>
+                <option value="High">
+                  High
+                </option>
+              </select>
+            </div>
+            <div>
+              <label for="project" class="block text-xl">Project</label>
+              <select name="project" id="project" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+                <option value="Inbox">
+                  Inbox
+                </option>
+              </select>
+            </div>
+            <div>
+              <button id="edit-task-form-submit-btn" class="w-full bg-dark text-light px-2.5 pb-2 pt-2.5 mt-4 text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
+                Edit
               </button>
             </div>
           </form>
