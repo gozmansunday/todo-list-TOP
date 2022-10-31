@@ -5,27 +5,45 @@ const newTaskFormBtn = document.querySelector('#new-task-form-btn');
 const newTaskFormCloseBtn = document.querySelector('#new-task-form-close-btn');
 const newTaskFormSubmitBtn = document.querySelector('#new-task-form-submit-btn');
 // New Task Form Inputs DOM
-const taskTitle = document.querySelector('#title');
-const taskDetails = document.querySelector('#details');
-const taskDate = document.querySelector('#date');
-const taskPriority = document.querySelector('#priority');
-const taskProject = document.querySelector('#project');
+const newTaskTitle = document.querySelector('#new-task-form #title');
+const newTaskDetails = document.querySelector('#new-task-form #details');
+const newTaskDate = document.querySelector('#new-task-form #date');
+const newTaskPriority = document.querySelector('#new-task-form #priority');
+const newTaskProject = document.querySelector('#new-task-form #project');
+// Edit Task Form Controls DOM
+const editTaskForm = document.querySelector('#edit-task-form');
+const editTaskFormCloseBtn = document.querySelector('#edit-task-form-close-btn');
+const editTaskFormSubmitBtn = document.querySelector('#edit-task-form-submit-btn');
+// Edit Task Form Inputs DOM
+const editTaskTitle = document.querySelector('#edit-task-form #title');
+const editTaskDetails = document.querySelector('#edit-task-form #details');
+const editTaskDate = document.querySelector('#edit-task-form #date');
+const editTaskPriority = document.querySelector('#edit-task-form #priority');
+const editTaskProject = document.querySelector('#edit-task-form #project');
 // Task Display DOM
 const taskContainer = document.querySelector('#task-container');
 const chevrons = document.querySelectorAll('.chevron');
 
 // Selector obj for accessing all DOM query selectors
 const selector = {
+  newTaskFormBtn,
   modal,
   newTaskForm,
-  newTaskFormBtn,
   newTaskFormCloseBtn,
   newTaskFormSubmitBtn,
-  taskTitle,
-  taskDetails,
-  taskDate,
-  taskPriority,
-  taskProject,
+  newTaskTitle,
+  newTaskDetails,
+  newTaskDate,
+  newTaskPriority,
+  newTaskProject,
+  editTaskForm,
+  editTaskFormCloseBtn,
+  editTaskFormSubmitBtn,
+  editTaskTitle,
+  editTaskDetails,
+  editTaskDate,
+  editTaskPriority,
+  editTaskProject,
   taskContainer,
   chevrons,
 };
@@ -33,8 +51,15 @@ const selector = {
 function newTaskFormDom() {
   modal.classList.toggle('hidden');
   modal.classList.toggle('flex');
-  newTaskForm.classList.toggle('new-task-form-animation');
+  newTaskForm.classList.toggle('task-form-animation');
   newTaskForm.classList.toggle('hidden');
+}
+
+function editTaskFormDom() {
+  modal.classList.toggle('hidden');
+  modal.classList.toggle('flex');
+  editTaskForm.classList.toggle('task-form-animation');
+  editTaskForm.classList.toggle('hidden');
 }
 
 function clearTaskContainer() {
@@ -57,7 +82,7 @@ function createTaskDisplayDom(baseColor, task) {
       </div>
       <div class="flex gap-2 items-center">
         <p class="mr-4  pt-0.5 md:pt-0">${task.date}</p>
-        <i class="fa-solid fa-pen-to-square text-sm"></i>
+        <i class="edit fa-solid fa-pen-to-square text-sm"></i>
         <i class="trash fa-solid fa-trash text-sm"></i>
       </div>
     </div>
@@ -138,7 +163,7 @@ function completeTaskDom(checkbox, tasksArray) {
   }
 
   if (checkbox.checked) {
-    taskDisp.className = `task-display text-sm border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-lg px-3 py-0.5 md:text-base`;
+    taskDisp.className = `task-display text-sm border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
     checkbox.classList.replace('checked:text-dark', 'checked:text-gray-400');
     taskTitle.classList.add('line-through');
     taskDate.classList.add('hidden');
@@ -153,7 +178,7 @@ function completeTaskDom(checkbox, tasksArray) {
     chevron.classList.add('rotate-0');
     tasksArray[taskIndex].completed = true;
   } else {
-    taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-lg px-3 py-0.5 md:text-base`;
+    taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
     checkbox.classList.replace('checked:text-gray-400', 'checked:text-dark');
     taskTitle.classList.remove('line-through');
     taskDate.classList.remove('hidden');
@@ -164,8 +189,6 @@ function completeTaskDom(checkbox, tasksArray) {
 }
 
 function deleteTaskDom(trash, tasksArray) {
-  console.log('trash!');
-
   const taskDisp = trash.parentElement.parentElement.parentElement;
   const taskIndex = [...dom.selector.taskContainer.children].indexOf(taskDisp);
   const confirmDelete = taskDisp.children[2];
@@ -193,12 +216,57 @@ function deleteTaskDom(trash, tasksArray) {
   }
 }
 
+function editTaskDom(edit, tasksArray) {
+  const taskDisp = edit.parentElement.parentElement.parentElement;
+  const taskIndex = [...dom.selector.taskContainer.children].indexOf(taskDisp);
+  const task = tasksArray[taskIndex];
+  let baseColor;
+
+  dom.selector.editTaskTitle.value = task.title;
+  dom.selector.editTaskDetails.value = task.details;
+  dom.selector.editTaskDate.value = task.date;
+  dom.selector.editTaskPriority.value = task.priority;
+  dom.selector.editTaskProject.value = task.project;
+
+  dom.editTaskFormDom();
+  
+  dom.selector.editTaskFormSubmitBtn.onclick = (e) => {
+    e.preventDefault();
+
+    task.title = dom.selector.editTaskTitle.value;
+    task.details = dom.selector.editTaskDetails.value;
+    task.date = dom.selector.editTaskDate.value;
+    task.priority = dom.selector.editTaskPriority.value;
+    task.project = dom.selector.editTaskProject.value;
+
+    if (task.priority === 'Low') {
+      baseColor = 'blue';
+    } else if (task.priority === 'Medium') {
+      baseColor = 'yellow';
+    } else {
+      baseColor = 'red';
+    }
+
+    taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
+    taskDisp.children[0].children[0].children[1].textContent = dom.selector.editTaskTitle.value;
+    taskDisp.children[0].children[1].children[0].textContent = dom.selector.editTaskDate.value;
+    taskDisp.children[1].children[0].innerHTML = `<span class="font-semibold">Title:</span> ${dom.selector.editTaskTitle.value}`;
+    taskDisp.children[1].children[1].innerHTML = `<span class="font-semibold">Details:</span> ${dom.selector.editTaskDetails.value}`;
+    taskDisp.children[1].children[2].innerHTML = `<span class="font-semibold">Project:</span> ${dom.selector.editTaskProject.value}`;
+    taskDisp.children[1].children[3].innerHTML = `<span class="font-semibold">Priority:</span> ${dom.selector.editTaskPriority.value}`;
+
+    console.log(task);
+  };
+}
+
 export const dom = {
   selector,
   newTaskFormDom,
+  editTaskFormDom,
   clearTaskContainer,
   createTaskDisplayDom,
   taskDisplayControlDom,
   completeTaskDom,
   deleteTaskDom,
+  editTaskDom,
 };

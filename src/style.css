@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.new-task-form-animation {
+.task-form-animation {
   animation: scale-up-center 0.3s ease 0s 1 normal none;
 }
 

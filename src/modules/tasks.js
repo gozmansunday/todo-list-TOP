@@ -1,4 +1,5 @@
 import { dom } from './dom.js';
+import { forms } from './forms.js';
 
 // Tasks Array
 let tasksArray = [];
@@ -13,11 +14,11 @@ function addTask(e) {
     e.preventDefault();
     
     //Imported Form Input Values
-    const taskTitle = dom.selector.taskTitle.value;
-    const taskDetails = dom.selector.taskDetails.value;
-    const taskDate = dom.selector.taskDate.value;
-    const taskPriority = dom.selector.taskPriority.value;
-    const taskProject = dom.selector.taskProject.value;
+    const taskTitle = dom.selector.newTaskTitle.value;
+    const taskDetails = dom.selector.newTaskDetails.value;
+    const taskDate = dom.selector.newTaskDate.value;
+    const taskPriority = dom.selector.newTaskPriority.value;
+    const taskProject = dom.selector.newTaskProject.value;
 
     if (taskTitle === '' || taskDetails === '' || taskDate === '' ) return;
 
@@ -49,7 +50,8 @@ function displayTask() {
 
   expandTask();
   checkTask();
-  deleteTask();  
+  deleteTask();
+  editTask();
 }
 
 function expandTask() {
@@ -78,6 +80,16 @@ function deleteTask() {
   [...trashs].forEach(trash => {
     trash.addEventListener('click', () => {
       dom.deleteTaskDom(trash, tasksArray);
+    });
+  });
+}
+
+function editTask() {
+  const edits = document.querySelectorAll('.edit');
+
+  [...edits].forEach(edit => {
+    edit.addEventListener('click', () => {
+      dom.editTaskDom(edit, tasksArray);
     });
   });
 }
