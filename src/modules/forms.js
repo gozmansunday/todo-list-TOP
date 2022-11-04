@@ -5,12 +5,20 @@ function formControl() {
     dom.newTaskFormDom();
   });
 
+  dom.selector.newProjectFormBtn.addEventListener('click', () => {
+    dom.newProjectFormDom();
+  });
+
   dom.selector.newTaskFormCloseBtn.addEventListener('click', () => {
     dom.newTaskFormDom();
   });
 
   dom.selector.editTaskFormCloseBtn.addEventListener('click', () => {
     dom.editTaskFormDom();
+  });
+
+  dom.selector.newProjectFormCloseBtn.addEventListener('click', () => {
+    dom.newProjectFormDom();
   });
 
   dom.selector.modal.addEventListener('click', () => {
@@ -21,6 +29,10 @@ function formControl() {
     if (!dom.selector.editTaskForm.classList.contains('hidden')) {
       dom.editTaskFormDom();
     }
+
+    if (!dom.selector.newProjectForm.classList.contains('hidden')) {
+      dom.newProjectFormDom();
+    }
   });
 
   dom.selector.newTaskForm.addEventListener('click', (e) => {
@@ -28,6 +40,10 @@ function formControl() {
   });
 
   dom.selector.editTaskForm.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  dom.selector.newProjectForm.addEventListener('click', (e) => {
     e.stopPropagation();
   });
 }

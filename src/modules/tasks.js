@@ -1,13 +1,14 @@
 import { dom } from './dom.js';
-import { forms } from './forms.js';
-
-// Tasks Array
-let tasksArray = [];
+import { projects } from './projects.js';
+// import { forms } from './forms.js';
 
 // Task Obj Factory
 function TaskObjCreator(title, details, date, priority, project, completed) {
   return {title, details, date, priority, project, completed};
 }
+
+// Tasks Array
+let tasksArray = projects.defaultProject().projectArray;
 
 function addTask(e) {
   dom.selector.newTaskFormSubmitBtn.addEventListener('click', (e) => {
