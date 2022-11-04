@@ -23,6 +23,15 @@ const editTaskProject = document.querySelector('#edit-task-form #project');
 // Task Display DOM
 const taskContainer = document.querySelector('#task-container');
 const chevrons = document.querySelectorAll('.chevron');
+// New Project Form Controls DOM
+const newProjectForm = document.querySelector('#new-project-form');
+const newProjectFormBtn = document.querySelector('#new-project-form-btn');
+const newProjectFormCloseBtn = document.querySelector('#new-project-form-close-btn');
+const newProjectFormSubmitBtn = document.querySelector('#new-project-form-submit-btn');
+// New Project Form Inputs DOM
+const newProjectName = document.querySelector('#new-project-form #name');
+// Project Display DOM
+const projectContainer = document.querySelector('#project-container');
 
 // Selector obj for accessing all DOM query selectors
 const selector = {
@@ -46,6 +55,12 @@ const selector = {
   editTaskProject,
   taskContainer,
   chevrons,
+  newProjectForm,
+  newProjectFormBtn,
+  newProjectFormCloseBtn,
+  newProjectFormSubmitBtn,
+  newProjectName,
+  projectContainer,
 };
 
 function newTaskFormDom() {
@@ -62,8 +77,15 @@ function editTaskFormDom() {
   editTaskForm.classList.toggle('hidden');
 }
 
+function newProjectFormDom() {
+  modal.classList.toggle('hidden');
+  modal.classList.toggle('flex');
+  newProjectForm.classList.toggle('task-form-animation');
+  newProjectForm.classList.toggle('hidden');
+}
+
 function clearTaskContainer() {
-  taskContainer.textContent = '';
+  taskContainer.innerHTML = '';
 }
 
 function createTaskDisplayDom(baseColor, task) {
@@ -259,14 +281,40 @@ function editTaskDom(edit, tasksArray) {
   };
 }
 
+function clearProjectContainer() {
+  projectContainer.innerHTML = '';
+}
+
+function createProjectDisplayDom(project) {
+  const projectDisp = document.createElement('div');
+  projectDisp.className = 'flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand';
+
+  const projectHTML = 
+    `
+    <div class="flex items-center gap-3">                
+      <i class="fa-solid fa-caret-right"></i>
+      <h4 class="pt-1">
+        ${project.name}
+      </h4>
+    </div>
+    <i class="fa-solid fa-trash text-sm pt-0.5"></i>`;
+  
+  projectDisp.innerHTML = projectHTML;
+
+  dom.selector.projectContainer.appendChild(projectDisp);
+}
+
 export const dom = {
   selector,
   newTaskFormDom,
   editTaskFormDom,
+  newProjectFormDom,
   clearTaskContainer,
   createTaskDisplayDom,
   taskDisplayControlDom,
   completeTaskDom,
   deleteTaskDom,
   editTaskDom,
+  clearProjectContainer,
+  createProjectDisplayDom,
 };
