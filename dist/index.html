@@ -36,21 +36,21 @@
               </h4>
             </div>
 
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-xl cursor-pointer lg:hover:border-brand">
+            <div class="flex items-center gap-3 text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-calendar-day"></i>
               <h4 class="pt-1">
                 Today
               </h4>
             </div>
 
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-xl cursor-pointer lg:hover:border-brand">
+            <div class="flex items-center gap-3 text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-calendar-week"></i>
               <h4 class="pt-1">
                 Week
               </h4>
             </div>
 
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-xl cursor-pointer lg:hover:border-brand">
+            <div class="flex items-center gap-3 text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-note-sticky"></i>
               <h4 class="pt-0.5">
                 Notes
@@ -65,24 +65,30 @@
             <h2>
               Projects
             </h2>
-            <i class="fa-solid fa-circle-plus text-2xl pt-0.5"></i>
+            <i id="new-project-form-btn" class="fa-solid fa-circle-plus text-2xl pt-0.5"></i>
           </div>
 
-          <!-- <div class="space-y-2 overflow-auto">
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-xl cursor-pointer lg:hover:border-brand">
-              <i class="fa-solid fa-caret-right"></i>
-              <h4 class="pt-1">
-                School
-              </h4>
+          <div id="project-container" class="space-y-2 overflow-auto">
+            <div class="flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
+              <div class="flex items-center gap-3">                
+                <i class="fa-solid fa-caret-right"></i>
+                <h4 class="pt-1">
+                  School
+                </h4>
+              </div>
+              <i class="fa-solid fa-trash text-sm pt-0.5"></i>
             </div>
 
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] border-mid rounded-xl cursor-pointer lg:hover:border-brand">
-              <i class="fa-solid fa-caret-right"></i>
-              <h4 class="pt-1">
-                Chores
-              </h4>
+            <div class="flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
+              <div class="flex items-center gap-3">                
+                <i class="fa-solid fa-caret-right"></i>
+                <h4 class="pt-1">
+                  Chores
+                </h4>
+              </div>
+              <i class="fa-solid fa-trash text-sm pt-0.5"></i>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
 
@@ -150,8 +156,107 @@
                 </div>
               </div>
             </div>
-            
+               
+            <div class="task-display text-sm border-[3px] border-blue-400 bg-blue-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base">
+              <div class="flex justify-between items-center">
+                <div class="flex gap-2 items-center">
+                  <div class="">
+                    <input type="checkbox" class="checkbox border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
+                  </div>
+                  <h4 class="text-lg font-semibold pt-0.5 ml-1">Pay bills</h4>
+                  <i class="chevron fa-solid fa-chevron-up text-sm pt-1 md:pt-1.5"></i>
+                </div>
+                <div class="flex gap-2 items-center">
+                  <p class="mr-4 pt-0.5 md:pt-0">25/10/2022</p>
+                  <i class="fa-solid fa-pen-to-square text-sm"></i>
+                  <i class="trash fa-solid fa-trash text-sm"></i>
+                </div>
+              </div>
+              
+              <div class="extended-part px-8">
+                <p>
+                  <span class="font-semibold">Title:</span>
+                  Pay bills
+                </p>
+                <p>
+                  <span class="font-semibold">Details:</span>
+                  I need to pay my fucking bills ASAP!
+                </p>
+                <p>
+                  <span class="font-semibold">Project:</span>
+                  All Tasks
+                </p>
+                <p>
+                  <span class="font-semibold">Priority:</span>
+                  High
+                </p>
+              </div>
 
+              <div class="confirm-delete px-8 space-y-1">
+                <h4 class="font-semibold">
+                  Are you sure you want to delete this task?
+                </h4>
+                <div class="flex items-center gap-2 md:gap-3 pb-1">
+                  <button class="cancel-del-btn bg-dark text-light rounded-md px-4 py-1 text-sm md:text-base transition duration-200 lg:hover:shadow-card">
+                    Cancel
+                  </button>
+                  <button class="confirm-del-btn bg-dark text-light rounded-md px-4 py-1 text-sm md:text-base transition duration-200 lg:hover:shadow-card">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+               
+            <div class="task-display text-sm border-[3px] border-yellow-400 bg-yellow-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base">
+              <div class="flex justify-between items-center">
+                <div class="flex gap-2 items-center">
+                  <div class="">
+                    <input type="checkbox" class="checkbox border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
+                  </div>
+                  <h4 class="text-lg font-semibold pt-0.5 ml-1">Pay bills</h4>
+                  <i class="chevron fa-solid fa-chevron-up text-sm pt-1 md:pt-1.5"></i>
+                </div>
+                <div class="flex gap-2 items-center">
+                  <p class="mr-4 pt-0.5 md:pt-0">25/10/2022</p>
+                  <i class="fa-solid fa-pen-to-square text-sm"></i>
+                  <i class="trash fa-solid fa-trash text-sm"></i>
+                </div>
+              </div>
+              
+              <div class="extended-part px-8">
+                <p>
+                  <span class="font-semibold">Title:</span>
+                  Pay bills
+                </p>
+                <p>
+                  <span class="font-semibold">Details:</span>
+                  I need to pay my fucking bills ASAP!
+                </p>
+                <p>
+                  <span class="font-semibold">Project:</span>
+                  All Tasks
+                </p>
+                <p>
+                  <span class="font-semibold">Priority:</span>
+                  High
+                </p>
+              </div>
+
+              <div class="confirm-delete px-8 space-y-1">
+                <h4 class="font-semibold">
+                  Are you sure you want to delete this task?
+                </h4>
+                <div class="flex items-center gap-2 md:gap-3 pb-1">
+                  <button class="cancel-del-btn bg-dark text-light rounded-md px-4 py-1 text-sm md:text-base transition duration-200 lg:hover:shadow-card">
+                    Cancel
+                  </button>
+                  <button class="confirm-del-btn bg-dark text-light rounded-md px-4 py-1 text-sm md:text-base transition duration-200 lg:hover:shadow-card">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+            
             <!--             
             <div class="text-sm flex justify-between items-center border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-3 py-0.5 md:text-base">
               <div class="flex gap-2 items-center">
@@ -178,7 +283,7 @@
         <!-- New Task Form -->
         <div id="new-task-form" class="hidden bg-mid border-4 border-dark space-y-4 rounded-3xl px-6 pt-3 pb-7 w-[24rem] shadow-card md:w-[26rem]">
           <div class="flex items-center justify-between">            
-            <h3 class="text-3xl font-semibold">Add New Task</h3>
+            <h3 class="text-3xl font-semibold">New Task</h3>
             <i id="new-task-form-close-btn" class="fa-solid fa-xmark text-3xl"></i>
           </div>
           <!-- Form Controls -->
@@ -270,6 +375,26 @@
             <div>
               <button id="edit-task-form-submit-btn" class="w-full bg-dark text-light px-2.5 pb-2 pt-2.5 mt-4 text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
                 Edit
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- New Project Form -->
+        <div id="new-project-form" class="hidden bg-mid border-4 border-dark space-y-4 rounded-3xl px-6 pt-3 pb-7 w-[24rem] shadow-card md:w-[26rem]">
+          <div class="flex items-center justify-between">            
+            <h3 class="text-3xl font-semibold">New Project</h3>
+            <i id="new-project-form-close-btn" class="fa-solid fa-xmark text-3xl"></i>
+          </div>
+          <!-- Form Controls -->
+          <form class="space-y-4">
+            <div>
+              <label for="name" class="block text-xl">Name</label>
+              <input type="text" name="name" id="name" value="School Work" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+            </div>
+            <div>
+              <button id="new-project-form-submit-btn" class="w-full bg-dark text-light px-2.5 pb-2 pt-2.5 mt-4 text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
+                Add Project
               </button>
             </div>
           </form>
