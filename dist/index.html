@@ -29,7 +29,7 @@
             Home
           </h2>
           <div class="space-y-2">
-            <div class="flex items-center gap-3 text-xl px-3 border-[3px] bg-brand border-brand rounded-xl cursor-pointer lg:hover:border-brand">
+            <div id="project-inbox" class="flex items-center gap-3 text-xl px-3 border-[3px] bg-brand border-brand rounded-xl cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-inbox"></i>
               <h4 class="pt-0.5">
                 Inbox
@@ -69,25 +69,27 @@
           </div>
 
           <div id="project-container" class="space-y-2 overflow-auto">
-            <div class="flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
+            
+            <div class="project-display flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
               <div class="flex items-center gap-3">                
                 <i class="fa-solid fa-caret-right"></i>
                 <h4 class="pt-1">
                   School
                 </h4>
               </div>
-              <i class="fa-solid fa-trash text-sm pt-0.5"></i>
+              <i class="delete-project-btn fa-solid fa-trash text-sm pt-0.5"></i>
             </div>
 
-            <div class="flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
+            <div class="project-display flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
               <div class="flex items-center gap-3">                
                 <i class="fa-solid fa-caret-right"></i>
                 <h4 class="pt-1">
                   Chores
                 </h4>
               </div>
-              <i class="fa-solid fa-trash text-sm pt-0.5"></i>
+              <i class="delete-project-btn fa-solid fa-trash text-sm pt-0.5"></i>
             </div>
+            
           </div>
         </div>
       </div>
@@ -98,7 +100,7 @@
         <div class="space-y-6">
           <!-- Tasks Section Heading -->
           <div class="flex items-center justify-between">
-            <h2 class="text-4xl font-semibold">
+            <h2 id="page-heading" class="text-4xl font-semibold">
               Inbox
             </h2>
             <i id="new-task-form-btn" class="fa-solid fa-circle-plus text-3xl transition duration-150 md:text-4xl lg:hover:scale-110"></i>
@@ -134,7 +136,7 @@
                 </p>
                 <p>
                   <span class="font-semibold">Project:</span>
-                  All Tasks
+                  Inbox
                 </p>
                 <p>
                   <span class="font-semibold">Priority:</span>
@@ -184,7 +186,7 @@
                 </p>
                 <p>
                   <span class="font-semibold">Project:</span>
-                  All Tasks
+                  Inbox
                 </p>
                 <p>
                   <span class="font-semibold">Priority:</span>
@@ -234,7 +236,7 @@
                 </p>
                 <p>
                   <span class="font-semibold">Project:</span>
-                  All Tasks
+                  Inbox
                 </p>
                 <p>
                   <span class="font-semibold">Priority:</span>
@@ -317,9 +319,11 @@
             <div>
               <label for="project" class="block text-xl">Project</label>
               <select name="project" id="project" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
-                <option value="Inbox">
-                  Inbox
-                </option>
+                <div>                  
+                  <option value="Inbox">
+                    Inbox
+                  </option>
+                </div>
               </select>
             </div>
             <div>
@@ -367,9 +371,11 @@
             <div>
               <label for="project" class="block text-xl">Project</label>
               <select name="project" id="project" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
-                <option value="Inbox">
-                  Inbox
-                </option>
+                <div>                  
+                  <option value="Inbox">
+                    Inbox
+                  </option>
+                </div>
               </select>
             </div>
             <div>
@@ -390,7 +396,7 @@
           <form class="space-y-4">
             <div>
               <label for="name" class="block text-xl">Name</label>
-              <input type="text" name="name" id="name" value="School Work" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+              <input type="text" name="name" id="name" value="School" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-1 pb-0.5 text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
               <button id="new-project-form-submit-btn" class="w-full bg-dark text-light px-2.5 pb-2 pt-2.5 mt-4 text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
