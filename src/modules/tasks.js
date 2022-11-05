@@ -8,7 +8,7 @@ function TaskObjCreator(title, details, date, priority, project, completed) {
 }
 
 // Tasks Array
-let tasksArray = projects.defaultProject().projectArray;
+let tasksArray = projects.inboxProject().projectArray;
 
 function addTask(e) {
   dom.selector.newTaskFormSubmitBtn.addEventListener('click', (e) => {
@@ -29,6 +29,7 @@ function addTask(e) {
 
     displayTask();
     console.log(tasksArray); //! REMOVE LATER
+    // console.log(projects.projectsArray); //! REMOVE LATER
   });
 }
 
@@ -97,4 +98,5 @@ function editTask() {
 
 export const tasks = {
   addTask,
+  displayTask,
 };

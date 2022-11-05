@@ -32,6 +32,10 @@ const newProjectFormSubmitBtn = document.querySelector('#new-project-form-submit
 const newProjectName = document.querySelector('#new-project-form #name');
 // Project Display DOM
 const projectContainer = document.querySelector('#project-container');
+// Inbox Project Display
+const projInbox = document.querySelector('#project-inbox');
+// Page Display
+const pageHeading = document.querySelector('#page-heading');
 
 // Selector obj for accessing all DOM query selectors
 const selector = {
@@ -61,6 +65,8 @@ const selector = {
   newProjectFormSubmitBtn,
   newProjectName,
   projectContainer,
+  projInbox,
+  pageHeading,
 };
 
 function newTaskFormDom() {
@@ -287,7 +293,7 @@ function clearProjectContainer() {
 
 function createProjectDisplayDom(project) {
   const projectDisp = document.createElement('div');
-  projectDisp.className = 'flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand';
+  projectDisp.className = 'project-display flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand';
 
   const projectHTML = 
     `
@@ -297,11 +303,19 @@ function createProjectDisplayDom(project) {
         ${project.name}
       </h4>
     </div>
-    <i class="fa-solid fa-trash text-sm pt-0.5"></i>`;
+    <i class="delete-project-btn fa-solid fa-trash text-sm pt-0.5"></i>`;
   
   projectDisp.innerHTML = projectHTML;
 
   dom.selector.projectContainer.appendChild(projectDisp);
+}
+
+function deleteProjectDom(delBtn, projectsArray) {
+  const projDisp = delBtn.parentElement;
+  const projIndex = [...dom.selector.projectContainer.children].indexOf(projDisp) + 1;
+
+  projectsArray.splice(projIndex, 1);
+  projDisp.remove();
 }
 
 export const dom = {
@@ -317,4 +331,5 @@ export const dom = {
   editTaskDom,
   clearProjectContainer,
   createProjectDisplayDom,
+  deleteProjectDom,
 };
