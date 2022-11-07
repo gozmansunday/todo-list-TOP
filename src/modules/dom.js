@@ -330,6 +330,7 @@ function displayDefaultProjectDom(projectName) {
   const projectDisp = document.createElement('div');
 
   projectDisp.className = 'flex items-center gap-3 text-xl px-3 border-[3px] bg-brand border-brand rounded-xl cursor-pointer lg:hover:border-brand';
+  projectDisp.setAttribute('id', 'default-project');
 
   const projectHTML = 
     `         
