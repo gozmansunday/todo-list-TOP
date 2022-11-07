@@ -3,20 +3,20 @@ import { tasks } from './tasks.js';
 
 // Projects Array
 let projectsArray = [];
-// Project Obj Factory
 
+// Project Obj Factory
 function ProjectObjCreator(name, projectArray, active) {
   return {name, projectArray, active};
 }
 
-function inboxProject() {
+function createProject(e) {
+  // Create Default Project - Inbox
   const inbox = ProjectObjCreator('Inbox', [], true);
   projectsArray.push(inbox);
+  displayDefaultProject();
+  displayDefaultOption();
 
-  return inbox;
-}
-
-function createProject(e) {
+  // Create Other Projects
   dom.selector.newProjectFormSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -29,9 +29,20 @@ function createProject(e) {
 
     projectsArray.push(projectObj);
 
-    displayProject();
     console.log(projectsArray); //! REMOVE LATER
+    displayProject();
+    displayOption();
   });
+}
+
+function displayDefaultProject() {
+  const projectName = projectsArray[0].name;
+  dom.displayDefaultProjectDom(projectName);
+}
+
+function displayDefaultOption() {
+  const projectName = projectsArray[0].name;
+  dom.displayDefaultOptionDom(projectName);
 }
 
 function displayProject() {
@@ -44,41 +55,13 @@ function displayProject() {
   });
 
   deleteProject();
+}
 
-  const projDisps = document.querySelectorAll('.project-display');
-  const projInbox = dom.selector.projInbox;
+function displayOption() {
+  dom.clearProjectSelect();
+  displayDefaultOption();
 
-  projInbox.onclick = () => {
-    makeAllProjectsNonActive(projectsArray, projInbox);
-
-    projectsArray[0].active = true;
-    projInbox.classList.replace('bg-transparent', 'bg-brand');
-    projInbox.classList.replace('border-mid', 'border-brand');
-
-    dom.selector.pageHeading.textContent = projectsArray[0].name;
-    dom.clearTaskContainer();
-    tasks.displayTask();
-
-    // console.log(projectsArray); //! REMOVE LATER
-  };
-
-  [...projDisps].forEach(projDisp => {
-    projDisp.onclick = () => {
-      const projIndex = [...dom.selector.projectContainer.children].indexOf(projDisp) + 1;
-      makeAllProjectsNonActive(projectsArray, projInbox);
-
-      // Select Active
-      projectsArray[projIndex].active = true;
-      projDisp.classList.replace('bg-transparent', 'bg-brand');
-      projDisp.classList.replace('border-mid', 'border-brand');
-
-      // Change Page
-      dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
-      dom.clearTaskContainer();
-
-      // console.log(projectsArray); //! REMOVE LATER
-    };
-  });
+  dom.displayOptionDom(projectsArray);
 }
 
 function deleteProject() {
@@ -91,21 +74,6 @@ function deleteProject() {
   });
 }
 
-function makeAllProjectsNonActive(projectsArray, projInbox) {
-  // Reset
-  projectsArray.forEach(project => {
-    project.active = false;
-  });
-  projInbox.classList.replace('bg-brand', 'bg-transparent');
-  projInbox.classList.replace('border-brand', 'border-mid');
-  [...dom.selector.projectContainer.children].forEach(project => {
-    project.classList.replace('bg-brand', 'bg-transparent');
-    project.classList.replace('border-brand', 'border-mid');
-  });
-}
-
 export const projects = {
-  projectsArray,
-  inboxProject,
   createProject,
 };
