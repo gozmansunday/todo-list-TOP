@@ -1,6 +1,5 @@
 import { dom } from './dom.js';
 import { projects } from './projects.js';
-// import { forms } from './forms.js';
 
 // Task Obj Factory
 function TaskObjCreator(title, details, date, priority, project, completed) {
@@ -8,7 +7,13 @@ function TaskObjCreator(title, details, date, priority, project, completed) {
 }
 
 // Tasks Array
-let tasksArray = projects.defaultProject().projectArray;
+let projectsArray = projects.projectsArray;
+
+let tasksArray = projectsArray.filter(project => {
+  if (project.active === true) {
+    return project.projectArray;
+  }
+});
 
 function addTask(e) {
   dom.selector.newTaskFormSubmitBtn.addEventListener('click', (e) => {
@@ -29,6 +34,7 @@ function addTask(e) {
 
     displayTask();
     console.log(tasksArray); //! REMOVE LATER
+    console.log(projectsArray);
   });
 }
 
@@ -97,4 +103,5 @@ function editTask() {
 
 export const tasks = {
   addTask,
+  displayTask,
 };
