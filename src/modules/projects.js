@@ -10,9 +10,10 @@ function ProjectObjCreator(name, projectArray, active) {
 }
 
 function createProject(e) {
-  // Create Default Project - Inbox
-  const inbox = ProjectObjCreator('Inbox', [], true);
-  projectsArray.push(inbox);
+  // Create Default Project - Inbox`
+  let defaultProject = ProjectObjCreator('Inbox', [], true);
+  projectsArray.push(defaultProject);
+  
   displayDefaultProject();
   displayDefaultOption();
 
@@ -28,7 +29,7 @@ function createProject(e) {
     const projectObj = ProjectObjCreator(projectName, [], false);
 
     projectsArray.push(projectObj);
-
+    
     console.log(projectsArray); //! REMOVE LATER
     displayProject();
     displayOption();
@@ -56,41 +57,39 @@ function displayProject() {
 
   deleteProject();
 
-  // const projDisps = document.querySelectorAll('.project-display');
-  // const projInbox = document.querySelector('#default-project');
+  const projDisps = document.querySelectorAll('.project-display');
+  const projInbox = document.querySelector('#default-project');
 
-  // projInbox.onclick = () => {
-  //   makeAllProjectsNonActive(projInbox);
+  projInbox.onclick = () => {
+    makeAllProjectsNonActive(projInbox);
 
-  //   projectsArray[0].active = true;
-  //   projInbox.classList.replace('bg-transparent', 'bg-brand');
-  //   projInbox.classList.replace('border-mid', 'border-brand');
+    projectsArray[0].active = true;
+    projInbox.classList.replace('bg-transparent', 'bg-brand');
+    projInbox.classList.replace('border-mid', 'border-brand');
 
-  //   dom.selector.pageHeading.textContent = projectsArray[0].name;
-  //   dom.clearTaskContainer();
-  //   tasks.displayTask();
+    dom.selector.pageHeading.textContent = projectsArray[0].name;
+    dom.clearTaskContainer();
 
-  //   console.log(projectsArray); //! REMOVE LATER
-  // };
+    console.log(projectsArray); //! REMOVE LATER
+  };
 
-  // [...projDisps].forEach(projDisp => {
-  //   projDisp.onclick = () => {
-  //     const projIndex = [...dom.selector.projectContainer.children].indexOf(projDisp) + 1;
-  //     makeAllProjectsNonActive(projInbox);
+  [...projDisps].forEach(projDisp => {
+    projDisp.onclick = () => {
+      const projIndex = [...dom.selector.projectContainer.children].indexOf(projDisp) + 1;
+      makeAllProjectsNonActive(projInbox);
 
-  //     // Select Active
-  //     projectsArray[projIndex].active = true;
-  //     projDisp.classList.replace('bg-transparent', 'bg-brand');
-  //     projDisp.classList.replace('border-mid', 'border-brand');
+      // Select Active
+      projectsArray[projIndex].active = true;
+      projDisp.classList.replace('bg-transparent', 'bg-brand');
+      projDisp.classList.replace('border-mid', 'border-brand');
 
-  //     // Change Page
-  //     dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
-  //     dom.clearTaskContainer();
-  //     // tasks.displayTask();
+      // Change Page
+      dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
+      dom.clearTaskContainer();
 
-  //     console.log(projectsArray); //! REMOVE LATER
-  //   };
-  // });
+      console.log(projectsArray); //! REMOVE LATER
+    };
+  });
 }
 
 function displayOption() {
@@ -110,18 +109,18 @@ function deleteProject() {
   });
 }
 
-// function makeAllProjectsNonActive(projInbox) {
-//   // Reset
-//   projectsArray.forEach(project => {
-//     project.active = false;
-//   });
-//   projInbox.classList.replace('bg-brand', 'bg-transparent');
-//   projInbox.classList.replace('border-brand', 'border-mid');
-//   [...dom.selector.projectContainer.children].forEach(project => {
-//     project.classList.replace('bg-brand', 'bg-transparent');
-//     project.classList.replace('border-brand', 'border-mid');
-//   });
-// }
+function makeAllProjectsNonActive(projInbox) {
+  // Reset
+  projectsArray.forEach(project => {
+    project.active = false;
+  });
+  projInbox.classList.replace('bg-brand', 'bg-transparent');
+  projInbox.classList.replace('border-brand', 'border-mid');
+  [...dom.selector.projectContainer.children].forEach(project => {
+    project.classList.replace('bg-brand', 'bg-transparent');
+    project.classList.replace('border-brand', 'border-mid');
+  });
+}
 
 export const projects = {
   createProject,

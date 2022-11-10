@@ -6,16 +6,10 @@ function TaskObjCreator(title, details, date, priority, project, completed) {
   return {title, details, date, priority, project, completed};
 }
 
-// Tasks Array
-let projectsArray = projects.projectsArray;
-
-let tasksArray = projectsArray.filter(project => {
-  if (project.active === true) {
-    return project.projectArray;
-  }
-});
+projects.createProject();
 
 function addTask(e) {
+  // console.log(tasksArray);
   dom.selector.newTaskFormSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
     
@@ -30,15 +24,17 @@ function addTask(e) {
 
     const taskObj = TaskObjCreator(taskTitle, taskDetails, taskDate, taskPriority, taskProject, false);
 
+    // Tasks Array
+    let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
+
     tasksArray.push(taskObj);
 
-    displayTask();
-    console.log(tasksArray); //! REMOVE LATER
-    console.log(projectsArray);
+    displayTask(tasksArray);
+    console.log(projects.projectsArray); //! REMOVE LATER
   });
 }
 
-function displayTask() {
+function displayTask(tasksArray) {
   dom.clearTaskContainer();
 
   tasksArray.forEach(task => {
@@ -56,9 +52,9 @@ function displayTask() {
   });
 
   expandTask();
-  checkTask();
-  deleteTask();
-  editTask();
+  checkTask(tasksArray);
+  deleteTask(tasksArray);
+  editTask(tasksArray);
 }
 
 function expandTask() {
@@ -71,7 +67,7 @@ function expandTask() {
   });
 }
 
-function checkTask() {
+function checkTask(tasksArray) {
   const checkboxes = document.querySelectorAll('.checkbox');
 
   [...checkboxes].forEach(checkbox => {
@@ -81,7 +77,7 @@ function checkTask() {
   }); 
 }
 
-function deleteTask() {
+function deleteTask(tasksArray) {
   const trashs = document.querySelectorAll('.trash');
 
   [...trashs].forEach(trash => {
@@ -91,7 +87,7 @@ function deleteTask() {
   });
 }
 
-function editTask() {
+function editTask(tasksArray) {
   const edits = document.querySelectorAll('.edit');
 
   [...edits].forEach(edit => {
