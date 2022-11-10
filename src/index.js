@@ -5,4 +5,3 @@ import { projects } from './modules/projects.js';
 
 forms.formControl();
 tasks.addTask();
-projects.createProject();
