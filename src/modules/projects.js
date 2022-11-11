@@ -59,6 +59,7 @@ function displayProject() {
 
   const projDisps = document.querySelectorAll('.project-display');
   const projInbox = document.querySelector('#default-project');
+  let tasksArray = tasks.addTask();
 
   projInbox.onclick = () => {
     makeAllProjectsNonActive(projInbox);

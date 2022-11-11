@@ -9,7 +9,8 @@ function TaskObjCreator(title, details, date, priority, project, completed) {
 projects.createProject();
 
 function addTask(e) {
-  // console.log(tasksArray);
+  const carrierObject = {array: null};
+
   dom.selector.newTaskFormSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
     
@@ -19,19 +20,30 @@ function addTask(e) {
     const taskDate = dom.selector.newTaskDate.value;
     const taskPriority = dom.selector.newTaskPriority.value;
     const taskProject = dom.selector.newTaskProject.value;
-
+  
     if (taskTitle === '' || taskDetails === '' || taskDate === '' ) return;
-
+  
     const taskObj = TaskObjCreator(taskTitle, taskDetails, taskDate, taskPriority, taskProject, false);
-
+  
     // Tasks Array
     let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
-
+  
     tasksArray.push(taskObj);
 
+    carrierObject.array = tasksArray;
+  
     displayTask(tasksArray);
-    console.log(projects.projectsArray); //! REMOVE LATER
+    console.log(tasksArray); //! REMOVE LATER
+    // console.log(projects.projectsArray); //! REMOVE LATER
   });
+
+  // setInterval(() => {
+  //   if (!(carrierObject.array === null)) {
+  //     console.log(carrierObject.array);
+  //   }
+  // }, 5000);
+
+  return carrierObject.array;
 }
 
 function displayTask(tasksArray) {
