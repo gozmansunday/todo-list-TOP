@@ -6,11 +6,11 @@ function TaskObjCreator(title, details, date, priority, project, completed) {
   return {title, details, date, priority, project, completed};
 }
 
+const carrierObject = {array: null};
+
 projects.createProject();
 
 function addTask(e) {
-  const carrierObject = {array: null};
-
   dom.selector.newTaskFormSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
     
@@ -30,20 +30,69 @@ function addTask(e) {
   
     tasksArray.push(taskObj);
 
-    carrierObject.array = tasksArray;
+    carrierObject.array = projects.projectsArray;
   
     displayTask(tasksArray);
     console.log(tasksArray); //! REMOVE LATER
     // console.log(projects.projectsArray); //! REMOVE LATER
   });
+}
 
-  // setInterval(() => {
-  //   if (!(carrierObject.array === null)) {
-  //     console.log(carrierObject.array);
-  //   }
-  // }, 5000);
+function checkObject() {  
+  setInterval(() => {
+    if (carrierObject.array !== null) {
+      console.log(carrierObject.array);
+    }
+  }, 5000);
+}
 
-  return carrierObject.array;
+function displayExistingTasks() {
+  let projectsArray = projects.projectsArray;
+  const projDisps = document.querySelectorAll('.project-display');
+  const projInbox = document.querySelector('#default-project');
+
+  projInbox.onclick = () => {
+    projects.makeAllProjectsNonActive(projInbox);
+
+    projectsArray[0].active = true;
+    projInbox.classList.replace('bg-transparent', 'bg-brand');
+    projInbox.classList.replace('border-mid', 'border-brand');
+
+    let tasksArray = carrierObject.array.find(project => project.active === true).projectArray;
+
+    dom.selector.pageHeading.textContent = projectsArray[0].name;
+    dom.clearTaskContainer();
+    if (carrierObject.array !== null) {
+      console.log(tasksArray);
+      displayTask(tasksArray);
+    }
+
+    console.log(projectsArray); //! REMOVE LATER
+  };
+
+  [...projDisps].forEach(projDisp => {
+    projDisp.onclick = () => {
+      const projIndex = [...dom.selector.projectContainer.children].indexOf(projDisp) + 1;
+      projects.makeAllProjectsNonActive(projInbox);
+
+      // Select Active
+      projectsArray[projIndex].active = true;
+      projDisp.classList.replace('bg-transparent', 'bg-brand');
+      projDisp.classList.replace('border-mid', 'border-brand');
+
+      let tasksArray = carrierObject.array.find(project => project.active === true).projectArray;
+
+      // Change Page
+      dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
+      dom.clearTaskContainer();
+      if (carrierObject.array !== null) {
+        console.log(tasksArray);
+        displayTask(tasksArray);
+      }
+
+      console.log(projectsArray); //! REMOVE LATER
+    };
+  });
 }
 
 function displayTask(tasksArray) {
@@ -112,4 +161,6 @@ function editTask(tasksArray) {
 export const tasks = {
   addTask,
   displayTask,
+  // checkObject,
+  displayExistingTasks,
 };

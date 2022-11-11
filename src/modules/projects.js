@@ -56,41 +56,46 @@ function displayProject() {
   });
 
   deleteProject();
+  tasks.displayExistingTasks();
 
-  const projDisps = document.querySelectorAll('.project-display');
-  const projInbox = document.querySelector('#default-project');
-  let tasksArray = tasks.addTask();
+  // const projDisps = document.querySelectorAll('.project-display');
+  // const projInbox = document.querySelector('#default-project');
+  // // let tasksArray = tasks.carrierObjectArray;
 
-  projInbox.onclick = () => {
-    makeAllProjectsNonActive(projInbox);
+  // projInbox.onclick = () => {
+  //   makeAllProjectsNonActive(projInbox);
 
-    projectsArray[0].active = true;
-    projInbox.classList.replace('bg-transparent', 'bg-brand');
-    projInbox.classList.replace('border-mid', 'border-brand');
+  //   projectsArray[0].active = true;
+  //   projInbox.classList.replace('bg-transparent', 'bg-brand');
+  //   projInbox.classList.replace('border-mid', 'border-brand');
 
-    dom.selector.pageHeading.textContent = projectsArray[0].name;
-    dom.clearTaskContainer();
+  //   dom.selector.pageHeading.textContent = projectsArray[0].name;
+  //   dom.clearTaskContainer();
+  //   tasks.displayExistingTasks();
 
-    console.log(projectsArray); //! REMOVE LATER
-  };
+  //   console.log(projectsArray); //! REMOVE LATER
+  // };
 
-  [...projDisps].forEach(projDisp => {
-    projDisp.onclick = () => {
-      const projIndex = [...dom.selector.projectContainer.children].indexOf(projDisp) + 1;
-      makeAllProjectsNonActive(projInbox);
+  // [...projDisps].forEach(projDisp => {
+  //   projDisp.onclick = () => {
+  //     const projIndex = [...dom.selector.projectContainer.children].indexOf(projDisp) + 1;
+  //     makeAllProjectsNonActive(projInbox);
 
-      // Select Active
-      projectsArray[projIndex].active = true;
-      projDisp.classList.replace('bg-transparent', 'bg-brand');
-      projDisp.classList.replace('border-mid', 'border-brand');
+  //     // Select Active
+  //     projectsArray[projIndex].active = true;
+  //     projDisp.classList.replace('bg-transparent', 'bg-brand');
+  //     projDisp.classList.replace('border-mid', 'border-brand');
 
-      // Change Page
-      dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
-      dom.clearTaskContainer();
+  //     // Change Page
+  //     dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
+  //     dom.clearTaskContainer();
+  //     tasks.displayExistingTasks();
+  //     // console.log(tasksArray);
+  //     // tasks.displayTask(tasksArray);
 
-      console.log(projectsArray); //! REMOVE LATER
-    };
-  });
+  //     console.log(projectsArray); //! REMOVE LATER
+  //   };
+  // });
 }
 
 function displayOption() {
@@ -126,4 +131,5 @@ function makeAllProjectsNonActive(projInbox) {
 export const projects = {
   createProject,
   projectsArray,
+  makeAllProjectsNonActive,
 };
