@@ -11,38 +11,40 @@
   <body class="grid grid-rows-[1fr_11fr] h-screen lg:grid-rows-[2fr_15fr]">
 
     <!-- HEADER -->
-    <header class="bg-dark text-brand font-grotesk">
+    <header class="bg-dark text-brand font-grotesk flex justify-between items-center">
       <div class="px-2 flex items-center gap-2 h-full md:px-6">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-brand w-16"><path d="M3,5H9V11H3V5M5,7V9H7V7H5M11,7H21V9H11V7M11,15H21V17H11V15M5,20L1.5,16.5L2.91,15.09L5,17.17L9.59,12.59L11,14L5,20Z"/></svg>
         <h1 class="text-[2.5rem] mt-0.5 font-bold md:text-[3.6rem] md:mt-0">
           ToDoit
         </h1>
       </div>
+      
+      <div id="hamburger" class="hamburger hamburger--dive mr-2 md:mr-6 lg:hidden">
+        <div class="inner">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+      </div>
     </header>
 
-    <main class="lg:grid grid-cols-[3fr_10fr] font-dm text-dark">
+    <main class="font-dm text-dark bg-light relative lg:grid lg:grid-cols-[3fr_10fr] lg:static">
       <!-- SIDE BAR -->
-      <div class="hidden bg-mid lg:flex flex-col gap-8 pl-10 pr-8 py-7">
-        <!-- Home -->
-        <div class="space-y-4">
-          <h2 class="text-3xl font-semibold">
+      <div id="side-bar-overlay" class="hidden absolute top-0 bottom-0 left-0 right-0 z-30 bg-black/60 w-full lg:static lg:block">
+        <div id="side-bar" class="bg-mid flex flex-col gap-8 pl-4 pr-8 py-4 -translate-x-full absolute top-0 bottom-0 w-3/4 lg:static md:w-3/5 lg:w-full lg:pl-10 lg:pr-8 lg:py-7 lg:translate-x-0">
+          <!-- Home -->
+          <div class="space-y-4">
+            <h2 class="text-3xl font-semibold">
             Home
           </h2>
           <div id="home-container" class="space-y-2">
-            <!-- <div id="project-inbox" class="flex items-center gap-3 text-xl px-3 border-[3px] bg-brand border-brand rounded-xl cursor-pointer lg:hover:border-brand">
-              <i class="fa-solid fa-inbox"></i>
-              <h4 class="pt-0.5">
-                Inbox
-              </h4>
-            </div> -->
-
             <div id="home-today" class="flex items-center gap-3 text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-calendar-day"></i>
               <h4 class="pt-1">
                 Today
               </h4>
             </div>
-
+            
             <div class="flex items-center gap-3 text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
               <i class="fa-solid fa-calendar-week"></i>
               <h4 class="pt-1">
@@ -58,7 +60,7 @@
             </div>
           </div>
         </div>
-
+        
         <!-- Projects -->
         <div class="space-y-2 grid grid-rows-[2.75rem_17rem]">
           <div class="flex justify-between items-center text-3xl font-semibold pr-2">
@@ -67,20 +69,12 @@
             </h2>
             <i id="new-project-form-btn" class="fa-solid fa-circle-plus text-2xl pt-0.5"></i>
           </div>
-
-          <div id="project-container" class="space-y-2 overflow-auto">
-            <!-- <div class="project-display flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand">
-              <div class="flex items-center gap-3">                
-                <i class="fa-solid fa-caret-right"></i>
-                <h4 class="pt-1">
-                  School
-                </h4>
-              </div>
-              <i class="delete-project-btn fa-solid fa-trash text-sm pt-0.5"></i>
-            </div> -->            
+          
+          <div id="project-container" class="space-y-2 overflow-auto">      
           </div>
         </div>
       </div>
+    </div>
 
       <!-- Main Bar -->
       <div class="bg-light h-full p-4 md:py-10 md:px-36">
@@ -246,29 +240,12 @@
                 </div>
               </div>
             </div>
-            
-            <!--             
-            <div class="text-sm flex justify-between items-center border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-3 py-0.5 md:text-base">
-              <div class="flex gap-2 items-center">
-                <div class="">
-                  <input type="checkbox" checked class="finish-task border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-gray-400 focus:ring-0 focus:ring-offset-0">
-                </div>
-                <h4 class="text-lg line-through font-semibold pt-0.5 ml-1">Learn JS</h4>
-                <i class="fa-solid fa-chevron-up invisible text-sm pt-1.5"></i>
-              </div>
-              <div class="flex gap-2 items-center">
-                <p class="mr-4 line-through">25/10/2022</p>
-                <i class="fa-solid fa-pen-to-square invisible text-sm"></i>
-                <i class="fa-solid fa-trash text-dark text-sm"></i>
-              </div>
-            </div>
-             -->
           </div>
         </div>
       </div>
 
       <!-- MODAL -->
-      <div id="modal" class="hidden justify-center items-center bg-black/60 fixed top-0 right-0 bottom-0 left-0">
+      <div id="modal" class="hidden justify-center items-center bg-black/60 fixed top-0 right-0 bottom-0 left-0 z-50">
 
         <!-- New Task Form -->
         <div id="new-task-form" class="hidden bg-mid border-4 border-dark space-y-4 rounded-3xl px-6 pt-3 pb-7 w-[24rem] shadow-card md:w-[26rem]">
