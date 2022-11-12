@@ -9,7 +9,6 @@ const newTaskTitle = document.querySelector('#new-task-form #title');
 const newTaskDetails = document.querySelector('#new-task-form #details');
 const newTaskDate = document.querySelector('#new-task-form #date');
 const newTaskPriority = document.querySelector('#new-task-form #priority');
-const newTaskProject = document.querySelector('#new-task-form #project');
 // Edit Task Form Controls DOM
 const editTaskForm = document.querySelector('#edit-task-form');
 const editTaskFormCloseBtn = document.querySelector('#edit-task-form-close-btn');
@@ -19,7 +18,6 @@ const editTaskTitle = document.querySelector('#edit-task-form #title');
 const editTaskDetails = document.querySelector('#edit-task-form #details');
 const editTaskDate = document.querySelector('#edit-task-form #date');
 const editTaskPriority = document.querySelector('#edit-task-form #priority');
-const editTaskProject = document.querySelector('#edit-task-form #project');
 // Task Display DOM
 const taskContainer = document.querySelector('#task-container');
 const chevrons = document.querySelectorAll('.chevron');
@@ -48,7 +46,6 @@ const selector = {
   newTaskDetails,
   newTaskDate,
   newTaskPriority,
-  newTaskProject,
   editTaskForm,
   editTaskFormCloseBtn,
   editTaskFormSubmitBtn,
@@ -56,7 +53,6 @@ const selector = {
   editTaskDetails,
   editTaskDate,
   editTaskPriority,
-  editTaskProject,
   taskContainer,
   chevrons,
   newProjectForm,
@@ -94,11 +90,6 @@ function clearTaskContainer() {
   taskContainer.innerHTML = '';
 }
 
-function clearProjectSelect() {
-  newTaskProject.innerHTML = '';
-  editTaskProject.innerHTML = '';
-}
-
 function createTaskDisplayDom(baseColor, task) {
   const taskDisp = document.createElement('div');
   taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
@@ -114,7 +105,7 @@ function createTaskDisplayDom(baseColor, task) {
         <i class="chevron rotate-0 fa-solid fa-chevron-up text-sm pt-1 md:pt-1.5"></i>
       </div>
       <div class="flex gap-2 items-center">
-        <p class="mr-4  pt-0.5 md:pt-0">${task.date}</p>
+        <p class="mr-4  pt-0.5">${task.date}</p>
         <i class="edit fa-solid fa-pen-to-square text-sm"></i>
         <i class="trash fa-solid fa-trash text-sm"></i>
       </div>
@@ -259,7 +250,6 @@ function editTaskDom(edit, tasksArray) {
   editTaskDetails.value = task.details;
   editTaskDate.value = task.date;
   editTaskPriority.value = task.priority;
-  editTaskProject.value = task.project;
 
   editTaskFormDom();
   
@@ -270,7 +260,6 @@ function editTaskDom(edit, tasksArray) {
     task.details = editTaskDetails.value;
     task.date = editTaskDate.value;
     task.priority = editTaskPriority.value;
-    task.project = editTaskProject.value;
 
     if (task.priority === 'Low') {
       baseColor = 'blue';
@@ -285,7 +274,6 @@ function editTaskDom(edit, tasksArray) {
     taskDisp.children[0].children[1].children[0].textContent = editTaskDate.value;
     taskDisp.children[1].children[0].innerHTML = `<span class="font-semibold">Title:</span> ${editTaskTitle.value}`;
     taskDisp.children[1].children[1].innerHTML = `<span class="font-semibold">Details:</span> ${editTaskDetails.value}`;
-    taskDisp.children[1].children[2].innerHTML = `<span class="font-semibold">Project:</span> ${editTaskProject.value}`;
     taskDisp.children[1].children[3].innerHTML = `<span class="font-semibold">Priority:</span> ${editTaskPriority.value}`;
 
     console.log(task);
@@ -322,8 +310,6 @@ function deleteProjectDom(delBtn, projectsArray) {
 
   projectsArray.splice(projIndex, 1);
   projDisp.remove();
-  newTaskProject.children[projIndex].remove();
-  editTaskProject.children[projIndex].remove();
 }
 
 function displayDefaultProjectDom(projectName) {
@@ -344,36 +330,12 @@ function displayDefaultProjectDom(projectName) {
   homeContainer.insertBefore(projectDisp, homeContainer.children[0]);
 }
 
-function displayDefaultOptionDom(projectName) {
-  const newTaskOption = document.createElement('option');
-  newTaskOption.value = projectName;
-  newTaskOption.text = projectName;
-
-  newTaskProject.add(newTaskOption);
-
-  const editTaskOption = document.createElement('option');
-  editTaskOption.value = projectName;
-  editTaskOption.text = projectName;
-
-  editTaskProject.add(editTaskOption);
-}
-
-function displayOptionDom(projectsArray) {
-  projectsArray.forEach(project => {
-    const projectName = project.name;
-    if (projectName === 'Inbox') return;
-
-    const newTaskOption = document.createElement('option');
-    newTaskOption.value = projectName;
-    newTaskOption.text = projectName;
-
-    newTaskProject.add(newTaskOption);
-
-    const editTaskOption = document.createElement('option');
-    editTaskOption.value = projectName;
-    editTaskOption.text = projectName;
-
-    editTaskProject.add(editTaskOption);
+function makeAllProjectsNonActiveDom(projInbox) {
+  projInbox.classList.replace('bg-brand', 'bg-transparent');
+  projInbox.classList.replace('border-brand', 'border-mid');
+  [...projectContainer.children].forEach(project => {
+    project.classList.replace('bg-brand', 'bg-transparent');
+    project.classList.replace('border-brand', 'border-mid');
   });
 }
 
@@ -383,7 +345,6 @@ export const dom = {
   editTaskFormDom,
   newProjectFormDom,
   clearTaskContainer,
-  clearProjectSelect,
   createTaskDisplayDom,
   taskDisplayControlDom,
   completeTaskDom,
@@ -393,6 +354,5 @@ export const dom = {
   createProjectDisplayDom,
   deleteProjectDom,
   displayDefaultProjectDom,
-  displayDefaultOptionDom,
-  displayOptionDom,
+  makeAllProjectsNonActiveDom,
 };

@@ -15,7 +15,6 @@ function createProject(e) {
   projectsArray.push(defaultProject);
   
   displayDefaultProject();
-  displayDefaultOption();
 
   // Create Other Projects
   dom.selector.newProjectFormSubmitBtn.addEventListener('click', (e) => {
@@ -32,18 +31,12 @@ function createProject(e) {
     
     console.log(projectsArray); //! REMOVE LATER
     displayProject();
-    displayOption();
   });
 }
 
 function displayDefaultProject() {
   const projectName = projectsArray[0].name;
   dom.displayDefaultProjectDom(projectName);
-}
-
-function displayDefaultOption() {
-  const projectName = projectsArray[0].name;
-  dom.displayDefaultOptionDom(projectName);
 }
 
 function displayProject() {
@@ -57,52 +50,6 @@ function displayProject() {
 
   deleteProject();
   tasks.displayExistingTasks();
-
-  // const projDisps = document.querySelectorAll('.project-display');
-  // const projInbox = document.querySelector('#default-project');
-  // // let tasksArray = tasks.carrierObjectArray;
-
-  // projInbox.onclick = () => {
-  //   makeAllProjectsNonActive(projInbox);
-
-  //   projectsArray[0].active = true;
-  //   projInbox.classList.replace('bg-transparent', 'bg-brand');
-  //   projInbox.classList.replace('border-mid', 'border-brand');
-
-  //   dom.selector.pageHeading.textContent = projectsArray[0].name;
-  //   dom.clearTaskContainer();
-  //   tasks.displayExistingTasks();
-
-  //   console.log(projectsArray); //! REMOVE LATER
-  // };
-
-  // [...projDisps].forEach(projDisp => {
-  //   projDisp.onclick = () => {
-  //     const projIndex = [...dom.selector.projectContainer.children].indexOf(projDisp) + 1;
-  //     makeAllProjectsNonActive(projInbox);
-
-  //     // Select Active
-  //     projectsArray[projIndex].active = true;
-  //     projDisp.classList.replace('bg-transparent', 'bg-brand');
-  //     projDisp.classList.replace('border-mid', 'border-brand');
-
-  //     // Change Page
-  //     dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
-  //     dom.clearTaskContainer();
-  //     tasks.displayExistingTasks();
-  //     // console.log(tasksArray);
-  //     // tasks.displayTask(tasksArray);
-
-  //     console.log(projectsArray); //! REMOVE LATER
-  //   };
-  // });
-}
-
-function displayOption() {
-  dom.clearProjectSelect();
-  displayDefaultOption();
-
-  dom.displayOptionDom(projectsArray);
 }
 
 function deleteProject() {
@@ -116,16 +63,10 @@ function deleteProject() {
 }
 
 function makeAllProjectsNonActive(projInbox) {
-  // Reset
   projectsArray.forEach(project => {
     project.active = false;
   });
-  projInbox.classList.replace('bg-brand', 'bg-transparent');
-  projInbox.classList.replace('border-brand', 'border-mid');
-  [...dom.selector.projectContainer.children].forEach(project => {
-    project.classList.replace('bg-brand', 'bg-transparent');
-    project.classList.replace('border-brand', 'border-mid');
-  });
+  dom.makeAllProjectsNonActiveDom(projInbox);
 }
 
 export const projects = {
