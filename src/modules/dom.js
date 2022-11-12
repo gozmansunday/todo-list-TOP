@@ -34,6 +34,11 @@ const projectContainer = document.querySelector('#project-container');
 const homeContainer = document.querySelector('#home-container');
 // Page Display
 const pageHeading = document.querySelector('#page-heading');
+// Hamburger Menu
+const hamburger = document.querySelector('#hamburger');
+// Sidebar
+const sideBarOverlay = document.querySelector('#side-bar-overlay');
+const sideBar = document.querySelector('#side-bar');
 
 // Selector obj for accessing all DOM query selectors
 const selector = {
@@ -63,6 +68,9 @@ const selector = {
   projectContainer,
   homeContainer,
   pageHeading,
+  hamburger,
+  sideBarOverlay,
+  sideBar,
 };
 
 function newTaskFormDom() {
