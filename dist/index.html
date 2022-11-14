@@ -30,11 +30,10 @@
 
     <main class="font-dm text-dark bg-light relative lg:grid lg:grid-cols-[3fr_10fr] lg:static">
       <!-- SIDE BAR -->
-      <div id="side-bar-overlay" class="hidden absolute top-0 bottom-0 left-0 right-0 z-30 bg-black/60 w-full lg:static lg:block">
-        <div id="side-bar" class="bg-mid flex flex-col gap-8 pl-4 pr-8 py-4 -translate-x-full absolute top-0 bottom-0 w-3/4 lg:static md:w-3/5 lg:w-full lg:pl-10 lg:pr-8 lg:py-7 lg:translate-x-0">
-          <!-- Home -->
-          <div class="space-y-4">
-            <h2 class="text-3xl font-semibold">
+      <div id="side-bar" class="bg-mid flex flex-col gap-8 pl-4 pr-8 py-4 -translate-x-full absolute inset-y-0 z-30 w-3/4 lg:static md:w-3/5 lg:w-full lg:pl-10 lg:pr-8 lg:py-7 lg:translate-x-0">
+        <!-- Home -->
+        <div class="space-y-4">
+          <h2 class="text-3xl font-semibold">
             Home
           </h2>
           <div id="home-container" class="space-y-2">
@@ -60,7 +59,7 @@
             </div>
           </div>
         </div>
-        
+      
         <!-- Projects -->
         <div class="space-y-2 grid grid-rows-[2.75rem_17rem]">
           <div class="flex justify-between items-center text-3xl font-semibold pr-2">
@@ -74,6 +73,7 @@
           </div>
         </div>
       </div>
+      <div id="side-bar-overlay" class="hidden z-20 absolute inset-0 bg-black/40"></div>
     </div>
 
       <!-- Main Bar -->
@@ -245,7 +245,7 @@
       </div>
 
       <!-- MODAL -->
-      <div id="modal" class="hidden justify-center items-center bg-black/60 fixed top-0 right-0 bottom-0 left-0 z-50">
+      <div id="modal" class="hidden justify-center items-center bg-black/40 fixed top-0 right-0 bottom-0 left-0 z-50">
 
         <!-- New Task Form -->
         <div id="new-task-form" class="hidden bg-mid border-4 border-dark space-y-4 rounded-3xl px-6 pt-3 pb-7 w-[24rem] shadow-card md:w-[26rem]">
