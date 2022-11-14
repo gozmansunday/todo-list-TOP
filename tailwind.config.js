@@ -5,7 +5,7 @@ module.exports = {
     './src/**/*.{html,js}',
   ],
 
-  important: true,
+  // important: true,
   
   theme: {
     screens: {
@@ -27,17 +27,23 @@ module.exports = {
         dm: ['DM Sans', 'sans-serif'],
         grotesk: ['Space Grotesk', 'sans-serif'],
       },
+      animation: {
+        'show-side-bar': 'slide-out 200ms ease-out 0s 1 normal none',
+        'hide-side-bar': 'slide-in 200ms ease-out 0s 1 normal none',
+      },
+      keyframes: {
+        'slide-out': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'slide-in': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
       boxShadow: {
-        // 'card': '0 12px 12px -3px rgba(0, 0, 0, 0.3)',
         'card': '0px 5px 15px rgba(0, 0, 0, 0.35)',
       },
-    },
-    deliciousHamburgers: {
-      size: '30px', // must be in px.
-      color: '#586061',
-      colorLight: '#fff8f4',
-      padding: '0px', // must be in px.
-      animationSpeed: 1,
     },
   },
   plugins: [
