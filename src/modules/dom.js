@@ -347,6 +347,23 @@ function makeAllProjectsNonActiveDom(projInbox) {
   });
 }
 
+function toggleDom() {
+  hamburger.classList.toggle('active');
+
+  // Side Bar Overlay
+  sideBarOverlay.classList.toggle('hidden');
+
+  // Side Bar
+  sideBar.classList.toggle('-translate-x-full');
+  sideBar.classList.toggle('translate-x-0');
+
+  if (sideBar.classList.contains('animate-show-side-bar') || sideBar.classList.contains('animate-hide-side-bar')) {
+    sideBar.classList.toggle('animate-hide-side-bar');
+  }
+
+  sideBar.classList.toggle('animate-show-side-bar');
+}
+
 export const dom = {
   selector,
   newTaskFormDom,
@@ -363,4 +380,5 @@ export const dom = {
   deleteProjectDom,
   displayDefaultProjectDom,
   makeAllProjectsNonActiveDom,
+  toggleDom,
 };

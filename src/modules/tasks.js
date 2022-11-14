@@ -56,6 +56,7 @@ function displayExistingTasks() {
       let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
       displayTask(tasksArray);
     }
+    dom.toggleDom();
 
     console.log(projectsArray); //! REMOVE LATER
   };
@@ -75,6 +76,7 @@ function displayExistingTasks() {
         let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
         displayTask(tasksArray);
       }
+      dom.toggleDom();
 
       console.log(projectsArray); //! REMOVE LATER
     };
