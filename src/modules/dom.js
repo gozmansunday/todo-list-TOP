@@ -1,3 +1,7 @@
+import { storage } from './storage.js';
+
+// projects.createProject();
+
 const modal = document.querySelector('#modal');
 // New Task Form Controls DOM
 const newTaskForm = document.querySelector('#new-task-form');
@@ -175,7 +179,7 @@ function taskDisplayControlDom(chevron) {
   chevron.classList.toggle('rotate-180');
 }
 
-function completeTaskDom(checkbox, tasksArray) {
+function completeTaskDom(checkbox, tasksArray, projectsArray) {
   const taskDisp = checkbox.parentElement.parentElement.parentElement.parentElement;
   const taskIndex = [...taskContainer.children].indexOf(taskDisp);
   const taskTitle = taskDisp.children[0].children[0].children[1];
@@ -218,9 +222,11 @@ function completeTaskDom(checkbox, tasksArray) {
     taskEdit.classList.remove('hidden');
     tasksArray[taskIndex].completed = false;
   }
+
+  storage.updateLocalStore(projectsArray);
 }
 
-function deleteTaskDom(trash, tasksArray) {
+function deleteTaskDom(trash, tasksArray, projectsArray) {
   const taskDisp = trash.parentElement.parentElement.parentElement;
   const taskIndex = [...taskContainer.children].indexOf(taskDisp);
   const confirmDelete = taskDisp.children[2];
@@ -230,6 +236,8 @@ function deleteTaskDom(trash, tasksArray) {
   if (tasksArray[taskIndex].completed) {
     taskDisp.remove();
     tasksArray.splice(taskIndex, 1);
+  
+    storage.updateLocalStore(projectsArray);
   } else {
     if (confirmDelete.style.maxHeight) {
       confirmDelete.style.maxHeight = null;
@@ -244,11 +252,13 @@ function deleteTaskDom(trash, tasksArray) {
     deleteBtn.addEventListener('click', () => {
       taskDisp.remove();
       tasksArray.splice(taskIndex, 1);
+  
+      storage.updateLocalStore(projectsArray);
     });
   }
 }
 
-function editTaskDom(edit, tasksArray) {
+function editTaskDom(edit, tasksArray, projectsArray) {
   const taskDisp = edit.parentElement.parentElement.parentElement;
   const taskIndex = [...taskContainer.children].indexOf(taskDisp);
   const task = tasksArray[taskIndex];
@@ -285,6 +295,8 @@ function editTaskDom(edit, tasksArray) {
     taskDisp.children[1].children[3].innerHTML = `<span class="font-semibold">Priority:</span> ${editTaskPriority.value}`;
 
     console.log(task);
+  
+    storage.updateLocalStore(projectsArray);
   };
 }
 

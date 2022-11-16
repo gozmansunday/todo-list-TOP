@@ -1,5 +1,6 @@
 import { dom } from './dom.js';
 import { projects } from './projects.js';
+import { storage } from './storage.js';
 
 // Task Obj Factory
 function TaskObjCreator(title, details, date, priority, project, completed) {
@@ -11,6 +12,8 @@ const globalObject = {array: null};
 projects.createProject();
 
 function addTask(e) {
+  storage.updateLocalStore(projects.projectsArray);
+
   dom.selector.newTaskFormSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
     
@@ -31,6 +34,7 @@ function addTask(e) {
     tasksArray.push(taskObj);
 
     globalObject.array = projects.projectsArray;
+    storage.updateLocalStore(projects.projectsArray);
   
     displayTask(tasksArray);
     console.log(tasksArray); //! REMOVE LATER
@@ -56,7 +60,6 @@ function displayExistingTasks() {
       let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
       displayTask(tasksArray);
     }
-    dom.toggleDom();
 
     console.log(projectsArray); //! REMOVE LATER
   };
@@ -76,7 +79,6 @@ function displayExistingTasks() {
         let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
         displayTask(tasksArray);
       }
-      dom.toggleDom();
 
       console.log(projectsArray); //! REMOVE LATER
     };
@@ -121,7 +123,7 @@ function checkTask(tasksArray) {
 
   [...checkboxes].forEach(checkbox => {
     checkbox.addEventListener('click', () => {
-      dom.completeTaskDom(checkbox, tasksArray);
+      dom.completeTaskDom(checkbox, tasksArray, globalObject.array);
     });
   }); 
 }
@@ -131,7 +133,7 @@ function deleteTask(tasksArray) {
 
   [...trashs].forEach(trash => {
     trash.addEventListener('click', () => {
-      dom.deleteTaskDom(trash, tasksArray);
+      dom.deleteTaskDom(trash, tasksArray, globalObject.array);
     });
   });
 }
@@ -141,7 +143,7 @@ function editTask(tasksArray) {
 
   [...edits].forEach(edit => {
     edit.addEventListener('click', () => {
-      dom.editTaskDom(edit, tasksArray);
+      dom.editTaskDom(edit, tasksArray, globalObject.array);
     });
   });
 }

@@ -1,5 +1,6 @@
 import { dom } from './dom.js';
 import { tasks } from './tasks.js';
+import { storage } from './storage.js';
 
 // Projects Array
 let projectsArray = [];
@@ -28,6 +29,8 @@ function createProject(e) {
     const projectObj = ProjectObjCreator(projectName, [], false);
 
     projectsArray.push(projectObj);
+
+    storage.updateLocalStore(projectsArray);
     
     console.log(projectsArray); //! REMOVE LATER
     displayProject();
@@ -68,6 +71,20 @@ function makeAllProjectsNonActive(projInbox) {
   });
   dom.makeAllProjectsNonActiveDom(projInbox);
 }
+
+// function updateLocalStore() {
+//   localStorage.setItem('projectsArray', JSON.stringify(projectsArray));
+// }
+
+// function getLocalArray() {
+//   return JSON.parse(localStorage.getItem('projectsArray'));
+// }
+
+// function loadProjects(projectsArray) {
+//   flashcardArray.forEach((flashcard) => {
+//     displayFlashcard()
+//   })
+// }
 
 export const projects = {
   createProject,
