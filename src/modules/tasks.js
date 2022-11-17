@@ -24,7 +24,7 @@ function addTask(e) {
     const taskPriority = dom.selector.newTaskPriority.value;
     const taskProject = projects.projectsArray.find(project => project.active === true).name;
   
-    if (taskTitle === '' || taskDetails === '' || taskDate === '' ) return;
+    if (taskTitle === '' || taskDate === '' ) return;
   
     const taskObj = TaskObjCreator(taskTitle, taskDetails, taskDate, taskPriority, taskProject, false);
   
@@ -41,7 +41,7 @@ function addTask(e) {
   });
 }
 
-function displayExistingTasks() {
+function displayExistingTasks(e) {
   let projectsArray = projects.projectsArray;
   const projDisps = document.querySelectorAll('.project-display');
   const projInbox = document.querySelector('#default-project');
@@ -49,40 +49,24 @@ function displayExistingTasks() {
   projInbox.onclick = () => {
     projects.makeAllProjectsNonActive(projInbox);
 
-    projectsArray[0].active = true;
-    projInbox.classList.replace('bg-transparent', 'bg-brand');
-    projInbox.classList.replace('border-mid', 'border-brand');
-
-    
-    dom.selector.pageHeading.textContent = projectsArray[0].name;
+    dom.makeDefaultProjectActive(projectsArray, projInbox);
     dom.clearTaskContainer();
-    if (globalObject.array !== null) {
-      let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
-      displayTask(tasksArray);
-    }
-
-    storage.updateLocalStore(projects.projectsArray);
-    console.log(projectsArray); //! REMOVE LATER
+    displayTasksFromGlobalObject();
   };
 
   [...projDisps].forEach(projDisp => {
-    projDisp.onclick = () => {
+    projDisp.onclick = (e) => {
       const projIndex = [...dom.selector.projectContainer.children].indexOf(projDisp) + 1;
       projects.makeAllProjectsNonActive(projInbox);
-      
-      projectsArray[projIndex].active = true;
-      projDisp.classList.replace('bg-transparent', 'bg-brand');
-      projDisp.classList.replace('border-mid', 'border-brand');
 
-      dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
-      dom.clearTaskContainer();
-      if (globalObject.array !== null) {
-        let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
-        displayTask(tasksArray);
+      if (e.target.classList.contains('delete-project-btn')) {
+        dom.makeDefaultProjectActive(projectsArray, projInbox);
+      } else {
+        dom.makeProjectActive(projectsArray, projIndex, projDisp);
       }
 
-      storage.updateLocalStore(projects.projectsArray);
-      console.log(projectsArray); //! REMOVE LATER
+      dom.clearTaskContainer();
+      displayTasksFromGlobalObject();
     };
   });
 }
@@ -160,6 +144,16 @@ function updatePageOnLoad() {
   storage.updateLocalStore(projects.projectsArray);
   let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
   displayTask(tasksArray);
+}
+
+function displayTasksFromGlobalObject() {
+  if (globalObject.array !== null) {
+    let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
+    displayTask(tasksArray);
+  }
+
+  storage.updateLocalStore(projects.projectsArray);
+  console.log(projects.projectsArray); //! REMOVE LATER
 }
 
 export const tasks = {

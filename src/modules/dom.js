@@ -328,6 +328,7 @@ function deleteProjectDom(delBtn, projectsArray) {
 
   projectsArray.splice(projIndex, 1);
   projDisp.remove();
+
   storage.updateLocalStore(projectsArray);
 }
 
@@ -375,6 +376,22 @@ function toggleDom() {
   sideBar.classList.toggle('animate-show-side-bar');
 }
 
+function makeDefaultProjectActive(projectsArray, projInbox) {
+  projectsArray[0].active = true;
+  projInbox.classList.replace('bg-transparent', 'bg-brand');
+  projInbox.classList.replace('border-mid', 'border-brand');
+
+  dom.selector.pageHeading.textContent = projectsArray[0].name;
+}
+
+function makeProjectActive(projectsArray, projIndex, projDisp) {
+  projectsArray[projIndex].active = true;
+  projDisp.classList.replace('bg-transparent', 'bg-brand');
+  projDisp.classList.replace('border-mid', 'border-brand');
+
+  dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
+}
+
 export const dom = {
   selector,
   newTaskFormDom,
@@ -392,4 +409,6 @@ export const dom = {
   displayDefaultProjectDom,
   makeAllProjectsNonActiveDom,
   toggleDom,
+  makeDefaultProjectActive,
+  makeProjectActive,
 };

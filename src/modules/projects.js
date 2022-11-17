@@ -19,14 +19,12 @@ function ProjectObjCreator(name, projectArray, active) {
 
 function createProject(e) {
   if (projectsArray.length === 0) {
-    // Create Default Project - Inbox`
     let defaultProject = ProjectObjCreator('Inbox', [], true);
     projectsArray.push(defaultProject);
   }
   
   displayDefaultProject();
 
-  // Create Other Projects
   dom.selector.newProjectFormSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -62,10 +60,12 @@ function displayProject() {
 
   deleteProject();
   tasks.displayExistingTasks();
+  showActiveProjectAfterAdd();
 }
 
 function deleteProject() {
   const delProjBtns = document.querySelectorAll('.delete-project-btn');
+  const projInbox = document.querySelector('#default-project');
 
   [...delProjBtns].forEach(delBtn => {
     delBtn.addEventListener('click', () => {
@@ -81,19 +81,13 @@ function makeAllProjectsNonActive(projInbox) {
   dom.makeAllProjectsNonActiveDom(projInbox);
 }
 
-// function updateLocalStore() {
-//   localStorage.setItem('projectsArray', JSON.stringify(projectsArray));
-// }
-
-// function getLocalArray() {
-//   return JSON.parse(localStorage.getItem('projectsArray'));
-// }
-
-// function loadProjects(projectsArray) {
-//   flashcardArray.forEach((flashcard) => {
-//     displayFlashcard()
-//   })
-// }
+function showActiveProjectAfterAdd() {
+  const activeProject = projectsArray.find(project => project.active === true);
+  const projIndex = projectsArray.indexOf(activeProject);
+  if (projIndex === 0) return;
+  dom.selector.projectContainer.children[projIndex - 1].classList.replace('bg-transparent', 'bg-brand');
+  dom.selector.projectContainer.children[projIndex - 1].classList.replace('border-mid', 'border-brand');
+}
 
 export const projects = {
   createProject,
