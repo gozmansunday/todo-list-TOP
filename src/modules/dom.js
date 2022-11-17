@@ -1,7 +1,5 @@
 import { storage } from './storage.js';
 
-// projects.createProject();
-
 const modal = document.querySelector('#modal');
 // New Task Form Controls DOM
 const newTaskForm = document.querySelector('#new-task-form');
