@@ -330,6 +330,7 @@ function deleteProjectDom(delBtn, projectsArray) {
 
   projectsArray.splice(projIndex, 1);
   projDisp.remove();
+  storage.updateLocalStore(projectsArray);
 }
 
 function displayDefaultProjectDom(projectName) {

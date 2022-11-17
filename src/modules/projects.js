@@ -3,7 +3,14 @@ import { tasks } from './tasks.js';
 import { storage } from './storage.js';
 
 // Projects Array
-let projectsArray = [];
+let projectsArray;
+
+if (storage.getLocalArray() !== null) {
+  projectsArray = storage.getLocalArray();
+}
+else {
+  projectsArray = [];
+}
 
 // Project Obj Factory
 function ProjectObjCreator(name, projectArray, active) {
@@ -11,9 +18,11 @@ function ProjectObjCreator(name, projectArray, active) {
 }
 
 function createProject(e) {
-  // Create Default Project - Inbox`
-  let defaultProject = ProjectObjCreator('Inbox', [], true);
-  projectsArray.push(defaultProject);
+  if (projectsArray.length === 0) {
+    // Create Default Project - Inbox`
+    let defaultProject = ProjectObjCreator('Inbox', [], true);
+    projectsArray.push(defaultProject);
+  }
   
   displayDefaultProject();
 
@@ -89,5 +98,6 @@ function makeAllProjectsNonActive(projInbox) {
 export const projects = {
   createProject,
   projectsArray,
+  displayProject,
   makeAllProjectsNonActive,
 };

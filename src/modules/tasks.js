@@ -12,7 +12,7 @@ const globalObject = {array: null};
 projects.createProject();
 
 function addTask(e) {
-  storage.updateLocalStore(projects.projectsArray);
+  updatePageOnLoad();
 
   dom.selector.newTaskFormSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -61,6 +61,7 @@ function displayExistingTasks() {
       displayTask(tasksArray);
     }
 
+    storage.updateLocalStore(projects.projectsArray);
     console.log(projectsArray); //! REMOVE LATER
   };
 
@@ -80,6 +81,7 @@ function displayExistingTasks() {
         displayTask(tasksArray);
       }
 
+      storage.updateLocalStore(projects.projectsArray);
       console.log(projectsArray); //! REMOVE LATER
     };
   });
@@ -146,6 +148,18 @@ function editTask(tasksArray) {
       dom.editTaskDom(edit, tasksArray, globalObject.array);
     });
   });
+}
+
+function updatePageOnLoad() {
+  projects.displayProject();
+  globalObject.array = projects.projectsArray;
+  projects.projectsArray.forEach(project => {
+    project.active = false;
+  });
+  projects.projectsArray[0].active = true;
+  storage.updateLocalStore(projects.projectsArray);
+  let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
+  displayTask(tasksArray);
 }
 
 export const tasks = {
