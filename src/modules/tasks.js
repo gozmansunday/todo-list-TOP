@@ -135,12 +135,13 @@ function editTask(tasksArray) {
 }
 
 function updatePageOnLoad() {
+  const projInbox = document.querySelector('#default-project');
   projects.displayProject();
   globalObject.array = projects.projectsArray;
-  projects.projectsArray.forEach(project => {
-    project.active = false;
-  });
+  projects.makeAllProjectsNonActive(projInbox);
   projects.projectsArray[0].active = true;
+  projInbox.classList.replace('bg-transparent', 'bg-brand');
+  projInbox.classList.replace('border-mid', 'border-brand');
   storage.updateLocalStore(projects.projectsArray);
   let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
   displayTask(tasksArray);

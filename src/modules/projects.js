@@ -65,7 +65,6 @@ function displayProject() {
 
 function deleteProject() {
   const delProjBtns = document.querySelectorAll('.delete-project-btn');
-  const projInbox = document.querySelector('#default-project');
 
   [...delProjBtns].forEach(delBtn => {
     delBtn.addEventListener('click', () => {
