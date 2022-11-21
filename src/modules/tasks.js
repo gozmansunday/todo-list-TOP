@@ -41,6 +41,30 @@ function addTask(e) {
   });
 }
 
+function displayTask(tasksArray) {
+  dom.clearTaskContainer();
+  
+  tasksArray.forEach(task => {
+    let baseColor;
+    
+    if (task.priority === 'Low') {
+      baseColor = 'blue';
+    } else if (task.priority === 'Medium') {
+      baseColor = 'yellow';
+    } else {
+      baseColor = 'red';
+    }
+    
+    dom.createTaskDisplayDom(baseColor, task);
+  });
+  
+  expandTask();
+  checkTask(tasksArray);
+  deleteTask(tasksArray);
+  editTask(tasksArray);
+  showCheckedTask();
+}
+
 function displayExistingTasks(e) {
   let projectsArray = projects.projectsArray;
   const projDisps = document.querySelectorAll('.project-display');
@@ -71,29 +95,6 @@ function displayExistingTasks(e) {
   });
 }
 
-function displayTask(tasksArray) {
-  dom.clearTaskContainer();
-
-  tasksArray.forEach(task => {
-    let baseColor;
-
-    if (task.priority === 'Low') {
-      baseColor = 'blue';
-    } else if (task.priority === 'Medium') {
-      baseColor = 'yellow';
-    } else {
-      baseColor = 'red';
-    }
-
-    dom.createTaskDisplayDom(baseColor, task);
-  });
-
-  expandTask();
-  checkTask(tasksArray);
-  deleteTask(tasksArray);
-  editTask(tasksArray);
-}
-
 function expandTask() {
   const chevrons = document.querySelectorAll('.chevron');
 
@@ -112,6 +113,15 @@ function checkTask(tasksArray) {
       dom.completeTaskDom(checkbox, tasksArray, globalObject.array);
     });
   }); 
+}
+
+function showCheckedTask() {
+  let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
+  
+  tasksArray.forEach(task => {
+    let taskIndex = tasksArray.indexOf(task);
+    dom.showCheckedTaskDom(task, taskIndex);
+  });
 }
 
 function deleteTask(tasksArray) {
@@ -136,15 +146,19 @@ function editTask(tasksArray) {
 
 function updatePageOnLoad() {
   const projInbox = document.querySelector('#default-project');
+
   projects.displayProject();
+
   globalObject.array = projects.projectsArray;
+
   projects.makeAllProjectsNonActive(projInbox);
   projects.projectsArray[0].active = true;
   projInbox.classList.replace('bg-transparent', 'bg-brand');
   projInbox.classList.replace('border-mid', 'border-brand');
-  storage.updateLocalStore(projects.projectsArray);
+
   let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
   displayTask(tasksArray);
+  storage.updateLocalStore(projects.projectsArray);
 }
 
 function displayTasksFromGlobalObject() {

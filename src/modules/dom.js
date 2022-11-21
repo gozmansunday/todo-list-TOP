@@ -298,6 +298,35 @@ function editTaskDom(edit, tasksArray, projectsArray) {
   };
 }
 
+function showCheckedTaskDom(task, taskIndex) {
+  const taskContainer = dom.selector.taskContainer;
+  const taskDisp = taskContainer.children[taskIndex];
+  const checkbox = taskDisp.children[0].children[0].children[0].children[0];
+  const taskTitle = taskDisp.children[0].children[0].children[1];
+  const taskDate = taskDisp.children[0].children[1].children[0];
+  const chevron = taskDisp.children[0].children[0].children[2];
+  const taskEdit = taskDisp.children[0].children[1].children[1];
+  const extendedPart = taskDisp.children[1];
+  const confirmDelete = taskDisp.children[2];
+  
+  if (task.completed === true) {
+    taskDisp.className = `task-display text-sm border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
+    checkbox.setAttribute('checked', '');
+    checkbox.classList.replace('checked:text-dark', 'checked:text-gray-400');
+    taskTitle.classList.add('line-through');
+    taskDate.classList.add('hidden');
+    chevron.classList.add('hidden');
+    taskEdit.classList.add('hidden');
+    extendedPart.style.maxHeight = null;
+    confirmDelete.style.maxHeight = null;
+    chevron.classList.remove('chevron-anim-down');
+    chevron.classList.remove('chevron-anim-up');
+    chevron.classList.remove('rotate-0');
+    chevron.classList.remove('rotate-180');
+    chevron.classList.add('rotate-0');
+  }
+}
+
 function clearProjectContainer() {
   projectContainer.innerHTML = '';
 }
@@ -403,6 +432,7 @@ export const dom = {
   completeTaskDom,
   deleteTaskDom,
   editTaskDom,
+  showCheckedTaskDom,
   clearProjectContainer,
   createProjectDisplayDom,
   deleteProjectDom,
