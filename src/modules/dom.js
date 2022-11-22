@@ -102,22 +102,22 @@ function clearTaskContainer() {
 
 function createTaskDisplayDom(baseColor, task) {
   const taskDisp = document.createElement('div');
-  taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
+  taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
 
   const taskHTML =
     `
     <div class="flex justify-between items-center">
       <div class="flex gap-2 items-center">
         <div class="">
-          <input type="checkbox" class="checkbox border-[3px] border-dark rounded-full w-5 h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
+          <input type="checkbox" class="checkbox border-[3px] border-dark rounded-full w-4 h-4 sm:w-5 sm:h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
         </div>
-        <h4 class="text-lg font-semibold pt-0.5 ml-1">${task.title}</h4>
-        <i class="chevron rotate-0 fa-solid fa-chevron-up text-sm pt-1 md:pt-1.5"></i>
+        <h4 class="text-sm sm:text-base lg:text-lg font-semibold pt-0.5 sm:pt-1 lg:pt-0.5 sm:ml-0.5">${task.title}</h4>
+        <i class="chevron rotate-0 fa-solid fa-chevron-up text-sm pt-1.5"></i>
       </div>
-      <div class="flex gap-2 items-center">
-        <p class="mr-4  pt-0.5">${task.date}</p>
-        <i class="edit fa-solid fa-pen-to-square text-sm"></i>
-        <i class="trash fa-solid fa-trash text-sm"></i>
+      <div class="flex gap-1.5 sm:gap-2 items-center">
+        <p class="hidden sm:block text-xs md:text-sm mr-1.5 sm:mr-2 lg:mr-4 pt-0.5 sm:pt-1">${task.date}</p>
+        <i class="edit fa-solid fa-pen-to-square text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-0.5"></i>
+        <i class="trash fa-solid fa-trash text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-0.5"></i>
       </div>
     </div>
     <div class="extended-part px-8">
@@ -136,6 +136,10 @@ function createTaskDisplayDom(baseColor, task) {
       <p>
         <span class="font-semibold">Priority:</span>
         ${task.priority}
+      </p>
+      <p>
+        <span class="font-semibold">Due Date:</span>
+        ${task.date}
       </p>
     </div>
     <div class="confirm-delete px-8 space-y-1">
@@ -197,10 +201,10 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
   }
 
   if (checkbox.checked) {
-    taskDisp.className = `task-display text-sm border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
+    taskDisp.className = `task-display text-xs border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
     checkbox.classList.replace('checked:text-dark', 'checked:text-gray-400');
     taskTitle.classList.add('line-through');
-    taskDate.classList.add('hidden');
+    taskDate.classList.replace('sm:block', 'sm:hidden');
     chevron.classList.add('hidden');
     taskEdit.classList.add('hidden');
     extendedPart.style.maxHeight = null;
@@ -212,10 +216,10 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
     chevron.classList.add('rotate-0');
     tasksArray[taskIndex].completed = true;
   } else {
-    taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
+    taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
     checkbox.classList.replace('checked:text-gray-400', 'checked:text-dark');
     taskTitle.classList.remove('line-through');
-    taskDate.classList.remove('hidden');
+    taskDate.classList.replace('sm:hidden', 'sm:block');
     chevron.classList.remove('hidden');
     taskEdit.classList.remove('hidden');
     tasksArray[taskIndex].completed = false;
@@ -285,7 +289,7 @@ function editTaskDom(edit, tasksArray, projectsArray) {
       baseColor = 'red';
     }
 
-    taskDisp.className = `task-display text-sm border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
+    taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
     taskDisp.children[0].children[0].children[1].textContent = editTaskTitle.value;
     taskDisp.children[0].children[1].children[0].textContent = editTaskDate.value;
     taskDisp.children[1].children[0].innerHTML = `<span class="font-semibold">Title:</span> ${editTaskTitle.value}`;
@@ -310,11 +314,11 @@ function showCheckedTaskDom(task, taskIndex) {
   const confirmDelete = taskDisp.children[2];
   
   if (task.completed === true) {
-    taskDisp.className = `task-display text-sm border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-3 pt-0.5 space-y-0.5 md:text-base`;
+    taskDisp.className = `task-display text-xs border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
     checkbox.setAttribute('checked', '');
     checkbox.classList.replace('checked:text-dark', 'checked:text-gray-400');
     taskTitle.classList.add('line-through');
-    taskDate.classList.add('hidden');
+    taskDate.classList.replace('sm:block', 'sm:hidden');
     chevron.classList.add('hidden');
     taskEdit.classList.add('hidden');
     extendedPart.style.maxHeight = null;
@@ -334,7 +338,7 @@ function clearProjectContainer() {
 function createProjectDisplayDom(project) {
   const projectDisp = document.createElement('div');
   
-  projectDisp.className = 'project-display flex items-center justify-between text-xl px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer lg:hover:border-brand';
+  projectDisp.className = 'project-display flex items-center justify-between px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer sm:text-xl lg:hover:border-brand';
 
   const projectHTML = 
     `
@@ -364,7 +368,7 @@ function deleteProjectDom(delBtn, projectsArray) {
 function displayDefaultProjectDom(projectName) {
   const projectDisp = document.createElement('div');
 
-  projectDisp.className = 'flex items-center gap-3 text-xl px-3 border-[3px] bg-brand border-brand rounded-xl cursor-pointer lg:hover:border-brand';
+  projectDisp.className = 'flex items-center gap-3 px-3 border-[3px] bg-brand border-brand rounded-xl cursor-pointer sm:text-xl lg:hover:border-brand';
   projectDisp.setAttribute('id', 'default-project');
 
   const projectHTML = 
