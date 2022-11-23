@@ -1,4 +1,5 @@
 import { storage } from './storage.js';
+import { date } from './date.js';
 
 const modal = document.querySelector('#modal');
 // New Task Form Controls DOM
@@ -115,7 +116,7 @@ function createTaskDisplayDom(baseColor, task) {
         <i class="chevron rotate-0 fa-solid fa-chevron-up text-sm pt-1.5"></i>
       </div>
       <div class="flex gap-1.5 sm:gap-2 items-center">
-        <p class="hidden sm:block text-xs md:text-sm mr-1.5 sm:mr-2 lg:mr-4 pt-0.5 sm:pt-1">${task.date}</p>
+        <p class="text-xs md:text-sm mr-1.5 sm:mr-2 lg:mr-4 pt-0.5 sm:pt-1">${task.date}</p>
         <i class="edit fa-solid fa-pen-to-square text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-0.5"></i>
         <i class="trash fa-solid fa-trash text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-0.5"></i>
       </div>
@@ -139,7 +140,7 @@ function createTaskDisplayDom(baseColor, task) {
       </p>
       <p>
         <span class="font-semibold">Due Date:</span>
-        ${task.date}
+        ${task.fullDate}
       </p>
     </div>
     <div class="confirm-delete px-8 space-y-1">
@@ -204,7 +205,7 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
     taskDisp.className = `task-display text-xs border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
     checkbox.classList.replace('checked:text-dark', 'checked:text-gray-400');
     taskTitle.classList.add('line-through');
-    taskDate.classList.replace('sm:block', 'sm:hidden');
+    taskDate.classList.add('hidden');
     chevron.classList.add('hidden');
     taskEdit.classList.add('hidden');
     extendedPart.style.maxHeight = null;
@@ -219,7 +220,7 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
     taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
     checkbox.classList.replace('checked:text-gray-400', 'checked:text-dark');
     taskTitle.classList.remove('line-through');
-    taskDate.classList.replace('sm:hidden', 'sm:block');
+    taskDate.classList.remove('hidden');
     chevron.classList.remove('hidden');
     taskEdit.classList.remove('hidden');
     tasksArray[taskIndex].completed = false;
@@ -268,7 +269,7 @@ function editTaskDom(edit, tasksArray, projectsArray) {
 
   editTaskTitle.value = task.title;
   editTaskDetails.value = task.details;
-  editTaskDate.value = task.date;
+  editTaskDate.value = task.fullDate;
   editTaskPriority.value = task.priority;
 
   editTaskFormDom();
@@ -276,9 +277,12 @@ function editTaskDom(edit, tasksArray, projectsArray) {
   editTaskFormSubmitBtn.onclick = (e) => {
     e.preventDefault();
 
+    const taskDate = date.getShortDate(editTaskDate.value);
+
     task.title = editTaskTitle.value;
     task.details = editTaskDetails.value;
-    task.date = editTaskDate.value;
+    task.fullDate = editTaskDate.value;
+    task.date = taskDate;
     task.priority = editTaskPriority.value;
 
     if (task.priority === 'Low') {
@@ -291,10 +295,11 @@ function editTaskDom(edit, tasksArray, projectsArray) {
 
     taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
     taskDisp.children[0].children[0].children[1].textContent = editTaskTitle.value;
-    taskDisp.children[0].children[1].children[0].textContent = editTaskDate.value;
+    taskDisp.children[0].children[1].children[0].textContent = taskDate;
     taskDisp.children[1].children[0].innerHTML = `<span class="font-semibold">Title:</span> ${editTaskTitle.value}`;
     taskDisp.children[1].children[1].innerHTML = `<span class="font-semibold">Details:</span> ${editTaskDetails.value}`;
     taskDisp.children[1].children[3].innerHTML = `<span class="font-semibold">Priority:</span> ${editTaskPriority.value}`;
+    taskDisp.children[1].children[4].innerHTML = `<span class="font-semibold">Due Date:</span> ${editTaskDate.value}`;
 
     console.log(task);
   
@@ -318,7 +323,7 @@ function showCheckedTaskDom(task, taskIndex) {
     checkbox.setAttribute('checked', '');
     checkbox.classList.replace('checked:text-dark', 'checked:text-gray-400');
     taskTitle.classList.add('line-through');
-    taskDate.classList.replace('sm:block', 'sm:hidden');
+    taskDate.classList.add('hidden');
     chevron.classList.add('hidden');
     taskEdit.classList.add('hidden');
     extendedPart.style.maxHeight = null;

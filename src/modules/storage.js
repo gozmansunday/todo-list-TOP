@@ -6,7 +6,6 @@ function getLocalArray() {
   return JSON.parse(localStorage.getItem('projectsArray'));
 }
 
-
 export const storage = {
   updateLocalStore,
   getLocalArray,

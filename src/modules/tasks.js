@@ -1,10 +1,11 @@
 import { dom } from './dom.js';
 import { projects } from './projects.js';
 import { storage } from './storage.js';
+import { date } from './date.js';
 
 // Task Obj Factory
-function TaskObjCreator(title, details, date, priority, project, completed) {
-  return {title, details, date, priority, project, completed};
+function TaskObjCreator(title, details, date, priority, project, completed, fullDate) {
+  return {title, details, date, priority, project, completed, fullDate};
 }
 
 const globalObject = {array: null};
@@ -20,13 +21,16 @@ function addTask(e) {
     //Imported Form Input Values
     const taskTitle = dom.selector.newTaskTitle.value;
     const taskDetails = dom.selector.newTaskDetails.value;
-    const taskDate = dom.selector.newTaskDate.value;
+    // const taskDate = dom.selector.newTaskDate.value;
+    const taskDueDate = dom.selector.newTaskDate.value;
     const taskPriority = dom.selector.newTaskPriority.value;
     const taskProject = projects.projectsArray.find(project => project.active === true).name;
+
+    const taskDate = date.getShortDate(taskDueDate);
   
-    if (taskTitle === '' || taskDate === '' ) return;
+    if (taskTitle === '' || taskDueDate === '' ) return;
   
-    const taskObj = TaskObjCreator(taskTitle, taskDetails, taskDate, taskPriority, taskProject, false);
+    const taskObj = TaskObjCreator(taskTitle, taskDetails, taskDate, taskPriority, taskProject, false, taskDueDate);
   
     // Tasks Array
     let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
