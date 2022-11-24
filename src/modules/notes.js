@@ -12,8 +12,8 @@ let notesArray = [];
 // }
 
 // Notes Obj Factory
-function NoteObjCreator(title, note) {
-  return {title, note};
+function NoteObjCreator(title, details) {
+  return {title, details};
 }
 
 function createNote(e) {
@@ -29,7 +29,16 @@ function createNote(e) {
     const noteObj = NoteObjCreator(noteTitle, noteDetails);
 
     notesArray.push(noteObj);
-    console.log(notesArray);
+    displayNote();
+    console.log(notesArray); //! DELETE LATER
+  });
+}
+
+function displayNote() {
+  dom.clearTaskContainer();
+
+  notesArray.forEach(note => {
+    dom.createNoteDisplayDom(note);
   });
 }
 

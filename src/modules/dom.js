@@ -452,6 +452,33 @@ function makeNotesOptionNonActive(notesOption) {
   newTaskFormBtn.classList.remove('hidden');
 }
 
+function createNoteDisplayDom(note) {
+  const noteDisp = document.createElement('div');
+  noteDisp.className = `note-display text-xs space-y-1 border-[3px] border-dark bg-neutral-300 rounded-xl px-3 py-2 lg:pt-2 lg:pb-3 sm:text-sm lg:text-base`;
+
+  const noteHTML =
+    `
+    <div class="flex items-center justify-between">
+      <h4 class="text-sm sm:text-base lg:text-lg font-semibold">
+        ${note.title}
+      </h4>
+      <div class="space-x-1.5">
+        <i class="edit fa-solid fa-pen-to-square text-xs sm:text-sm sm:pt-0.5"></i>
+        <i class="trash fa-solid fa-trash text-xs sm:text-sm sm:pt-0.5"></i>
+      </div>
+    </div>
+    <div>
+      <p class="leading-snug lg:leading-tight">
+        ${note.details}
+      </p>
+    </div>
+    `;
+
+  noteDisp.innerHTML = noteHTML;
+
+  taskContainer.appendChild(noteDisp);
+}
+
 export const dom = {
   selector,
   formDom,
@@ -472,4 +499,5 @@ export const dom = {
   makeProjectActive,
   makeNotesOptionActive,
   makeNotesOptionNonActive,
+  createNoteDisplayDom,
 };
