@@ -1,12 +1,22 @@
-function updateLocalStore(projectsArray) {
+function updateProjectsArray(projectsArray) {
   localStorage.setItem('projectsArray', JSON.stringify(projectsArray));
 }
 
-function getLocalArray() {
+function getProjectsArray() {
   return JSON.parse(localStorage.getItem('projectsArray'));
 }
 
+function updateNotesArray(notesArray) {
+  localStorage.setItem('notesArray', JSON.stringify(notesArray));
+}
+
+function getNotesArray() {
+  return JSON.parse(localStorage.getItem('notesArray'));
+}
+
 export const storage = {
-  updateLocalStore,
-  getLocalArray,
+  updateProjectsArray,
+  getProjectsArray,
+  updateNotesArray,
+  getNotesArray,
 };

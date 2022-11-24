@@ -1,9 +1,6 @@
 function getShortDate(fullDate) {
-  const dateDay = fullDate.substring(8);
-    const dateMonth = fullDate.substring(5,7);
-    const shortDate = `${dateDay}/${dateMonth}`;
-
-    return shortDate;
+  const shortDate = `${fullDate.substring(8)}/${fullDate.substring(5,7)}`;
+  return shortDate;
 }
 
 export const date = {

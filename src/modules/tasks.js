@@ -38,7 +38,7 @@ function addTask(e) {
     tasksArray.push(taskObj);
 
     globalObject.array = projects.projectsArray;
-    storage.updateLocalStore(projects.projectsArray);
+    storage.updateProjectsArray(projects.projectsArray);
   
     displayTask(tasksArray);
     console.log(tasksArray); //! REMOVE LATER
@@ -73,11 +73,13 @@ function displayExistingTasks(e) {
   let projectsArray = projects.projectsArray;
   const projDisps = document.querySelectorAll('.project-display');
   const projInbox = document.querySelector('#default-project');
+  const notesOption = dom.selector.notesOption;
 
   projInbox.onclick = () => {
     projects.makeAllProjectsNonActive(projInbox);
 
     dom.makeDefaultProjectActive(projectsArray, projInbox);
+    dom.makeNotesOptionNonActive(notesOption);
     dom.clearTaskContainer();
     displayTasksFromGlobalObject();
   };
@@ -93,6 +95,7 @@ function displayExistingTasks(e) {
         dom.makeProjectActive(projectsArray, projIndex, projDisp);
       }
 
+      dom.makeNotesOptionNonActive(notesOption);
       dom.clearTaskContainer();
       displayTasksFromGlobalObject();
     };
@@ -162,7 +165,7 @@ function updatePageOnLoad() {
 
   let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
   displayTask(tasksArray);
-  storage.updateLocalStore(projects.projectsArray);
+  storage.updateProjectsArray(projects.projectsArray);
 }
 
 function displayTasksFromGlobalObject() {
@@ -171,7 +174,7 @@ function displayTasksFromGlobalObject() {
     displayTask(tasksArray);
   }
 
-  storage.updateLocalStore(projects.projectsArray);
+  storage.updateProjectsArray(projects.projectsArray);
   console.log(projects.projectsArray); //! REMOVE LATER
 }
 

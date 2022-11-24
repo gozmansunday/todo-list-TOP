@@ -42,6 +42,16 @@ const hamburger = document.querySelector('#hamburger');
 // Sidebar
 const sideBarOverlay = document.querySelector('#side-bar-overlay');
 const sideBar = document.querySelector('#side-bar');
+// Notes
+const notesOption = document.querySelector('#notes');
+// New Note Form Controls DOM
+const newNoteForm = document.querySelector('#new-note-form');
+const newNoteFormBtn = document.querySelector('#new-note-form-btn');
+const newNoteFormCloseBtn = document.querySelector('#new-note-form-close-btn');
+const newNoteFormSubmitBtn = document.querySelector('#new-note-form-submit-btn');
+// New Note Form Inputs DOM
+const newNoteTitle = document.querySelector('#new-note-form #title');
+const newNoteDetails = document.querySelector('#new-note-form #details');
 
 // Selector obj for accessing all DOM query selectors
 const selector = {
@@ -74,27 +84,20 @@ const selector = {
   hamburger,
   sideBarOverlay,
   sideBar,
+  notesOption,
+  newNoteForm,
+  newNoteFormBtn,
+  newNoteFormCloseBtn,
+  newNoteFormSubmitBtn,
+  newNoteTitle,
+  newNoteDetails,
 };
 
-function newTaskFormDom() {
+function formDom(form) {
   modal.classList.toggle('hidden');
   modal.classList.toggle('flex');
-  newTaskForm.classList.toggle('task-form-animation');
-  newTaskForm.classList.toggle('hidden');
-}
-
-function editTaskFormDom() {
-  modal.classList.toggle('hidden');
-  modal.classList.toggle('flex');
-  editTaskForm.classList.toggle('task-form-animation');
-  editTaskForm.classList.toggle('hidden');
-}
-
-function newProjectFormDom() {
-  modal.classList.toggle('hidden');
-  modal.classList.toggle('flex');
-  newProjectForm.classList.toggle('task-form-animation');
-  newProjectForm.classList.toggle('hidden');
+  form.classList.toggle('task-form-animation');
+  form.classList.toggle('hidden');
 }
 
 function clearTaskContainer() {
@@ -226,7 +229,7 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
     tasksArray[taskIndex].completed = false;
   }
 
-  storage.updateLocalStore(projectsArray);
+  storage.updateProjectsArray(projectsArray);
 }
 
 function deleteTaskDom(trash, tasksArray, projectsArray) {
@@ -240,7 +243,7 @@ function deleteTaskDom(trash, tasksArray, projectsArray) {
     taskDisp.remove();
     tasksArray.splice(taskIndex, 1);
   
-    storage.updateLocalStore(projectsArray);
+    storage.updateProjectsArray(projectsArray);
   } else {
     if (confirmDelete.style.maxHeight) {
       confirmDelete.style.maxHeight = null;
@@ -256,7 +259,7 @@ function deleteTaskDom(trash, tasksArray, projectsArray) {
       taskDisp.remove();
       tasksArray.splice(taskIndex, 1);
   
-      storage.updateLocalStore(projectsArray);
+      storage.updateProjectsArray(projectsArray);
     });
   }
 }
@@ -303,12 +306,12 @@ function editTaskDom(edit, tasksArray, projectsArray) {
 
     console.log(task);
   
-    storage.updateLocalStore(projectsArray);
+    storage.updateProjectsArray(projectsArray);
   };
 }
 
 function showCheckedTaskDom(task, taskIndex) {
-  const taskContainer = dom.selector.taskContainer;
+  // const taskContainer = taskContainer;
   const taskDisp = taskContainer.children[taskIndex];
   const checkbox = taskDisp.children[0].children[0].children[0].children[0];
   const taskTitle = taskDisp.children[0].children[0].children[1];
@@ -367,7 +370,7 @@ function deleteProjectDom(delBtn, projectsArray) {
   projectsArray.splice(projIndex, 1);
   projDisp.remove();
 
-  storage.updateLocalStore(projectsArray);
+  storage.updateProjectsArray(projectsArray);
 }
 
 function displayDefaultProjectDom(projectName) {
@@ -419,7 +422,7 @@ function makeDefaultProjectActive(projectsArray, projInbox) {
   projInbox.classList.replace('bg-transparent', 'bg-brand');
   projInbox.classList.replace('border-mid', 'border-brand');
 
-  dom.selector.pageHeading.textContent = projectsArray[0].name;
+  pageHeading.textContent = projectsArray[0].name;
 }
 
 function makeProjectActive(projectsArray, projIndex, projDisp) {
@@ -427,14 +430,31 @@ function makeProjectActive(projectsArray, projIndex, projDisp) {
   projDisp.classList.replace('bg-transparent', 'bg-brand');
   projDisp.classList.replace('border-mid', 'border-brand');
 
-  dom.selector.pageHeading.textContent = projectsArray[projIndex].name;
+  pageHeading.textContent = projectsArray[projIndex].name;
+}
+
+function makeNotesOptionActive(notesOption) {
+  notesOption.classList.replace('bg-transparent', 'bg-brand');
+  notesOption.classList.replace('border-mid', 'border-brand');
+
+  newTaskFormBtn.classList.add('hidden');
+  newNoteFormBtn.classList.remove('hidden');
+
+  pageHeading.textContent = 'Notes';
+
+}
+
+function makeNotesOptionNonActive(notesOption) {
+  notesOption.classList.replace('bg-brand', 'bg-transparent');
+  notesOption.classList.replace('border-brand', 'border-mid');
+
+  newNoteFormBtn.classList.add('hidden');
+  newTaskFormBtn.classList.remove('hidden');
 }
 
 export const dom = {
   selector,
-  newTaskFormDom,
-  editTaskFormDom,
-  newProjectFormDom,
+  formDom,
   clearTaskContainer,
   createTaskDisplayDom,
   taskDisplayControlDom,
@@ -450,4 +470,6 @@ export const dom = {
   toggleDom,
   makeDefaultProjectActive,
   makeProjectActive,
+  makeNotesOptionActive,
+  makeNotesOptionNonActive,
 };

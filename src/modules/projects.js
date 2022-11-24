@@ -5,8 +5,8 @@ import { storage } from './storage.js';
 // Projects Array
 let projectsArray;
 
-if (storage.getLocalArray() !== null) {
-  projectsArray = storage.getLocalArray();
+if (storage.getProjectsArray() !== null) {
+  projectsArray = storage.getProjectsArray();
 }
 else {
   projectsArray = [];
@@ -37,7 +37,7 @@ function createProject(e) {
 
     projectsArray.push(projectObj);
 
-    storage.updateLocalStore(projectsArray);
+    storage.updateProjectsArray(projectsArray);
     
     console.log(projectsArray); //! REMOVE LATER
     displayProject();
