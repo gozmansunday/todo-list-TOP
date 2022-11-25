@@ -97,8 +97,8 @@
                   Lorem Ipsum
                 </h4>
                 <div class="space-x-1.5">
-                  <i class="edit fa-solid fa-pen-to-square text-xs sm:text-sm sm:pt-0.5"></i>
-                  <i class="trash fa-solid fa-trash text-xs sm:text-sm sm:pt-0.5"></i>
+                  <i class="note-edit fa-solid fa-pen-to-square text-xs sm:text-sm sm:pt-0.5"></i>
+                  <i class="note-trash fa-solid fa-trash text-xs sm:text-sm sm:pt-0.5"></i>
                 </div>
               </div>
               <div>
@@ -389,6 +389,30 @@
             </div>
             <div>
               <button id="new-note-form-submit-btn" class="w-full bg-dark text-light py-1 sm:pb-2 sm:pt-2.5 mt-2 sm:mt-4 sm:text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
+                Add Note
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Edit Note Form -->
+        <div id="edit-note-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
+          <div class="flex items-center justify-between">            
+            <h3 class="text-xl font-semibold sm:text-2xl">Edit Note</h3>
+            <i id="edit-note-form-close-btn" class="fa-solid fa-xmark text-xl sm:text-2xl lg:text-3xl"></i>
+          </div>
+          <!-- Form Controls -->
+          <form class="space-y-2">
+            <div>
+              <label for="title" class="block sm:text-lg">Title</label>
+              <input type="text" name="title" id="title" value="Lorem Ipsum" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+            </div>
+            <div>
+              <label for="details" class="block sm:text-lg">Note</label>
+              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-14 sm:h-24 md:h-28 lg:h-32 -mb-2 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem a officiis error, quidem aspernatur, distinctio in voluptatibus nam ut possimus ab aperiam esse mollitia, ratione molestias ipsum. Incidunt, similique in.</textarea>
+            </div>
+            <div>
+              <button id="edit-note-form-submit-btn" class="w-full bg-dark text-light py-1 sm:pb-2 sm:pt-2.5 mt-2 sm:mt-4 sm:text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
                 Add Note
               </button>
             </div>
