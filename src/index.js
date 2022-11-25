@@ -7,5 +7,4 @@ import { hamburger } from './modules/hamburger.js';
 hamburger.toggle();
 forms.formControl();
 tasks.addTask();
-notes.selectNotesMode();
 notes.createNote();

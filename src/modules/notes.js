@@ -17,6 +17,8 @@ function NoteObjCreator(title, details) {
 }
 
 function createNote(e) {
+  selectNotesMode();
+  
   dom.selector.newNoteFormSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
