@@ -496,7 +496,8 @@ function deleteNoteDom(trash, notesArray) {
   const noteIndex = [...pageItemContainer.children].indexOf(noteDisp);
 
   noteDisp.remove();
-  notesArray.splice(noteIndex, 1);  
+  notesArray.splice(noteIndex, 1);
+  storage.updateNotesArray(notesArray);
 }
 
 function editNoteDom(edit, notesArray) {
@@ -517,6 +518,8 @@ function editNoteDom(edit, notesArray) {
 
     noteDisp.children[0].children[0].textContent = editNoteTitle.value;
     noteDisp.children[1].children[0].textContent = editNoteDetails.value;
+
+    storage.updateNotesArray(notesArray);
   };
 }
 

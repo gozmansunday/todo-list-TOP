@@ -3,13 +3,13 @@ import { projects } from './projects.js';
 import { storage } from './storage.js';
 
 // Notes Array
-let notesArray = [];
+let notesArray;
 
-// if (storage.getNotesArray() !== null) {
-//   notesArray = storage.getNotesArray();
-// } else {
-//   notesArray = [];
-// }
+if (storage.getNotesArray() !== null) {
+  notesArray = storage.getNotesArray();
+} else {
+  notesArray = [];
+}
 
 // Notes Obj Factory
 function NoteObjCreator(title, details) {
@@ -29,6 +29,7 @@ function createNote(e) {
     const noteObj = NoteObjCreator(noteTitle, noteDetails);
 
     notesArray.push(noteObj);
+    storage.updateNotesArray(notesArray);
     displayNote();
     console.log(notesArray); //! DELETE LATER
   });
@@ -74,7 +75,8 @@ function selectNotesMode() {
 
     dom.makeNotesOptionActive(notesOption);
     dom.clearpageItemContainer();
-    // storage.updateProjectsArray(projects.projectsArray);
+    displayNote();
+    storage.updateNotesArray(notesArray);
   };
 }
 
