@@ -118,7 +118,7 @@ function clearpageItemContainer() {
 
 function createTaskDisplayDom(baseColor, task) {
   const taskDisp = document.createElement('div');
-  taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
+  taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
 
   const taskHTML =
     `
@@ -232,7 +232,7 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
     chevron.classList.add('rotate-0');
     tasksArray[taskIndex].completed = true;
   } else {
-    taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
+    taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
     checkbox.classList.replace('checked:text-gray-400', 'checked:text-dark');
     taskTitle.classList.remove('line-through');
     taskDate.classList.remove('hidden');
@@ -308,7 +308,7 @@ function editTaskDom(edit, tasksArray, projectsArray) {
       baseColor = 'red';
     }
 
-    taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
+    taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
     taskDisp.children[0].children[0].children[1].textContent = editTaskTitle.value;
     taskDisp.children[0].children[1].children[0].textContent = taskDate;
     taskDisp.children[1].children[0].innerHTML = `<span class="font-semibold">Title:</span> ${editTaskTitle.value}`;
@@ -466,7 +466,7 @@ function makeNotesOptionNonActive(notesOption) {
 
 function createNoteDisplayDom(note) {
   const noteDisp = document.createElement('div');
-  noteDisp.className = `note-display text-xs space-y-1 border-[3px] border-dark bg-neutral-300 rounded-xl px-3 py-2 lg:pt-2 lg:pb-3 sm:text-sm lg:text-base`;
+  noteDisp.className = `note-display text-xs space-y-1 border-[3px] border-dark bg-neutral-300 rounded-xl px-3 py-2 lg:pt-2 lg:pb-3 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
 
   const noteHTML =
     `
