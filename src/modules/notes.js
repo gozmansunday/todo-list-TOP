@@ -35,10 +35,33 @@ function createNote(e) {
 }
 
 function displayNote() {
-  dom.clearTaskContainer();
+  dom.clearpageItemContainer();
 
   notesArray.forEach(note => {
     dom.createNoteDisplayDom(note);
+  });
+
+  deleteNote();
+  editNote();
+}
+
+function deleteNote() {
+  const trashs = document.querySelectorAll('.note-trash');
+
+  [...trashs].forEach(trash => {
+    trash.addEventListener('click', () => {
+      dom.deleteNoteDom(trash, notesArray);
+    });
+  });
+}
+
+function editNote() {
+  const edits = document.querySelectorAll('.note-edit');
+
+  [...edits].forEach(edit => {
+    edit.addEventListener('click', () => {
+      dom.editNoteDom(edit, notesArray);
+    });
   });
 }
 
@@ -50,7 +73,7 @@ function selectNotesMode() {
     projects.makeAllProjectsNonActive(projInbox);
 
     dom.makeNotesOptionActive(notesOption);
-    dom.clearTaskContainer();
+    dom.clearpageItemContainer();
     // storage.updateProjectsArray(projects.projectsArray);
   };
 }

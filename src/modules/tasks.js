@@ -46,7 +46,7 @@ function addTask(e) {
 }
 
 function displayTask(tasksArray) {
-  dom.clearTaskContainer();
+  dom.clearpageItemContainer();
   
   tasksArray.forEach(task => {
     let baseColor;
@@ -80,7 +80,7 @@ function displayExistingTasks(e) {
 
     dom.makeDefaultProjectActive(projectsArray, projInbox);
     dom.makeNotesOptionNonActive(notesOption);
-    dom.clearTaskContainer();
+    dom.clearpageItemContainer();
     displayTasksFromGlobalObject();
   };
 
@@ -96,7 +96,7 @@ function displayExistingTasks(e) {
       }
 
       dom.makeNotesOptionNonActive(notesOption);
-      dom.clearTaskContainer();
+      dom.clearpageItemContainer();
       displayTasksFromGlobalObject();
     };
   });

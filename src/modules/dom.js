@@ -22,7 +22,7 @@ const editTaskDetails = document.querySelector('#edit-task-form #details');
 const editTaskDate = document.querySelector('#edit-task-form #date');
 const editTaskPriority = document.querySelector('#edit-task-form #priority');
 // Task Display DOM
-const taskContainer = document.querySelector('#task-container');
+const pageItemContainer = document.querySelector('#task-container');
 const chevrons = document.querySelectorAll('.chevron');
 // New Project Form Controls DOM
 const newProjectForm = document.querySelector('#new-project-form');
@@ -52,6 +52,13 @@ const newNoteFormSubmitBtn = document.querySelector('#new-note-form-submit-btn')
 // New Note Form Inputs DOM
 const newNoteTitle = document.querySelector('#new-note-form #title');
 const newNoteDetails = document.querySelector('#new-note-form #details');
+// Edit Note Form Controls DOM
+const editNoteForm = document.querySelector('#edit-note-form');
+const editNoteFormCloseBtn = document.querySelector('#edit-note-form-close-btn');
+const editNoteFormSubmitBtn = document.querySelector('#edit-note-form-submit-btn');
+// Edit Note Form Inputs DOM
+const editNoteTitle = document.querySelector('#edit-note-form #title');
+const editNoteDetails = document.querySelector('#edit-note-form #details');
 
 // Selector obj for accessing all DOM query selectors
 const selector = {
@@ -71,7 +78,7 @@ const selector = {
   editTaskDetails,
   editTaskDate,
   editTaskPriority,
-  taskContainer,
+  pageItemContainer,
   chevrons,
   newProjectForm,
   newProjectFormBtn,
@@ -91,6 +98,11 @@ const selector = {
   newNoteFormSubmitBtn,
   newNoteTitle,
   newNoteDetails,
+  editNoteForm,
+  editNoteFormCloseBtn,
+  editNoteFormSubmitBtn,
+  editNoteTitle,
+  editNoteDetails,
 };
 
 function formDom(form) {
@@ -100,8 +112,8 @@ function formDom(form) {
   form.classList.toggle('hidden');
 }
 
-function clearTaskContainer() {
-  taskContainer.innerHTML = '';
+function clearpageItemContainer() {
+  pageItemContainer.innerHTML = '';
 }
 
 function createTaskDisplayDom(baseColor, task) {
@@ -163,7 +175,7 @@ function createTaskDisplayDom(baseColor, task) {
 
   taskDisp.innerHTML = taskHTML;
 
-  taskContainer.appendChild(taskDisp);
+  pageItemContainer.appendChild(taskDisp);
 }
 
 function taskDisplayControlDom(chevron) {
@@ -187,7 +199,7 @@ function taskDisplayControlDom(chevron) {
 
 function completeTaskDom(checkbox, tasksArray, projectsArray) {
   const taskDisp = checkbox.parentElement.parentElement.parentElement.parentElement;
-  const taskIndex = [...taskContainer.children].indexOf(taskDisp);
+  const taskIndex = [...pageItemContainer.children].indexOf(taskDisp);
   const taskTitle = taskDisp.children[0].children[0].children[1];
   const taskDate = taskDisp.children[0].children[1].children[0];
   const chevron = taskDisp.children[0].children[0].children[2];
@@ -234,7 +246,7 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
 
 function deleteTaskDom(trash, tasksArray, projectsArray) {
   const taskDisp = trash.parentElement.parentElement.parentElement;
-  const taskIndex = [...taskContainer.children].indexOf(taskDisp);
+  const taskIndex = [...pageItemContainer.children].indexOf(taskDisp);
   const confirmDelete = taskDisp.children[2];
   const cancelBtn = confirmDelete.children[1].children[0];
   const deleteBtn = confirmDelete.children[1].children[1];
@@ -266,7 +278,7 @@ function deleteTaskDom(trash, tasksArray, projectsArray) {
 
 function editTaskDom(edit, tasksArray, projectsArray) {
   const taskDisp = edit.parentElement.parentElement.parentElement;
-  const taskIndex = [...taskContainer.children].indexOf(taskDisp);
+  const taskIndex = [...pageItemContainer.children].indexOf(taskDisp);
   const task = tasksArray[taskIndex];
   let baseColor;
 
@@ -275,7 +287,7 @@ function editTaskDom(edit, tasksArray, projectsArray) {
   editTaskDate.value = task.fullDate;
   editTaskPriority.value = task.priority;
 
-  editTaskFormDom();
+  formDom(editTaskForm);
   
   editTaskFormSubmitBtn.onclick = (e) => {
     e.preventDefault();
@@ -311,8 +323,8 @@ function editTaskDom(edit, tasksArray, projectsArray) {
 }
 
 function showCheckedTaskDom(task, taskIndex) {
-  // const taskContainer = taskContainer;
-  const taskDisp = taskContainer.children[taskIndex];
+  // const pageItemContainer = pageItemContainer;
+  const taskDisp = pageItemContainer.children[taskIndex];
   const checkbox = taskDisp.children[0].children[0].children[0].children[0];
   const taskTitle = taskDisp.children[0].children[0].children[1];
   const taskDate = taskDisp.children[0].children[1].children[0];
@@ -463,8 +475,8 @@ function createNoteDisplayDom(note) {
         ${note.title}
       </h4>
       <div class="space-x-1.5">
-        <i class="edit fa-solid fa-pen-to-square text-xs sm:text-sm sm:pt-0.5"></i>
-        <i class="trash fa-solid fa-trash text-xs sm:text-sm sm:pt-0.5"></i>
+        <i class="note-edit fa-solid fa-pen-to-square text-xs sm:text-sm sm:pt-0.5"></i>
+        <i class="note-trash fa-solid fa-trash text-xs sm:text-sm sm:pt-0.5"></i>
       </div>
     </div>
     <div>
@@ -476,13 +488,42 @@ function createNoteDisplayDom(note) {
 
   noteDisp.innerHTML = noteHTML;
 
-  taskContainer.appendChild(noteDisp);
+  pageItemContainer.appendChild(noteDisp);
+}
+
+function deleteNoteDom(trash, notesArray) {
+  const noteDisp = trash.parentElement.parentElement.parentElement;
+  const noteIndex = [...pageItemContainer.children].indexOf(noteDisp);
+
+  noteDisp.remove();
+  notesArray.splice(noteIndex, 1);  
+}
+
+function editNoteDom(edit, notesArray) {
+  const noteDisp = edit.parentElement.parentElement.parentElement;
+  const noteIndex = [...pageItemContainer.children].indexOf(noteDisp);
+  const note = notesArray[noteIndex];
+
+  editNoteTitle.value = note.title;
+  editNoteDetails.value = note.details;
+
+  formDom(editNoteForm);
+
+  editNoteFormSubmitBtn.onclick = (e) => {
+    e.preventDefault();
+
+    note.title = editNoteTitle.value;
+    note.details = editNoteDetails.value;
+
+    noteDisp.children[0].children[0].textContent = editNoteTitle.value;
+    noteDisp.children[1].children[0].textContent = editNoteDetails.value;
+  };
 }
 
 export const dom = {
   selector,
   formDom,
-  clearTaskContainer,
+  clearpageItemContainer,
   createTaskDisplayDom,
   taskDisplayControlDom,
   completeTaskDom,
@@ -500,4 +541,6 @@ export const dom = {
   makeNotesOptionActive,
   makeNotesOptionNonActive,
   createNoteDisplayDom,
+  deleteNoteDom,
+  editNoteDom,
 };
