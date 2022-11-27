@@ -61,6 +61,10 @@ const editNoteTitle = document.querySelector('#edit-note-form #title');
 const editNoteDetails = document.querySelector('#edit-note-form #details');
 // Date Inputs
 const dateInputs = document.querySelectorAll('.date-input');
+// Today
+const todayOption = document.querySelector('#home-today');
+// Add Btns Container
+const addBtnsContainer = document.querySelector('#add-btns-container');
 
 // Selector obj for accessing all DOM query selectors
 const selector = {
@@ -106,6 +110,7 @@ const selector = {
   editNoteTitle,
   editNoteDetails,
   dateInputs,
+  todayOption,
 };
 
 function formDom(form) {
@@ -456,7 +461,6 @@ function makeNotesOptionActive(notesOption) {
   newNoteFormBtn.classList.remove('hidden');
 
   pageHeading.textContent = 'Notes';
-
 }
 
 function makeNotesOptionNonActive(notesOption) {
@@ -526,6 +530,22 @@ function editNoteDom(edit, notesArray) {
   };
 }
 
+function makeTodayOptionActive(todayOption) {
+  todayOption.classList.replace('bg-transparent', 'bg-brand');
+  todayOption.classList.replace('border-mid', 'border-brand');
+
+  addBtnsContainer.classList.add('hidden');
+
+  pageHeading.textContent = 'Today';
+}
+
+function makeTodayOptionNonActive(todayOption) {
+  todayOption.classList.replace('bg-brand', 'bg-transparent');
+  todayOption.classList.replace('border-brand', 'border-mid');
+
+  addBtnsContainer.classList.remove('hidden');
+}
+
 export const dom = {
   selector,
   formDom,
@@ -549,4 +569,6 @@ export const dom = {
   createNoteDisplayDom,
   deleteNoteDom,
   editNoteDom,
+  makeTodayOptionActive,
+  makeTodayOptionNonActive,
 };

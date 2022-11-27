@@ -65,20 +65,20 @@ function displayTask(tasksArray) {
   checkTask(tasksArray);
   deleteTask(tasksArray);
   editTask(tasksArray);
-  showCheckedTask();
+  showCheckedTask(tasksArray);
 }
 
 function displayExistingTasks(e) {
   let projectsArray = projects.projectsArray;
   const projDisps = document.querySelectorAll('.project-display');
   const projInbox = document.querySelector('#default-project');
-  const notesOption = dom.selector.notesOption;
 
   projInbox.onclick = () => {
     projects.makeAllProjectsNonActive(projInbox);
 
     dom.makeDefaultProjectActive(projectsArray, projInbox);
-    dom.makeNotesOptionNonActive(notesOption);
+    dom.makeNotesOptionNonActive(dom.selector.notesOption);
+    dom.makeTodayOptionNonActive(dom.selector.todayOption);
     dom.clearpageItemContainer();
     displayTasksFromGlobalObject();
   };
@@ -94,7 +94,8 @@ function displayExistingTasks(e) {
         dom.makeProjectActive(projectsArray, projIndex, projDisp);
       }
 
-      dom.makeNotesOptionNonActive(notesOption);
+      dom.makeNotesOptionNonActive(dom.selector.notesOption);
+      dom.makeTodayOptionNonActive(dom.selector.todayOption);
       dom.clearpageItemContainer();
       displayTasksFromGlobalObject();
     };
@@ -121,8 +122,8 @@ function checkTask(tasksArray) {
   }); 
 }
 
-function showCheckedTask() {
-  let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
+function showCheckedTask(tasksArray) {
+  // let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
   
   tasksArray.forEach(task => {
     let taskIndex = tasksArray.indexOf(task);
@@ -181,4 +182,5 @@ export const tasks = {
   addTask,
   displayTask,
   displayExistingTasks,
+  globalObject,
 };
