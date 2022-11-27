@@ -153,6 +153,10 @@ function editTask(tasksArray) {
   });
 }
 
+function showOverdueTask(tasksArray) {
+  
+}
+
 function updatePageOnLoad() {
   const projInbox = document.querySelector('#default-project');
 

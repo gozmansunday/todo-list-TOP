@@ -143,6 +143,7 @@ function createTaskDisplayDom(baseColor, task) {
         <i class="chevron rotate-0 fa-solid fa-chevron-up text-sm pt-1.5"></i>
       </div>
       <div class="flex gap-1.5 sm:gap-2 items-center">
+        <i class="fa-solid fa-circle-exclamation hidden text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-1"></i>
         <p class="text-xs md:text-sm mr-1.5 sm:mr-2 lg:mr-4 pt-0.5 sm:pt-1">${task.date}</p>
         <i class="edit fa-solid fa-pen-to-square text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-0.5"></i>
         <i class="trash fa-solid fa-trash text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-0.5"></i>
