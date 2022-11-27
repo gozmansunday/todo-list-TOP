@@ -6,5 +6,6 @@ import { hamburger } from './modules/hamburger.js';
 
 hamburger.toggle();
 forms.formControl();
+forms.setMinDateToToday();
 tasks.addTask();
 notes.createNote();

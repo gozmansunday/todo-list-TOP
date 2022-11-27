@@ -1,5 +1,5 @@
 import { storage } from './storage.js';
-import { date } from './date.js';
+import { format } from 'date-fns';
 
 const modal = document.querySelector('#modal');
 // New Task Form Controls DOM
@@ -59,6 +59,8 @@ const editNoteFormSubmitBtn = document.querySelector('#edit-note-form-submit-btn
 // Edit Note Form Inputs DOM
 const editNoteTitle = document.querySelector('#edit-note-form #title');
 const editNoteDetails = document.querySelector('#edit-note-form #details');
+// Date Inputs
+const dateInputs = document.querySelectorAll('.date-input');
 
 // Selector obj for accessing all DOM query selectors
 const selector = {
@@ -103,6 +105,7 @@ const selector = {
   editNoteFormSubmitBtn,
   editNoteTitle,
   editNoteDetails,
+  dateInputs,
 };
 
 function formDom(form) {
@@ -292,7 +295,7 @@ function editTaskDom(edit, tasksArray, projectsArray) {
   editTaskFormSubmitBtn.onclick = (e) => {
     e.preventDefault();
 
-    const taskDate = date.getShortDate(editTaskDate.value);
+    const taskDate = format(new Date(editTaskDate.value), 'dd/MM');
 
     task.title = editTaskTitle.value;
     task.details = editTaskDetails.value;

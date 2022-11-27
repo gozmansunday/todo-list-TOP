@@ -1,7 +1,7 @@
 import { dom } from './dom.js';
 import { projects } from './projects.js';
 import { storage } from './storage.js';
-import { date } from './date.js';
+import { format } from 'date-fns';
 
 // Task Obj Factory
 function TaskObjCreator(title, details, date, priority, project, completed, fullDate) {
@@ -21,12 +21,11 @@ function addTask(e) {
     //Imported Form Input Values
     const taskTitle = dom.selector.newTaskTitle.value;
     const taskDetails = dom.selector.newTaskDetails.value;
-    // const taskDate = dom.selector.newTaskDate.value;
     const taskDueDate = dom.selector.newTaskDate.value;
     const taskPriority = dom.selector.newTaskPriority.value;
     const taskProject = projects.projectsArray.find(project => project.active === true).name;
 
-    const taskDate = date.getShortDate(taskDueDate);
+    const taskDate = format(new Date(taskDueDate), 'dd/MM');
   
     if (taskTitle === '' || taskDueDate === '' ) return;
   

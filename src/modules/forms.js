@@ -80,6 +80,13 @@ function formControl() {
   });
 }
 
+function setMinDateToToday() {
+  [...dom.selector.dateInputs].forEach(dateInput => {
+    dateInput.min = new Date().toLocaleDateString('en-ca');
+  });
+}
+
 export const forms = {
   formControl,
+  setMinDateToToday,
 };
