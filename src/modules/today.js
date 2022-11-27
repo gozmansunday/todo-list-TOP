@@ -1,6 +1,6 @@
 import { dom } from './dom.js';
 import { projects } from './projects.js';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 import { tasks } from './tasks.js';
 
 function displayValidTasks() {
@@ -29,6 +29,7 @@ function selectTodayMode() {
     
     projects.makeAllProjectsNonActive(projInbox);
     dom.makeNotesOptionNonActive(dom.selector.notesOption);
+    dom.makeWeekOptionNonActive(dom.selector.weekOption);
     dom.makeTodayOptionActive(todayOption);
     dom.clearpageItemContainer();
     displayValidTasks();

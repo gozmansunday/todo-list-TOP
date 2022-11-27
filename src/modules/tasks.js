@@ -79,6 +79,7 @@ function displayExistingTasks(e) {
     dom.makeDefaultProjectActive(projectsArray, projInbox);
     dom.makeNotesOptionNonActive(dom.selector.notesOption);
     dom.makeTodayOptionNonActive(dom.selector.todayOption);
+    dom.makeWeekOptionNonActive(dom.selector.weekOption);
     dom.clearpageItemContainer();
     displayTasksFromGlobalObject();
   };
@@ -96,6 +97,7 @@ function displayExistingTasks(e) {
 
       dom.makeNotesOptionNonActive(dom.selector.notesOption);
       dom.makeTodayOptionNonActive(dom.selector.todayOption);
+      dom.makeWeekOptionNonActive(dom.selector.weekOption);
       dom.clearpageItemContainer();
       displayTasksFromGlobalObject();
     };

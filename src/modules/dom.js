@@ -63,6 +63,8 @@ const editNoteDetails = document.querySelector('#edit-note-form #details');
 const dateInputs = document.querySelectorAll('.date-input');
 // Today
 const todayOption = document.querySelector('#home-today');
+// Week
+const weekOption = document.querySelector('#home-week');
 // Add Btns Container
 const addBtnsContainer = document.querySelector('#add-btns-container');
 
@@ -111,6 +113,8 @@ const selector = {
   editNoteDetails,
   dateInputs,
   todayOption,
+  weekOption,
+  addBtnsContainer,
 };
 
 function formDom(form) {
@@ -546,6 +550,22 @@ function makeTodayOptionNonActive(todayOption) {
   addBtnsContainer.classList.remove('hidden');
 }
 
+function makeWeekOptionActive(weekOption) {
+  weekOption.classList.replace('bg-transparent', 'bg-brand');
+  weekOption.classList.replace('border-mid', 'border-brand');
+
+  addBtnsContainer.classList.add('hidden');
+
+  pageHeading.textContent = 'Week';
+}
+
+function makeWeekOptionNonActive(weekOption) {
+  weekOption.classList.replace('bg-brand', 'bg-transparent');
+  weekOption.classList.replace('border-brand', 'border-mid');
+
+  addBtnsContainer.classList.remove('hidden');
+}
+
 export const dom = {
   selector,
   formDom,
@@ -571,4 +591,6 @@ export const dom = {
   editNoteDom,
   makeTodayOptionActive,
   makeTodayOptionNonActive,
+  makeWeekOptionActive,
+  makeWeekOptionNonActive,
 };

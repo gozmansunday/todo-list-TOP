@@ -75,6 +75,7 @@ function selectNotesMode() {
     const projInbox = document.querySelector('#default-project');
     projects.makeAllProjectsNonActive(projInbox);
     dom.makeTodayOptionNonActive(dom.selector.todayOption);
+    dom.makeWeekOptionNonActive(dom.selector.weekOption);
 
     dom.makeNotesOptionActive(notesOption);
     dom.clearpageItemContainer();
