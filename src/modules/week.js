@@ -1,8 +1,7 @@
 import { dom } from './dom.js';
 import { projects } from './projects.js';
-import { format } from 'date-fns';
-import { add } from 'date-fns';
 import { tasks } from './tasks.js';
+import { format, add } from 'date-fns';
 
 function displayValidTasks() {
   let projectsArray = projects.projectsArray;

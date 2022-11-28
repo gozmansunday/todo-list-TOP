@@ -33,7 +33,6 @@ function createNote(e) {
     notesArray.push(noteObj);
     storage.updateNotesArray(notesArray);
     displayNote();
-    console.log(notesArray); //! DELETE LATER
   });
 }
 

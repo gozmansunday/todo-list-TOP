@@ -1,9 +1,7 @@
 import { dom } from './dom.js';
 import { projects } from './projects.js';
 import { storage } from './storage.js';
-import { format } from 'date-fns';
-import { isPast } from 'date-fns';
-import { add } from 'date-fns';
+import { format, isPast, add } from 'date-fns';
 
 // Task Obj Factory
 function TaskObjCreator(title, details, date, priority, project, completed, fullDate, overdue) {
@@ -26,7 +24,6 @@ function addTask(e) {
     const taskDueDate = dom.selector.newTaskDate.value;
     const taskPriority = dom.selector.newTaskPriority.value;
     const taskProject = projects.projectsArray.find(project => project.active === true).name;
-
     const taskDate = format(new Date(taskDueDate), 'dd/MM');
   
     if (taskTitle === '' || taskDueDate === '' ) return;
@@ -35,14 +32,11 @@ function addTask(e) {
   
     // Tasks Array
     let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
-  
     tasksArray.push(taskObj);
 
     globalObject.array = projects.projectsArray;
     storage.updateProjectsArray(projects.projectsArray);
-  
     displayTask(tasksArray);
-    console.log(tasksArray); //! REMOVE LATER
   });
 }
 
@@ -128,8 +122,6 @@ function checkTask(tasksArray) {
 }
 
 function showCheckedTask(tasksArray) {
-  // let tasksArray = globalObject.array.find(project => project.active === true).projectArray;
-  
   tasksArray.forEach(task => {
     let taskIndex = tasksArray.indexOf(task);
     dom.showCheckedTaskDom(task, taskIndex);
@@ -162,7 +154,8 @@ function showOverdueTask() {
   let tasksArray = project.projectArray;
   
   tasksArray.forEach(task => {
-    const overdue = isPast(add(new Date(task.fullDate), {days: 1}));
+    // const overdue = isPast(add(new Date(task.fullDate), {days: 1}));
+    const overdue = isPast(new Date(task.fullDate));
     let taskIndex = tasksArray.indexOf(task);
 
     if (overdue) task.overdue = true;
@@ -195,7 +188,6 @@ function displayTasksFromGlobalObject() {
   }
 
   storage.updateProjectsArray(projects.projectsArray);
-  console.log(projects.projectsArray); //! REMOVE LATER
 }
 
 export const tasks = {

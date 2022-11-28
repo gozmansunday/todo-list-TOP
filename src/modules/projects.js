@@ -39,7 +39,6 @@ function createProject(e) {
 
     storage.updateProjectsArray(projectsArray);
     
-    console.log(projectsArray); //! REMOVE LATER
     displayProject();
   });
 }

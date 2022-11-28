@@ -1,7 +1,5 @@
 import { storage } from './storage.js';
-import { format } from 'date-fns';
-import { isPast } from 'date-fns';
-import { add } from 'date-fns';
+import { format, isPast, add } from 'date-fns';
 
 const modal = document.querySelector('#modal');
 // New Task Form Controls DOM
@@ -25,7 +23,6 @@ const editTaskDate = document.querySelector('#edit-task-form #date');
 const editTaskPriority = document.querySelector('#edit-task-form #priority');
 // Task Display DOM
 const pageItemContainer = document.querySelector('#task-container');
-const chevrons = document.querySelectorAll('.chevron');
 // New Project Form Controls DOM
 const newProjectForm = document.querySelector('#new-project-form');
 const newProjectFormBtn = document.querySelector('#new-project-form-btn');
@@ -89,18 +86,14 @@ const selector = {
   editTaskDate,
   editTaskPriority,
   pageItemContainer,
-  chevrons,
   newProjectForm,
   newProjectFormBtn,
   newProjectFormCloseBtn,
   newProjectFormSubmitBtn,
   newProjectName,
   projectContainer,
-  homeContainer,
-  pageHeading,
   hamburger,
   sideBarOverlay,
-  sideBar,
   notesOption,
   newNoteForm,
   newNoteFormBtn,
@@ -111,12 +104,9 @@ const selector = {
   editNoteForm,
   editNoteFormCloseBtn,
   editNoteFormSubmitBtn,
-  editNoteTitle,
-  editNoteDetails,
   dateInputs,
   todayOption,
   weekOption,
-  addBtnsContainer,
 };
 
 function formDom(form) {
@@ -189,7 +179,6 @@ function createTaskDisplayDom(baseColor, task) {
     `;
 
   taskDisp.innerHTML = taskHTML;
-
   pageItemContainer.appendChild(taskDisp);
 }
 
@@ -321,7 +310,8 @@ function editTaskDom(edit, tasksArray, projectsArray) {
     task.fullDate = editTaskDate.value;
     task.date = taskDate;
     task.priority = editTaskPriority.value;
-    task.overdue = isPast(add(new Date(editTaskDate.value), {days: 1}));
+    // task.overdue = isPast(add(new Date(editTaskDate.value), {days: 1}));
+    task.overdue = isPast(new Date(editTaskDate.value));
 
     if (task.priority === 'Low') {
       baseColor = 'blue';
@@ -346,8 +336,6 @@ function editTaskDom(edit, tasksArray, projectsArray) {
     taskDisp.children[1].children[1].innerHTML = `<span class="font-semibold">Details:</span> ${editTaskDetails.value}`;
     taskDisp.children[1].children[3].innerHTML = `<span class="font-semibold">Priority:</span> ${editTaskPriority.value}`;
     taskDisp.children[1].children[4].innerHTML = `<span class="font-semibold">Due Date:</span> ${editTaskDate.value}`;
-
-    console.log(task);
   
     storage.updateProjectsArray(projectsArray);
   };
@@ -413,7 +401,6 @@ function createProjectDisplayDom(project) {
     <i class="delete-project-btn fa-solid fa-trash text-sm pt-0.5"></i>`;
   
   projectDisp.innerHTML = projectHTML;
-
   projectContainer.appendChild(projectDisp);
 }
 
