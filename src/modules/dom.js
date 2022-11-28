@@ -311,7 +311,8 @@ function editTaskDom(edit, tasksArray, projectsArray) {
     task.date = taskDate;
     task.priority = editTaskPriority.value;
     // task.overdue = isPast(add(new Date(editTaskDate.value), {days: 1}));
-    task.overdue = isPast(new Date(editTaskDate.value));
+    task.overdue = isPast(add(new Date(editTaskDate.value), {hours: 12}));
+    // task.overdue = isPast(new Date(editTaskDate.value));
 
     if (task.priority === 'Low') {
       baseColor = 'blue';
