@@ -1,5 +1,7 @@
 import { storage } from './storage.js';
 import { format } from 'date-fns';
+import { isPast } from 'date-fns';
+import { add } from 'date-fns';
 
 const modal = document.querySelector('#modal');
 // New Task Form Controls DOM
@@ -143,7 +145,7 @@ function createTaskDisplayDom(baseColor, task) {
         <i class="chevron rotate-0 fa-solid fa-chevron-up text-sm pt-1.5"></i>
       </div>
       <div class="flex gap-1.5 sm:gap-2 items-center">
-        <i class="fa-solid fa-circle-exclamation hidden text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-1"></i>
+        <i class="overdue-warning fa-solid fa-circle-exclamation hidden text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-1"></i>
         <p class="text-xs md:text-sm mr-1.5 sm:mr-2 lg:mr-4 pt-0.5 sm:pt-1">${task.date}</p>
         <i class="edit fa-solid fa-pen-to-square text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-0.5"></i>
         <i class="trash fa-solid fa-trash text-xs sm:text-sm pt-0.5 sm:pt-1 lg:pt-0.5"></i>
@@ -214,16 +216,17 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
   const taskDisp = checkbox.parentElement.parentElement.parentElement.parentElement;
   const taskIndex = [...pageItemContainer.children].indexOf(taskDisp);
   const taskTitle = taskDisp.children[0].children[0].children[1];
-  const taskDate = taskDisp.children[0].children[1].children[0];
+  const taskDate = taskDisp.children[0].children[1].children[1];
   const chevron = taskDisp.children[0].children[0].children[2];
-  const taskEdit = taskDisp.children[0].children[1].children[1];
+  const taskEdit = taskDisp.children[0].children[1].children[2];
   const extendedPart = taskDisp.children[1];
   const confirmDelete = taskDisp.children[2];
   let baseColor;
+  let task = tasksArray[taskIndex];
 
-  if (tasksArray[taskIndex].priority === 'Low') {
+  if (task.priority === 'Low') {
     baseColor = 'blue';
-  } else if (tasksArray[taskIndex].priority === 'Medium') {
+  } else if (task.priority === 'Medium') {
     baseColor = 'yellow';
   } else {
     baseColor = 'red';
@@ -243,15 +246,19 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
     chevron.classList.remove('rotate-0');
     chevron.classList.remove('rotate-180');
     chevron.classList.add('rotate-0');
-    tasksArray[taskIndex].completed = true;
+    task.completed = true;
   } else {
-    taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
+    if (!task.overdue) {      
+      taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
+    } else {
+      taskDisp.className = 'task-display text-xs border-[3px] text-red-600 border-red-600 bg-neutral-300 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg';
+    }
     checkbox.classList.replace('checked:text-gray-400', 'checked:text-dark');
     taskTitle.classList.remove('line-through');
     taskDate.classList.remove('hidden');
     chevron.classList.remove('hidden');
     taskEdit.classList.remove('hidden');
-    tasksArray[taskIndex].completed = false;
+    task.completed = false;
   }
 
   storage.updateProjectsArray(projectsArray);
@@ -292,6 +299,8 @@ function deleteTaskDom(trash, tasksArray, projectsArray) {
 function editTaskDom(edit, tasksArray, projectsArray) {
   const taskDisp = edit.parentElement.parentElement.parentElement;
   const taskIndex = [...pageItemContainer.children].indexOf(taskDisp);
+  const checkbox = taskDisp.children[0].children[0].children[0].children[0];
+  const overdueWarning = taskDisp.children[0].children[1].children[0];
   const task = tasksArray[taskIndex];
   let baseColor;
 
@@ -312,6 +321,7 @@ function editTaskDom(edit, tasksArray, projectsArray) {
     task.fullDate = editTaskDate.value;
     task.date = taskDate;
     task.priority = editTaskPriority.value;
+    task.overdue = isPast(add(new Date(editTaskDate.value), {days: 1}));
 
     if (task.priority === 'Low') {
       baseColor = 'blue';
@@ -321,9 +331,17 @@ function editTaskDom(edit, tasksArray, projectsArray) {
       baseColor = 'red';
     }
 
-    taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
+    if (!task.overdue) {
+      taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
+      checkbox.className = `checkbox border-[3px] border-dark rounded-full w-4 h-4 sm:w-5 sm:h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0`;
+      overdueWarning.classList.add('hidden');
+    } else {
+      taskDisp.className = 'task-display text-xs border-[3px] text-red-600 border-red-600 bg-neutral-300 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg';
+      checkbox.className = `checkbox border-[3px] border-red-600 rounded-full w-4 h-4 sm:w-5 sm:h-5 bg-transparent checked:text-gray-400 focus:ring-0 focus:ring-offset-0`;
+      overdueWarning.classList.remove('hidden');
+    }
     taskDisp.children[0].children[0].children[1].textContent = editTaskTitle.value;
-    taskDisp.children[0].children[1].children[0].textContent = taskDate;
+    taskDisp.children[0].children[1].children[1].textContent = taskDate;
     taskDisp.children[1].children[0].innerHTML = `<span class="font-semibold">Title:</span> ${editTaskTitle.value}`;
     taskDisp.children[1].children[1].innerHTML = `<span class="font-semibold">Details:</span> ${editTaskDetails.value}`;
     taskDisp.children[1].children[3].innerHTML = `<span class="font-semibold">Priority:</span> ${editTaskPriority.value}`;
@@ -336,13 +354,12 @@ function editTaskDom(edit, tasksArray, projectsArray) {
 }
 
 function showCheckedTaskDom(task, taskIndex) {
-  // const pageItemContainer = pageItemContainer;
   const taskDisp = pageItemContainer.children[taskIndex];
   const checkbox = taskDisp.children[0].children[0].children[0].children[0];
   const taskTitle = taskDisp.children[0].children[0].children[1];
-  const taskDate = taskDisp.children[0].children[1].children[0];
+  const taskDate = taskDisp.children[0].children[1].children[1];
   const chevron = taskDisp.children[0].children[0].children[2];
-  const taskEdit = taskDisp.children[0].children[1].children[1];
+  const taskEdit = taskDisp.children[0].children[1].children[2];
   const extendedPart = taskDisp.children[1];
   const confirmDelete = taskDisp.children[2];
   
@@ -361,6 +378,18 @@ function showCheckedTaskDom(task, taskIndex) {
     chevron.classList.remove('rotate-0');
     chevron.classList.remove('rotate-180');
     chevron.classList.add('rotate-0');
+  }
+}
+
+function showOverdueTaskDom(overdue, taskIndex) {
+  const taskDisp = dom.selector.pageItemContainer.children[taskIndex];
+  if (overdue) {
+    const checkbox = taskDisp.children[0].children[0].children[0].children[0];
+    const overdueWarning = taskDisp.children[0].children[1].children[0];
+
+    taskDisp.className = 'task-display text-xs border-[3px] text-red-600 border-red-600 bg-neutral-300 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg';
+    checkbox.className = 'checkbox border-[3px] border-red-600 rounded-full w-4 h-4 sm:w-5 sm:h-5 bg-transparent checked:text-gray-400 focus:ring-0 focus:ring-offset-0';
+    overdueWarning.classList.remove('hidden');
   }
 }
 
@@ -577,6 +606,7 @@ export const dom = {
   deleteTaskDom,
   editTaskDom,
   showCheckedTaskDom,
+  showOverdueTaskDom,
   clearProjectContainer,
   createProjectDisplayDom,
   deleteProjectDom,

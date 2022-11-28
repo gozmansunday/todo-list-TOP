@@ -2,10 +2,12 @@ import { dom } from './dom.js';
 import { projects } from './projects.js';
 import { storage } from './storage.js';
 import { format } from 'date-fns';
+import { isPast } from 'date-fns';
+import { add } from 'date-fns';
 
 // Task Obj Factory
-function TaskObjCreator(title, details, date, priority, project, completed, fullDate) {
-  return {title, details, date, priority, project, completed, fullDate};
+function TaskObjCreator(title, details, date, priority, project, completed, fullDate, overdue) {
+  return {title, details, date, priority, project, completed, fullDate, overdue};
 }
 
 const globalObject = {array: null};
@@ -29,7 +31,7 @@ function addTask(e) {
   
     if (taskTitle === '' || taskDueDate === '' ) return;
   
-    const taskObj = TaskObjCreator(taskTitle, taskDetails, taskDate, taskPriority, taskProject, false, taskDueDate);
+    const taskObj = TaskObjCreator(taskTitle, taskDetails, taskDate, taskPriority, taskProject, false, taskDueDate, false);
   
     // Tasks Array
     let tasksArray = projects.projectsArray.find(project => project.active === true).projectArray;
@@ -65,6 +67,7 @@ function displayTask(tasksArray) {
   checkTask(tasksArray);
   deleteTask(tasksArray);
   editTask(tasksArray);
+  showOverdueTask();
   showCheckedTask(tasksArray);
 }
 
@@ -153,8 +156,19 @@ function editTask(tasksArray) {
   });
 }
 
-function showOverdueTask(tasksArray) {
+function showOverdueTask() {
+  let project = projects.projectsArray.find(project => project.active === true);
+  if (project === undefined) return;
+  let tasksArray = project.projectArray;
   
+  tasksArray.forEach(task => {
+    const overdue = isPast(add(new Date(task.fullDate), {days: 1}));
+    let taskIndex = tasksArray.indexOf(task);
+
+    if (overdue) task.overdue = true;
+
+    dom.showOverdueTaskDom(overdue, taskIndex);
+  });
 }
 
 function updatePageOnLoad() {
