@@ -33,6 +33,8 @@ function createNote(e) {
     notesArray.push(noteObj);
     storage.updateNotesArray(notesArray);
     displayNote();
+    dom.selector.newNoteForm.reset();
+    dom.formDom(dom.selector.newNoteForm);
   });
 }
 

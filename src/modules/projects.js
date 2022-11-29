@@ -40,6 +40,8 @@ function createProject(e) {
     storage.updateProjectsArray(projectsArray);
     
     displayProject();
+    dom.selector.newProjectForm.reset();
+    dom.formDom(dom.selector.newProjectForm);
   });
 }
 

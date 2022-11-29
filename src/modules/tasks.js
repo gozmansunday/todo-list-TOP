@@ -37,6 +37,8 @@ function addTask(e) {
     globalObject.array = projects.projectsArray;
     storage.updateProjectsArray(projects.projectsArray);
     displayTask(tasksArray);
+    dom.selector.newTaskForm.reset();
+    dom.formDom(dom.selector.newTaskForm);
   });
 }
 
@@ -155,7 +157,7 @@ function showOverdueTask() {
   
   tasksArray.forEach(task => {
     // const overdue = isPast(add(new Date(task.fullDate), {days: 1}));
-    const overdue = isPast(add(new Date(task.fullDate), {hours: 12}));
+    const overdue = isPast(add(new Date(task.fullDate), {hours: 18}));
     // const overdue = isPast(new Date(task.fullDate));
     let taskIndex = tasksArray.indexOf(task);
 
