@@ -131,7 +131,7 @@ function createTaskDisplayDom(baseColor, task) {
         <div class="">
           <input type="checkbox" class="checkbox border-[3px] border-dark rounded-full w-4 h-4 sm:w-5 sm:h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0">
         </div>
-        <h4 class="text-sm sm:text-base lg:text-lg font-semibold pt-0.5 sm:pt-1 lg:pt-0.5 sm:ml-0.5">${task.title}</h4>
+        <h4 class="text-sm sm:text-base lg:text-lg font-semibold pt-0.5 sm:pt-1 lg:pt-0.5 sm:ml-0.5 truncate max-w-[5rem] xs:max-w-[7rem] sm:max-w-[9rem] md:max-w-[14rem] lg:max-w-[18rem] xl:max-w-lg">${task.title}</h4>
         <i class="chevron rotate-0 fa-solid fa-chevron-up text-sm pt-1.5"></i>
       </div>
       <div class="flex gap-1.5 sm:gap-2 items-center">
@@ -303,16 +303,14 @@ function editTaskDom(edit, tasksArray, projectsArray) {
   editTaskFormSubmitBtn.onclick = (e) => {
     e.preventDefault();
 
-    const taskDate = format(new Date(editTaskDate.value), 'dd/MM');
+    const taskDate = format(new Date(editTaskDate.value), 'dd/MM/yyyy');
 
     task.title = editTaskTitle.value;
     task.details = editTaskDetails.value;
     task.fullDate = editTaskDate.value;
     task.date = taskDate;
     task.priority = editTaskPriority.value;
-    // task.overdue = isPast(add(new Date(editTaskDate.value), {days: 1}));
-    task.overdue = isPast(add(new Date(editTaskDate.value), {hours: 18}));
-    // task.overdue = isPast(new Date(editTaskDate.value));
+    task.overdue = isPast(add(new Date(editTaskDate.value), {days: 1}));
 
     if (task.priority === 'Low') {
       baseColor = 'blue';

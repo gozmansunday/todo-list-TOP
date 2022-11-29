@@ -24,7 +24,7 @@ function addTask(e) {
     const taskDueDate = dom.selector.newTaskDate.value;
     const taskPriority = dom.selector.newTaskPriority.value;
     const taskProject = projects.projectsArray.find(project => project.active === true).name;
-    const taskDate = format(new Date(taskDueDate), 'dd/MM');
+    const taskDate = format(new Date(taskDueDate), 'dd/MM/yyyy');
   
     if (taskTitle === '' || taskDueDate === '' ) return;
   
@@ -156,9 +156,7 @@ function showOverdueTask() {
   let tasksArray = project.projectArray;
   
   tasksArray.forEach(task => {
-    // const overdue = isPast(add(new Date(task.fullDate), {days: 1}));
-    const overdue = isPast(add(new Date(task.fullDate), {hours: 18}));
-    // const overdue = isPast(new Date(task.fullDate));
+    const overdue = isPast(add(new Date(task.fullDate), {days: 1}));
     let taskIndex = tasksArray.indexOf(task);
 
     if (overdue) task.overdue = true;
