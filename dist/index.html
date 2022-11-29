@@ -329,29 +329,29 @@
       <div id="modal" class="hidden justify-center items-center bg-black/40 fixed inset-0 z-50">
 
         <!-- New Task Form -->
-        <div id="new-task-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
+        <form id="new-task-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
           <div class="flex items-center justify-between">            
             <h3 class="text-xl font-semibold sm:text-2xl">New Task</h3>
             <i id="new-task-form-close-btn" class="fa-solid fa-xmark text-xl sm:text-2xl lg:text-3xl"></i>
           </div>
           <!-- Form Controls -->
-          <form class="space-y-2">
+          <div class="space-y-2">
             <div>
-              <label for="title" class="block sm:text-lg">Title</label>
-              <input type="text" name="title" id="title" value="Pay bills" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+              <label for="title" class="block sm:text-lg after:content-['*'] after:ml-0.5 after:text-red-600">Title</label>
+              <input type="text" name="title" id="title" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
               <label for="details" class="block sm:text-lg">Details</label>
               <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-10 sm:h-12 -mb-2 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark"></textarea>
             </div>
             <div>
-              <label for="date" class="block sm:text-lg">Due Date</label>
+              <label for="date" class="block sm:text-lg after:content-['*'] after:ml-0.5 after:text-red-600">Due Date</label>
               <input type="date" name="date" id="date" class="date-input w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
-              <label for="priority" class="block sm:text-lg">Priority</label>
+              <label for="priority" class="block sm:text-lg after:content-['*'] after:ml-0.5 after:text-red-600">Priority</label>
               <select name="priority" id="priority" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
-                <option value="Low" selected>
+                <option value="Low">
                   Low
                 </option>
                 <option value="Medium">
@@ -367,19 +367,19 @@
                 Add Task
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
 
         <!-- Edit Task Form -->
-        <div id="edit-task-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
+        <form id="edit-task-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
           <div class="flex items-center justify-between">            
             <h3 class="text-xl font-semibold sm:text-2xl">Edit Task</h3>
             <i id="edit-task-form-close-btn" class="fa-solid fa-xmark text-xl sm:text-2xl lg:text-3xl"></i>
           </div>
           <!-- Form Controls -->
-          <form class="space-y-2">
+          <div class="space-y-2">
             <div>
-              <label for="title" class="block sm:text-lg">Title</label>
+              <label for="title" class="block sm:text-lg after:content-['*'] after:ml-0.5 after:text-red-600">Title</label>
               <input type="text" name="title" id="title" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
@@ -387,11 +387,11 @@
               <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-10 sm:h-12 -mb-2 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark"></textarea>
             </div>
             <div>
-              <label for="date" class="block sm:text-lg">Due Date</label>
+              <label for="date" class="block sm:text-lg after:content-['*'] after:ml-0.5 after:text-red-600">Due Date</label>
               <input type="date" name="date" id="date" class="date-input w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
-              <label for="priority" class="block sm:text-lg">Priority</label>
+              <label for="priority" class="block sm:text-lg after:content-['*'] after:ml-0.5 after:text-red-600">Priority</label>
               <select name="priority" id="priority" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
                 <option value="Low">
                   Low
@@ -409,76 +409,76 @@
                 Edit
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
 
         <!-- New Project Form -->
-        <div id="new-project-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
+        <form id="new-project-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
           <div class="flex items-center justify-between">            
             <h3 class="text-xl font-semibold sm:text-2xl">New Project</h3>
             <i id="new-project-form-close-btn" class="fa-solid fa-xmark text-xl sm:text-2xl lg:text-3xl"></i>
           </div>
           <!-- Form Controls -->
-          <form class="space-y-2">
+          <div class="space-y-2">
             <div>
-              <label for="name" class="block sm:text-lg">Name</label>
-              <input type="text" name="name" id="name" value="School" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+              <label for="name" class="block sm:text-lg after:content-['*'] after:ml-0.5 after:text-red-600">Name</label>
+              <input type="text" name="name" id="name" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
               <button id="new-project-form-submit-btn" class="w-full bg-dark text-light py-1 sm:pb-2 sm:pt-2.5 mt-2 sm:mt-4 sm:text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
                 Add Project
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
 
         <!-- New Note Form -->
-        <div id="new-note-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
+        <form id="new-note-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
           <div class="flex items-center justify-between">            
             <h3 class="text-xl font-semibold sm:text-2xl">New Note</h3>
             <i id="new-note-form-close-btn" class="fa-solid fa-xmark text-xl sm:text-2xl lg:text-3xl"></i>
           </div>
           <!-- Form Controls -->
-          <form class="space-y-2">
+          <div class="space-y-2">
             <div>
               <label for="title" class="block sm:text-lg">Title</label>
-              <input type="text" name="title" id="title" value="Lorem Ipsum" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+              <input type="text" name="title" id="title" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
-              <label for="details" class="block sm:text-lg">Note</label>
-              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-20 sm:h-28 md:h-32 lg:h-36 -mb-2 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem a officiis error, quidem aspernatur, distinctio in voluptatibus nam ut possimus ab aperiam esse mollitia, ratione molestias ipsum. Incidunt, similique in.</textarea>
+              <label for="details" class="block sm:text-lg after:content-['*'] after:ml-0.5 after:text-red-600">Note</label>
+              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-20 sm:h-28 md:h-32 lg:h-36 -mb-2 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark"></textarea>
             </div>
             <div>
               <button id="new-note-form-submit-btn" class="w-full bg-dark text-light py-1 sm:pb-2 sm:pt-2.5 mt-2 sm:mt-4 sm:text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
                 Add Note
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
 
         <!-- Edit Note Form -->
-        <div id="edit-note-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
+        <form id="edit-note-form" class="hidden bg-mid border-4 border-dark space-y-1 sm:space-y-2 rounded-3xl px-4 pt-2 pb-5 sm:px-6 sm:pt-3 sm:pb-7 w-[18rem] shadow-card sm:w-[20rem] md:w-[26rem]">
           <div class="flex items-center justify-between">            
             <h3 class="text-xl font-semibold sm:text-2xl">Edit Note</h3>
             <i id="edit-note-form-close-btn" class="fa-solid fa-xmark text-xl sm:text-2xl lg:text-3xl"></i>
           </div>
           <!-- Form Controls -->
-          <form class="space-y-2">
+          <div class="space-y-2">
             <div>
               <label for="title" class="block sm:text-lg">Title</label>
-              <input type="text" name="title" id="title" value="Lorem Ipsum" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
+              <input type="text" name="title" id="title" class="w-full border-[3px] border-dark/50 bg-mid px-2 pt-0.5 sm:pt-1 pb-0.5 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">
             </div>
             <div>
-              <label for="details" class="block sm:text-lg">Note</label>
-              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-20 sm:h-28 md:h-32 lg:h-36 -mb-2 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem a officiis error, quidem aspernatur, distinctio in voluptatibus nam ut possimus ab aperiam esse mollitia, ratione molestias ipsum. Incidunt, similique in.</textarea>
+              <label for="details" class="block sm:text-lg after:content-['*'] after:ml-0.5 after:text-red-600">Note</label>
+              <textarea name="details" id="details" class="w-full border-[3px] border-dark/50 bg-mid px-2 py-1 h-20 sm:h-28 md:h-32 lg:h-36 -mb-2 text-xs sm:text-sm rounded-lg transition duration-200 focus:ring-0 focus:ring-offset-0 focus:border-dark"></textarea>
             </div>
             <div>
               <button id="edit-note-form-submit-btn" class="w-full bg-dark text-light py-1 sm:pb-2 sm:pt-2.5 mt-2 sm:mt-4 sm:text-lg rounded-lg transition duration-200 lg:hover:shadow-card">
                 Edit Note
               </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
 
       </div>
     </main>
