@@ -1,6 +1,6 @@
-import { dom } from './dom.js';
-import { projects } from './projects.js';
-import { storage } from './storage.js';
+import dom from './dom';
+import projects from './projects';
+import storage from './storage';
 
 // Notes Array
 let notesArray;
@@ -13,12 +13,59 @@ if (storage.getNotesArray() !== null) {
 
 // Notes Obj Factory
 function NoteObjCreator(title, details) {
-  return {title, details};
+  return { title, details };
 }
 
-function createNote(e) {
+function deleteNote() {
+  const trashs = document.querySelectorAll('.note-trash');
+
+  [...trashs].forEach((trash) => {
+    trash.addEventListener('click', () => {
+      dom.deleteNoteDom(trash, notesArray);
+    });
+  });
+}
+
+function editNote() {
+  const edits = document.querySelectorAll('.note-edit');
+
+  [...edits].forEach((edit) => {
+    edit.addEventListener('click', () => {
+      dom.editNoteDom(edit, notesArray);
+    });
+  });
+}
+
+function displayNote() {
+  dom.clearpageItemContainer();
+
+  notesArray.forEach((note) => {
+    dom.createNoteDisplayDom(note);
+  });
+
+  deleteNote();
+  editNote();
+}
+
+function selectNotesMode() {
+  const { notesOption } = dom.selector;
+
+  notesOption.onclick = () => {
+    const projInbox = document.querySelector('#default-project');
+    projects.makeAllProjectsNonActive(projInbox);
+    dom.makeTodayOptionNonActive(dom.selector.todayOption);
+    dom.makeWeekOptionNonActive(dom.selector.weekOption);
+
+    dom.makeNotesOptionActive(notesOption);
+    dom.clearpageItemContainer();
+    displayNote();
+    storage.updateNotesArray(notesArray);
+  };
+}
+
+function createNote() {
   selectNotesMode();
-  
+
   dom.selector.newNoteFormSubmitBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -38,54 +85,9 @@ function createNote(e) {
   });
 }
 
-function displayNote() {
-  dom.clearpageItemContainer();
-
-  notesArray.forEach(note => {
-    dom.createNoteDisplayDom(note);
-  });
-
-  deleteNote();
-  editNote();
-}
-
-function deleteNote() {
-  const trashs = document.querySelectorAll('.note-trash');
-
-  [...trashs].forEach(trash => {
-    trash.addEventListener('click', () => {
-      dom.deleteNoteDom(trash, notesArray);
-    });
-  });
-}
-
-function editNote() {
-  const edits = document.querySelectorAll('.note-edit');
-
-  [...edits].forEach(edit => {
-    edit.addEventListener('click', () => {
-      dom.editNoteDom(edit, notesArray);
-    });
-  });
-}
-
-function selectNotesMode() {
-  const notesOption = dom.selector.notesOption;
-
-  notesOption.onclick = () => {
-    const projInbox = document.querySelector('#default-project');
-    projects.makeAllProjectsNonActive(projInbox);
-    dom.makeTodayOptionNonActive(dom.selector.todayOption);
-    dom.makeWeekOptionNonActive(dom.selector.weekOption);
-
-    dom.makeNotesOptionActive(notesOption);
-    dom.clearpageItemContainer();
-    displayNote();
-    storage.updateNotesArray(notesArray);
-  };
-}
-
-export const notes = {
+const notes = {
   createNote,
   selectNotesMode,
 };
+
+export default notes;

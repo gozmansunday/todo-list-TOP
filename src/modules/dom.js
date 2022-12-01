@@ -1,12 +1,14 @@
-import { storage } from './storage.js';
 import { format, isPast, add } from 'date-fns';
+import storage from './storage';
 
 const modal = document.querySelector('#modal');
 // New Task Form Controls DOM
 const newTaskForm = document.querySelector('#new-task-form');
 const newTaskFormBtn = document.querySelector('#new-task-form-btn');
 const newTaskFormCloseBtn = document.querySelector('#new-task-form-close-btn');
-const newTaskFormSubmitBtn = document.querySelector('#new-task-form-submit-btn');
+const newTaskFormSubmitBtn = document.querySelector(
+  '#new-task-form-submit-btn'
+);
 // New Task Form Inputs DOM
 const newTaskTitle = document.querySelector('#new-task-form #title');
 const newTaskDetails = document.querySelector('#new-task-form #details');
@@ -14,8 +16,12 @@ const newTaskDate = document.querySelector('#new-task-form #date');
 const newTaskPriority = document.querySelector('#new-task-form #priority');
 // Edit Task Form Controls DOM
 const editTaskForm = document.querySelector('#edit-task-form');
-const editTaskFormCloseBtn = document.querySelector('#edit-task-form-close-btn');
-const editTaskFormSubmitBtn = document.querySelector('#edit-task-form-submit-btn');
+const editTaskFormCloseBtn = document.querySelector(
+  '#edit-task-form-close-btn'
+);
+const editTaskFormSubmitBtn = document.querySelector(
+  '#edit-task-form-submit-btn'
+);
 // Edit Task Form Inputs DOM
 const editTaskTitle = document.querySelector('#edit-task-form #title');
 const editTaskDetails = document.querySelector('#edit-task-form #details');
@@ -26,8 +32,12 @@ const pageItemContainer = document.querySelector('#task-container');
 // New Project Form Controls DOM
 const newProjectForm = document.querySelector('#new-project-form');
 const newProjectFormBtn = document.querySelector('#new-project-form-btn');
-const newProjectFormCloseBtn = document.querySelector('#new-project-form-close-btn');
-const newProjectFormSubmitBtn = document.querySelector('#new-project-form-submit-btn');
+const newProjectFormCloseBtn = document.querySelector(
+  '#new-project-form-close-btn'
+);
+const newProjectFormSubmitBtn = document.querySelector(
+  '#new-project-form-submit-btn'
+);
 // New Project Form Inputs DOM
 const newProjectName = document.querySelector('#new-project-form #name');
 // Project Display DOM
@@ -47,14 +57,20 @@ const notesOption = document.querySelector('#notes');
 const newNoteForm = document.querySelector('#new-note-form');
 const newNoteFormBtn = document.querySelector('#new-note-form-btn');
 const newNoteFormCloseBtn = document.querySelector('#new-note-form-close-btn');
-const newNoteFormSubmitBtn = document.querySelector('#new-note-form-submit-btn');
+const newNoteFormSubmitBtn = document.querySelector(
+  '#new-note-form-submit-btn'
+);
 // New Note Form Inputs DOM
 const newNoteTitle = document.querySelector('#new-note-form #title');
 const newNoteDetails = document.querySelector('#new-note-form #details');
 // Edit Note Form Controls DOM
 const editNoteForm = document.querySelector('#edit-note-form');
-const editNoteFormCloseBtn = document.querySelector('#edit-note-form-close-btn');
-const editNoteFormSubmitBtn = document.querySelector('#edit-note-form-submit-btn');
+const editNoteFormCloseBtn = document.querySelector(
+  '#edit-note-form-close-btn'
+);
+const editNoteFormSubmitBtn = document.querySelector(
+  '#edit-note-form-submit-btn'
+);
 // Edit Note Form Inputs DOM
 const editNoteTitle = document.querySelector('#edit-note-form #title');
 const editNoteDetails = document.querySelector('#edit-note-form #details');
@@ -124,8 +140,7 @@ function createTaskDisplayDom(baseColor, task) {
   const taskDisp = document.createElement('div');
   taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
 
-  const taskHTML =
-    `
+  const taskHTML = `
     <div class="flex justify-between items-center">
       <div class="flex gap-2 items-center">
         <div class="">
@@ -183,12 +198,13 @@ function createTaskDisplayDom(baseColor, task) {
 }
 
 function taskDisplayControlDom(chevron) {
-  const extendedPart = chevron.parentElement.parentElement.parentElement.children[1];
+  const extendedPart =
+    chevron.parentElement.parentElement.parentElement.children[1];
 
   if (extendedPart.style.maxHeight) {
     extendedPart.style.maxHeight = null;
   } else {
-    extendedPart.style.maxHeight = extendedPart.scrollHeight + "px";
+    extendedPart.style.maxHeight = `${extendedPart.scrollHeight}px`;
   }
 
   if (chevron.classList.contains('chevron-anim-down')) {
@@ -202,7 +218,8 @@ function taskDisplayControlDom(chevron) {
 }
 
 function completeTaskDom(checkbox, tasksArray, projectsArray) {
-  const taskDisp = checkbox.parentElement.parentElement.parentElement.parentElement;
+  const taskDisp =
+    checkbox.parentElement.parentElement.parentElement.parentElement;
   const taskIndex = [...pageItemContainer.children].indexOf(taskDisp);
   const taskTitle = taskDisp.children[0].children[0].children[1];
   const taskDate = taskDisp.children[0].children[1].children[1];
@@ -211,7 +228,7 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
   const extendedPart = taskDisp.children[1];
   const confirmDelete = taskDisp.children[2];
   let baseColor;
-  let task = tasksArray[taskIndex];
+  const task = tasksArray[taskIndex];
 
   if (task.priority === 'Low') {
     baseColor = 'blue';
@@ -237,10 +254,11 @@ function completeTaskDom(checkbox, tasksArray, projectsArray) {
     chevron.classList.add('rotate-0');
     task.completed = true;
   } else {
-    if (!task.overdue) {      
+    if (!task.overdue) {
       taskDisp.className = `task-display text-xs border-[3px] border-${baseColor}-400 bg-${baseColor}-200 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
     } else {
-      taskDisp.className = 'task-display text-xs border-[3px] text-red-600 border-red-600 bg-neutral-300 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg';
+      taskDisp.className =
+        'task-display text-xs border-[3px] text-red-600 border-red-600 bg-neutral-300 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg';
     }
     checkbox.classList.replace('checked:text-gray-400', 'checked:text-dark');
     taskTitle.classList.remove('line-through');
@@ -263,13 +281,13 @@ function deleteTaskDom(trash, tasksArray, projectsArray) {
   if (tasksArray[taskIndex].completed) {
     taskDisp.remove();
     tasksArray.splice(taskIndex, 1);
-  
+
     storage.updateProjectsArray(projectsArray);
   } else {
     if (confirmDelete.style.maxHeight) {
       confirmDelete.style.maxHeight = null;
     } else {
-      confirmDelete.style.maxHeight = confirmDelete.scrollHeight + "px";
+      confirmDelete.style.maxHeight = `${confirmDelete.scrollHeight}px`;
     }
 
     cancelBtn.addEventListener('click', () => {
@@ -279,7 +297,7 @@ function deleteTaskDom(trash, tasksArray, projectsArray) {
     deleteBtn.addEventListener('click', () => {
       taskDisp.remove();
       tasksArray.splice(taskIndex, 1);
-  
+
       storage.updateProjectsArray(projectsArray);
     });
   }
@@ -299,7 +317,7 @@ function editTaskDom(edit, tasksArray, projectsArray) {
   editTaskPriority.value = task.priority;
 
   formDom(editTaskForm);
-  
+
   editTaskFormSubmitBtn.onclick = (e) => {
     e.preventDefault();
 
@@ -310,7 +328,7 @@ function editTaskDom(edit, tasksArray, projectsArray) {
     task.fullDate = editTaskDate.value;
     task.date = taskDate;
     task.priority = editTaskPriority.value;
-    task.overdue = isPast(add(new Date(editTaskDate.value), {days: 1}));
+    task.overdue = isPast(add(new Date(editTaskDate.value), { days: 1 }));
 
     if (task.priority === 'Low') {
       baseColor = 'blue';
@@ -325,17 +343,19 @@ function editTaskDom(edit, tasksArray, projectsArray) {
       checkbox.className = `checkbox border-[3px] border-dark rounded-full w-4 h-4 sm:w-5 sm:h-5 bg-transparent checked:text-dark focus:ring-0 focus:ring-offset-0`;
       overdueWarning.classList.add('hidden');
     } else {
-      taskDisp.className = 'task-display text-xs border-[3px] text-red-600 border-red-600 bg-neutral-300 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg';
+      taskDisp.className =
+        'task-display text-xs border-[3px] text-red-600 border-red-600 bg-neutral-300 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg';
       checkbox.className = `checkbox border-[3px] border-red-600 rounded-full w-4 h-4 sm:w-5 sm:h-5 bg-transparent checked:text-gray-400 focus:ring-0 focus:ring-offset-0`;
       overdueWarning.classList.remove('hidden');
     }
-    taskDisp.children[0].children[0].children[1].textContent = editTaskTitle.value;
+    taskDisp.children[0].children[0].children[1].textContent =
+      editTaskTitle.value;
     taskDisp.children[0].children[1].children[1].textContent = taskDate;
     taskDisp.children[1].children[0].innerHTML = `<span class="font-semibold">Title:</span> ${editTaskTitle.value}`;
     taskDisp.children[1].children[1].innerHTML = `<span class="font-semibold">Details:</span> ${editTaskDetails.value}`;
     taskDisp.children[1].children[3].innerHTML = `<span class="font-semibold">Priority:</span> ${editTaskPriority.value}`;
     taskDisp.children[1].children[4].innerHTML = `<span class="font-semibold">Due Date:</span> ${editTaskDate.value}`;
-  
+
     storage.updateProjectsArray(projectsArray);
     editTaskForm.reset();
     formDom(editTaskForm);
@@ -351,7 +371,7 @@ function showCheckedTaskDom(task, taskIndex) {
   const taskEdit = taskDisp.children[0].children[1].children[2];
   const extendedPart = taskDisp.children[1];
   const confirmDelete = taskDisp.children[2];
-  
+
   if (task.completed === true) {
     taskDisp.className = `task-display text-xs border-[3px] border-gray-300 bg-gray-200 text-gray-400 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base`;
     checkbox.setAttribute('checked', '');
@@ -371,13 +391,15 @@ function showCheckedTaskDom(task, taskIndex) {
 }
 
 function showOverdueTaskDom(overdue, taskIndex) {
-  const taskDisp = dom.selector.pageItemContainer.children[taskIndex];
+  const taskDisp = pageItemContainer.children[taskIndex];
   if (overdue) {
     const checkbox = taskDisp.children[0].children[0].children[0].children[0];
     const overdueWarning = taskDisp.children[0].children[1].children[0];
 
-    taskDisp.className = 'task-display text-xs border-[3px] text-red-600 border-red-600 bg-neutral-300 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg';
-    checkbox.className = 'checkbox border-[3px] border-red-600 rounded-full w-4 h-4 sm:w-5 sm:h-5 bg-transparent checked:text-gray-400 focus:ring-0 focus:ring-offset-0';
+    taskDisp.className =
+      'task-display text-xs border-[3px] text-red-600 border-red-600 bg-neutral-300 rounded-xl px-2 sm:px-3 pt-0.5 space-y-0.5 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg';
+    checkbox.className =
+      'checkbox border-[3px] border-red-600 rounded-full w-4 h-4 sm:w-5 sm:h-5 bg-transparent checked:text-gray-400 focus:ring-0 focus:ring-offset-0';
     overdueWarning.classList.remove('hidden');
   }
 }
@@ -388,11 +410,11 @@ function clearProjectContainer() {
 
 function createProjectDisplayDom(project) {
   const projectDisp = document.createElement('div');
-  
-  projectDisp.className = 'project-display flex items-center justify-between px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer sm:text-xl lg:hover:border-brand';
 
-  const projectHTML = 
-    `
+  projectDisp.className =
+    'project-display flex items-center justify-between px-3 border-[3px] bg-transparent border-mid rounded-xl cursor-pointer sm:text-xl lg:hover:border-brand';
+
+  const projectHTML = `
     <div class="flex items-center gap-3">                
       <i class="fa-solid fa-caret-right"></i>
       <h4 class="pt-1">
@@ -400,7 +422,7 @@ function createProjectDisplayDom(project) {
       </h4>
     </div>
     <i class="delete-project-btn fa-solid fa-trash text-sm pt-0.5"></i>`;
-  
+
   projectDisp.innerHTML = projectHTML;
   projectContainer.appendChild(projectDisp);
 }
@@ -418,16 +440,16 @@ function deleteProjectDom(delBtn, projectsArray) {
 function displayDefaultProjectDom(projectName) {
   const projectDisp = document.createElement('div');
 
-  projectDisp.className = 'flex items-center gap-3 px-3 border-[3px] bg-brand border-brand rounded-xl cursor-pointer sm:text-xl lg:hover:border-brand';
+  projectDisp.className =
+    'flex items-center gap-3 px-3 border-[3px] bg-brand border-brand rounded-xl cursor-pointer sm:text-xl lg:hover:border-brand';
   projectDisp.setAttribute('id', 'default-project');
 
-  const projectHTML = 
-    `         
+  const projectHTML = `         
     <i class="fa-solid fa-inbox"></i>
     <h4 class="pt-0.5">
       ${projectName}
     </h4>`;
-  
+
   projectDisp.innerHTML = projectHTML;
 
   homeContainer.insertBefore(projectDisp, homeContainer.children[0]);
@@ -436,7 +458,7 @@ function displayDefaultProjectDom(projectName) {
 function makeAllProjectsNonActiveDom(projInbox) {
   projInbox.classList.replace('bg-brand', 'bg-transparent');
   projInbox.classList.replace('border-brand', 'border-mid');
-  [...projectContainer.children].forEach(project => {
+  [...projectContainer.children].forEach((project) => {
     project.classList.replace('bg-brand', 'bg-transparent');
     project.classList.replace('border-brand', 'border-mid');
   });
@@ -452,7 +474,10 @@ function toggleDom() {
   sideBar.classList.toggle('-translate-x-full');
   sideBar.classList.toggle('translate-x-0');
 
-  if (sideBar.classList.contains('animate-show-side-bar') || sideBar.classList.contains('animate-hide-side-bar')) {
+  if (
+    sideBar.classList.contains('animate-show-side-bar') ||
+    sideBar.classList.contains('animate-hide-side-bar')
+  ) {
     sideBar.classList.toggle('animate-hide-side-bar');
   }
 
@@ -475,9 +500,9 @@ function makeProjectActive(projectsArray, projIndex, projDisp) {
   pageHeading.textContent = projectsArray[projIndex].name;
 }
 
-function makeNotesOptionActive(notesOption) {
-  notesOption.classList.replace('bg-transparent', 'bg-brand');
-  notesOption.classList.replace('border-mid', 'border-brand');
+function makeNotesOptionActive(notesBtn) {
+  notesBtn.classList.replace('bg-transparent', 'bg-brand');
+  notesBtn.classList.replace('border-mid', 'border-brand');
 
   newTaskFormBtn.classList.add('hidden');
   newNoteFormBtn.classList.remove('hidden');
@@ -485,9 +510,9 @@ function makeNotesOptionActive(notesOption) {
   pageHeading.textContent = 'Notes';
 }
 
-function makeNotesOptionNonActive(notesOption) {
-  notesOption.classList.replace('bg-brand', 'bg-transparent');
-  notesOption.classList.replace('border-brand', 'border-mid');
+function makeNotesOptionNonActive(notesBtn) {
+  notesBtn.classList.replace('bg-brand', 'bg-transparent');
+  notesBtn.classList.replace('border-brand', 'border-mid');
 
   newNoteFormBtn.classList.add('hidden');
   newTaskFormBtn.classList.remove('hidden');
@@ -497,8 +522,7 @@ function createNoteDisplayDom(note) {
   const noteDisp = document.createElement('div');
   noteDisp.className = `note-display text-xs space-y-1 border-[3px] border-dark bg-neutral-300 rounded-xl px-3 py-2 lg:pt-2 lg:pb-3 sm:text-sm lg:text-base transition duration-300 lg:hover:scale-[1.015] lg:hover:shadow-lg`;
 
-  const noteHTML =
-    `
+  const noteHTML = `
     <div class="flex items-center justify-between">
       <h4 class="text-sm sm:text-base lg:text-lg font-semibold">
         ${note.title}
@@ -554,39 +578,39 @@ function editNoteDom(edit, notesArray) {
   };
 }
 
-function makeTodayOptionActive(todayOption) {
-  todayOption.classList.replace('bg-transparent', 'bg-brand');
-  todayOption.classList.replace('border-mid', 'border-brand');
+function makeTodayOptionActive(todayBtn) {
+  todayBtn.classList.replace('bg-transparent', 'bg-brand');
+  todayBtn.classList.replace('border-mid', 'border-brand');
 
   addBtnsContainer.classList.add('hidden');
 
   pageHeading.textContent = 'Today';
 }
 
-function makeTodayOptionNonActive(todayOption) {
-  todayOption.classList.replace('bg-brand', 'bg-transparent');
-  todayOption.classList.replace('border-brand', 'border-mid');
+function makeTodayOptionNonActive(todayBtn) {
+  todayBtn.classList.replace('bg-brand', 'bg-transparent');
+  todayBtn.classList.replace('border-brand', 'border-mid');
 
   addBtnsContainer.classList.remove('hidden');
 }
 
-function makeWeekOptionActive(weekOption) {
-  weekOption.classList.replace('bg-transparent', 'bg-brand');
-  weekOption.classList.replace('border-mid', 'border-brand');
+function makeWeekOptionActive(weekBtn) {
+  weekBtn.classList.replace('bg-transparent', 'bg-brand');
+  weekBtn.classList.replace('border-mid', 'border-brand');
 
   addBtnsContainer.classList.add('hidden');
 
   pageHeading.textContent = 'Week';
 }
 
-function makeWeekOptionNonActive(weekOption) {
-  weekOption.classList.replace('bg-brand', 'bg-transparent');
-  weekOption.classList.replace('border-brand', 'border-mid');
+function makeWeekOptionNonActive(weekBtn) {
+  weekBtn.classList.replace('bg-brand', 'bg-transparent');
+  weekBtn.classList.replace('border-brand', 'border-mid');
 
   addBtnsContainer.classList.remove('hidden');
 }
 
-export const dom = {
+const dom = {
   selector,
   formDom,
   clearpageItemContainer,
@@ -615,3 +639,5 @@ export const dom = {
   makeWeekOptionActive,
   makeWeekOptionNonActive,
 };
+
+export default dom;

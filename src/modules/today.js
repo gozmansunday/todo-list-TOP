@@ -1,32 +1,32 @@
-import { dom } from './dom.js';
-import { projects } from './projects.js';
-import { tasks } from './tasks.js';
 import { format } from 'date-fns';
+import dom from './dom';
+import projects from './projects';
+import tasks from './tasks';
 
 function displayValidTasks() {
-  let projectsArray = projects.projectsArray;
+  const { projectsArray } = projects;
   const todayArray = [];
   const todayDate = format(new Date(), 'yyyy-MM-dd');
-  
-  projectsArray.forEach(project => {
-    let tasksArray = project.projectArray;
 
-    tasksArray.forEach(task => {
+  projectsArray.forEach((project) => {
+    const tasksArray = project.projectArray;
+
+    tasksArray.forEach((task) => {
       if (task.fullDate === todayDate) {
         todayArray.push(task);
       }
     });
-  })
+  });
 
   tasks.displayTask(todayArray);
 }
 
 function selectTodayMode() {
-  const todayOption = dom.selector.todayOption;
+  const { todayOption } = dom.selector;
 
   todayOption.onclick = () => {
     const projInbox = document.querySelector('#default-project');
-    
+
     projects.makeAllProjectsNonActive(projInbox);
     dom.makeNotesOptionNonActive(dom.selector.notesOption);
     dom.makeWeekOptionNonActive(dom.selector.weekOption);
@@ -36,6 +36,8 @@ function selectTodayMode() {
   };
 }
 
-export const today = {
+const today = {
   selectTodayMode,
 };
+
+export default today;

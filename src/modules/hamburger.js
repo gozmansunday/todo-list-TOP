@@ -1,8 +1,8 @@
-import { dom } from './dom.js';
+import dom from './dom';
 
 function toggle() {
-  const hamburger = dom.selector.hamburger;
-  const sideBarOverlay = dom.selector.sideBarOverlay;
+  const { hamburger } = dom.selector;
+  const { sideBarOverlay } = dom.selector;
 
   hamburger.onclick = () => {
     dom.toggleDom();
@@ -13,6 +13,8 @@ function toggle() {
   };
 }
 
-export const hamburger = {
+const hamburger = {
   toggle,
 };
+
+export default hamburger;

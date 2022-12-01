@@ -14,9 +14,11 @@ function getNotesArray() {
   return JSON.parse(localStorage.getItem('notesArray'));
 }
 
-export const storage = {
+const storage = {
   updateProjectsArray,
   getProjectsArray,
   updateNotesArray,
   getNotesArray,
 };
+
+export default storage;
