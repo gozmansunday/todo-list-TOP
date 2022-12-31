@@ -1,3 +1,12 @@
 # todo-list-TOP
 
-A To Do List app. To be made in completion of The Odin Project.
+## Temporary README
+To check out the project, take the following steps:
+- Enter the following command in the terminal to install dev dependencies.
+```bash
+npm install
+```
+- Enter the following command in the terminal to run the project.
+```bash
+npm run dev
+```
