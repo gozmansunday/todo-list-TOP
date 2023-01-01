@@ -1,14 +1,16 @@
 # ToDoit
 
-[ToDoit Inbox](src/img/todo-inbox.jpeg)  
+![ToDoit Inbox](src/img/todo-inbox.jpeg)  
+
 Preview the app - [ToDoit](https://todoit-gzmn.netlify.app).  
+
 ToDoit is a to-do list app built with Tailwind CSS, Webpack and JavaScript.
 
 - Create, view, edit and delete to-do items.
 - Create projects to add a group of to-do items.  
-  [ToDoit Projects](src/img/todo-project.jpeg)
+  ![ToDoit Projects](src/img/todo-project.jpeg)
 - Create, view, edit and delete notes.  
-  [ToDoit Notes](src/img/todo-notes.jpeg)
+  ![ToDoit Notes](src/img/todo-notes.jpeg)
 
 ## Technologies used
 
