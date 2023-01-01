@@ -23,7 +23,7 @@ ToDoit is a to-do list app built with Tailwind CSS, Webpack and JavaScript.
 To install ToDoit locally, follow the steps below:
 
 - Clone repo to your machine
-- Open the root of the project and install all dependencies withthe following command:
+- Open the root of the project and install all dependencies with the following command:
 
 ```bash
 npm install
